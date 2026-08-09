@@ -1,0 +1,89 @@
+FATHOM — PERSONAL USE ONLY LICENCE
+Copyright (c) 2026 Tarun Karnati. All rights reserved.
+
+This is not an open source licence. It grants no right to use this software.
+
+
+1. SCOPE AND PURPOSE
+
+FATHOM is a personal-use agentic market instrument, built by and for a single operator for the
+Ontario All-Quote Agent Challenge, August 2026. It is not a product, not a service, and not offered
+to anyone else. This licence exists to state that boundary in enforceable terms, as required by the
+project's Prime Directives (§2.1: "Never sell, license, publish for public use, or deploy this as a
+service").
+
+
+2. GRANT
+
+The copyright holder ("the Operator") retains all rights. No licence, express or implied, is
+granted to any other person or entity to use, copy, modify, merge, publish, distribute,
+sublicense, sell, host, or create derivative works of this software or its outputs.
+
+Permission is granted solely to the Operator, and solely for personal, non-commercial use.
+
+
+3. PERMITTED, FOR THE OPERATOR ONLY
+
+  a. Running the software locally on hardware the Operator controls.
+  b. Using it to obtain and record information about insurance available to the Operator,
+     using the Operator's own real and accurate personal information.
+  c. Submitting redacted outputs, documentation and a recorded walkthrough to the Ontario
+     All-Quote Agent Challenge for evaluation.
+  d. Granting challenge organisers and judges read access to the repository for the sole
+     purpose of evaluating that submission. Such access confers no right to use, run, deploy,
+     modify or redistribute the software.
+
+
+4. PROHIBITED, WITHOUT EXCEPTION
+
+  a. Selling, licensing, renting, or otherwise commercialising this software or its outputs.
+  b. Deploying it as a hosted product, service, API, or offering it to third parties in any form.
+  c. Publishing it for public use, including as a template, starter, or reference implementation
+     intended to be run by others.
+  d. Operating it on behalf of any person other than the Operator, or with any person's data
+     other than the Operator's own.
+  e. Using it to bind, purchase, renew, cancel or modify any insurance policy.
+  f. Using it to submit payment information, an electronic signature, or an application
+     declaration.
+  g. Using it to bypass a CAPTCHA, bot control, authentication mechanism, or rate limit.
+  h. Using it with a fabricated, borrowed or altered driver's licence number.
+  i. Removing, disabling, weakening or circumventing the Policy Engine, the redaction layer,
+     the voice disclosure prelude, the consent state machine, or the evidence chain.
+
+Clauses (e) through (i) are hard constraints of the system itself, restated here so that the
+licence and the running code say the same thing.
+
+
+5. NO ADVICE, NO QUOTES, NO REPRESENTATION
+
+Outputs of this software are records of observations, not insurance advice, not offers, and not
+quotes. The Operator is not a licensed insurance agent, broker or adjuster, and this software does
+not act as one.
+
+Any premium labelled `computed` is a calculation performed from a publicly published rate manual.
+It is not a quote from an insurer and does not bind any insurer. Placement of insurance requires a
+licensed intermediary.
+
+Records of interactions with insurers, brokers and comparison platforms are observations with
+timestamps and evidence. They assert no breach of any law, regulation or rule by any party.
+
+
+6. NO WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE OPERATOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+7. TERMINATION
+
+Any use outside Section 3 terminates all permissions under this licence automatically and
+immediately.
+
+
+8. GOVERNING LAW
+
+This licence is governed by the laws of the Province of Ontario and the federal laws of Canada
+applicable therein.

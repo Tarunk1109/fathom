@@ -1,0 +1,46 @@
+name: CI
+
+# FATHOM CI. Milestone 1 scope: the PII sweep and its tests, nothing else.
+#
+# The sweep is the enforcement mechanism for Prime Directives §2.1 — no real licence number, full
+# address, payment data or raw call audio anywhere in the repo, logs, prompts, traces, screenshots
+# or the submission. It fails the build on a hit.
+#
+# The same check runs locally with `make sweep`. There is one implementation, not two.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pii-sweep:
+    name: PII sweep (Prime Directives 2.1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sweep repository, out/ and docs/ for PII
+        run: python3 tools/pii_sweep.py
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run unit tests
+        # stdlib unittest — pytest arrives with Milestone 2 per fathom.md §13
+        run: python3 -m unittest discover -s tests -v

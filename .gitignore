@@ -1,0 +1,71 @@
+# FATHOM
+#
+# Two jobs: keep build noise out, and make it hard for PII to reach history by accident.
+# The PII sweep is the real gate (tools/pii_sweep.py); this is the belt to its braces.
+#
+# Note: git only treats '#' as a comment at the start of a line. No trailing comments on
+# pattern lines — they become part of the pattern.
+
+# --- Prime Directives 2.1: these must never be committed ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+.secrets/
+
+# Encrypted operator store — stays on operator hardware
+data/vault/
+
+# Anything pre-redaction
+data/raw/
+**/raw/
+
+# Raw call audio — 2.1, and 11.7 defaults the recorder to NO_AUDIO
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.ogg
+*.mp4
+*.mov
+
+# Unredacted capture staging. Redacted artifacts live in the evidence store, not here.
+screenshots/unredacted/
+**/unredacted/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Node / UI ---
+node_modules/
+dist/
+build/
+.vite/
+.next/
+
+# --- Local databases and caches ---
+*.sqlite
+*.sqlite3
+*.db
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# out/ is tracked on purpose — it holds the submission deliverables (15).

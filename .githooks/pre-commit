@@ -1,0 +1,23 @@
+#!/bin/sh
+# FATHOM pre-commit hook — Prime Directives §2.1.
+#
+# Sweeps the working tree for PII before anything is committed. A leak is far cheaper to catch
+# here than after it is in history, where removing it means rewriting the repository.
+#
+# Install:    make hooks       (sets core.hooksPath to .githooks)
+# Remove:     make unhook
+# Bypass:     git commit --no-verify   ← only with a reason you would defend to a judge
+
+set -e
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+printf 'FATHOM: sweeping for PII before commit...\n'
+
+if ! python3 "$REPO_ROOT/tools/pii_sweep.py" "$REPO_ROOT"; then
+    printf '\nCommit blocked: PII-shaped content found (Prime Directives 2.1).\n'
+    printf 'Remove the value, or annotate the line with a pii-sweep allow pragma and a reason.\n'
+    exit 1
+fi
+
+exit 0
