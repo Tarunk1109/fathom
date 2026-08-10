@@ -144,6 +144,121 @@ def _sandbox(action: ProposedAction, ctx: SessionContext) -> str | None:
 
 
 # --------------------------------------------------------------------------------------
+# P-APPROVAL-01
+# --------------------------------------------------------------------------------------
+
+def _approval(action: ProposedAction, ctx: SessionContext) -> str | None:
+    """No real destination is touched on a route the operator has not approved.
+
+    Operator constraint following INC-001: the full intended payload is shown field by field with
+    each field's source profile, and approved once per route, before anything real is touched.
+
+    Implemented as a rule rather than a habit deliberately. INC-001 was a control that depended on
+    a person remembering, and it failed exactly the way those fail. Approval is empty by default,
+    so a route runs only after a deliberate act.
+    """
+    if action.kind in LOCAL_KINDS:
+        return None
+    if is_sandbox_target(action.target):
+        return None
+    if action.route_id in ctx.approved_routes:
+        return None
+    return (
+        f"Route '{action.route_id}' has no recorded operator payload approval and "
+        f"'{action.target}' is a real destination. Run `make approve ROUTE={action.route_id}` to "
+        f"review the intended payload field by field, then approve it. One approval per route."
+    )
+
+
+# --------------------------------------------------------------------------------------
+# P-PROFILE-BLEED-01
+# --------------------------------------------------------------------------------------
+
+def _profile_bleed(action: ProposedAction, ctx: SessionContext) -> str | None:
+    """One submission, one profile. Added after INC-001.
+
+    Two ways to fail, both denied: fields from two different profiles in one payload, and a field
+    whose source is not the profile the action itself is running under. The second matters as much
+    as the first — a single real-world value dropped into a hypothetical journey is exactly what
+    happened, and it is invisible if you only check for internal disagreement.
+
+    The denial names the field and both profiles, because "profile bleed detected" is not
+    actionable and a denial nobody can act on gets suppressed.
+    """
+    if action.kind not in {"fill", "submit", "speak"}:
+        return None
+
+    provenance = action.field_provenance()
+
+    for field_name, source in sorted(provenance.items()):
+        if source != action.profile_id:
+            return (
+                f"Field '{field_name}' originates from profile '{source}' but this action runs "
+                f"under profile '{action.profile_id}'. A submission must resolve to exactly one "
+                f"profile. §2.1: a hypothetical profile is hypothetical in every field."
+            )
+
+    sources = set(provenance.values())
+    if len(sources) > 1:
+        offending = sorted(provenance.items())[0]
+        return (
+            f"Payload mixes profiles {sorted(sources)} — field '{offending[0]}' comes from "
+            f"'{offending[1]}'. A submission must resolve to exactly one profile."
+        )
+
+    if ctx.require_provenance:
+        missing = action.unprovenanced_fields()
+        if missing:
+            return (
+                f"Fields {missing} carry no source profile, and this session requires provenance. "
+                f"An untagged field cannot be shown to belong to the profile being run."
+            )
+    return None
+
+
+# --------------------------------------------------------------------------------------
+# P-HYPO-ATTEST-01
+# --------------------------------------------------------------------------------------
+
+ATTESTATION_PATTERNS = _compile([
+    r"\bi[\s_-]+(?:confirm|acknowledge|declare|certify|attest|agree[\s_-]+that)\b",
+    r"\b(?:information|details|address|answers?)\b[^.?]{0,40}?\b(?:is|are)\b[^.?]{0,20}?"
+    r"\b(?:accurate|correct|true|complete)\b",
+    r"\btrue[\s_-]+and[\s_-]+(?:complete|correct|accurate)\b",
+    r"\bto[\s_-]+the[\s_-]+best[\s_-]+of[\s_-]+my[\s_-]+knowledge\b",
+    r"\bfraud\w*\b",
+    r"\bmisrepresent\w*\b",
+    r"\backnowledg\w*\b[^.?]{0,40}?\b(?:accurac|fraud|true|correct|complete)\w*",
+])
+
+
+def _hypothetical_attestation(action: ProposedAction, ctx: SessionContext) -> str | None:
+    """No attestation of accuracy or truthfulness under a hypothetical profile.
+
+    This is INC-001's own control, written so it can be pointed at. It overlaps
+    `P-HYPO-STEP-01` and is ordered above it on purpose: an audit entry reading *attestation* is
+    worth more than one reading *step*, and this is the specific act that went wrong.
+
+    The patterns require attestational phrasing rather than a bare adjective, so marketing copy
+    ("accurate quotes in three minutes") does not trip it.
+    """
+    if not ctx.hypothetical:
+        return None
+    if action.kind not in {"fill", "submit", "click"}:
+        return None
+
+    text = action.control_text() + " " + " ".join(action.field_names())
+    hit = _any_match(ATTESTATION_PATTERNS, text)
+    if hit:
+        return (
+            f"'{hit}' asks the applicant to attest that information is accurate or truthful, and "
+            f"profile '{action.profile_id}' is hypothetical, so no such attestation can honestly "
+            f"be given. Record manual_handoff and stop. See INC-001."
+        )
+    return None
+
+
+# --------------------------------------------------------------------------------------
 # P-HYPO-LICENCE-01
 # --------------------------------------------------------------------------------------
 
@@ -754,6 +869,14 @@ DEFAULT_RULES: tuple[Rule, ...] = (
          "any action after a stop request", _stop),
     Rule("P-SANDBOX-01", "DENY", "§2.3 sandbox-only profiles never touch a real destination",
          "any real-destination action carrying a sandbox_only profile", _sandbox),
+    Rule("P-APPROVAL-01", "DENY", "§2.1 no unapproved payload reaches a real destination (INC-001)",
+         "any real-destination action on a route without a recorded operator payload approval",
+         _approval),
+    Rule("P-PROFILE-BLEED-01", "DENY", "§2.1 one submission, one profile (INC-001)",
+         "any payload mixing fields whose provenance is more than one profile", _profile_bleed),
+    Rule("P-HYPO-ATTEST-01", "DENY", "§2.1 no accuracy or fraud attestation under a hypothetical",
+         "accuracy, truthfulness or fraud-acknowledgement controls under a hypothetical profile",
+         _hypothetical_attestation, terminal_status="manual_handoff"),
     Rule("P-HYPO-LICENCE-01", "DENY", "§2.1 never submit a licence number under a hypothetical",
          "any driver's licence number submitted under a hypothetical profile",
          _hypothetical_licence),
@@ -803,4 +926,6 @@ SPECIFIED_DENY_RULE_IDS: frozenset[str] = frozenset({
     "P-RECORD-01", "P-STOP-01",
     # Added 2026-08-09 by amendment D-002, following the organizer Q&A (AC-001).
     "P-HYPO-LICENCE-01", "P-HYPO-HUMAN-01", "P-HYPO-STEP-01", "P-REAL-FACT-01", "P-PLATE-01",
+    # Added 2026-08-09 following INC-001 (profile bleed during the Sonnet hypothetical pass).
+    "P-PROFILE-BLEED-01", "P-HYPO-ATTEST-01", "P-APPROVAL-01",
 })

@@ -33,6 +33,10 @@ the operator if he asks to break them.**
 | Never submit a fabricated material fact under a non-hypothetical profile | `P-REAL-FACT-01`. Mirrors `P-HYPO-LICENCE-01`; the two profiles may not bleed into each other |
 | Never send a `sandbox_only` profile to a real destination | `P-SANDBOX-01`. Governs real-destination access only; no longer conflated with `hypothetical` |
 | Never submit a licence plate. Skip optional plate fields; if a plate is mandatory, record `blocked` with the exact field and stop | `P-PLATE-01` |
+| Never mix fields from different profiles in one submission | `P-PROFILE-BLEED-01`. Every field value carries its source `profile_id`; a submission must resolve to exactly one profile |
+| Never populate a hypothetical profile with any real-world identifier — address, name, phone, email, licence — belonging to the operator or any third party. **A hypothetical profile is hypothetical in every field or it is not hypothetical** | Profile registry refuses to load such a profile; `P-PROFILE-BLEED-01` denies the mixed submission |
+| Never tick an accuracy, truthfulness or fraud-acknowledgement checkbox under a hypothetical profile | `P-HYPO-ATTEST-01`; emits `manual_handoff` |
+| Never touch a real destination on a route whose intended payload the operator has not approved field-by-field | `P-APPROVAL-01`. One approval per route. No route runs unattended |
 | Never misrepresent the caller as a human, broker, agent, or insurer employee | Voice disclosure prelude is non-removable and checksummed |
 | Never record or transcribe a call without affirmative consent | Consent state machine gates the recorder; default `NO_AUDIO` |
 | Never place repeated calls or continue after a request to stop | One call, one retry only on pre-connection failure |

@@ -1,0 +1,45 @@
+{
+  "_note": "Sandbox-only simulation. Never touches a real destination (P-SANDBOX-01). Used for the synthetic insurer sites and for demonstrating the profile switcher.",
+
+  "profile_id": "profile_sim_g2",
+  "hypothetical": true,
+  "sandbox_only": true,
+  "label": "SIMULATION — G2, no vehicle (sandbox only)",
+  "description": "Simulated G2 driver with no owned vehicle. Runs only against the local synthetic insurer sandbox. Labelled as a simulation in every view and in the walkthrough (FATHOM 2.3).",
+
+  "facts": {
+    "first_name": "Rowan",
+    "last_name": "Quillfeather",
+    "birth_year": "2004",
+    "province": "ON",
+    "licence_class": "G2",
+    "licence_province": "ON",
+    "years_licensed_g2": "2",
+    "driver_training": "completed",
+    "prior_insurance": "false",
+    "vehicle_ownership": "none_prospective_purchase",
+    "at_fault_accidents_6y": "0",
+    "convictions_3y": "0",
+    "vehicle_year": "2019",
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_trim": "LX",
+    "annual_km": "8000",
+    "primary_use": "pleasure",
+    "requested_effective_date": "2026-09-01"
+  },
+
+  "elections": {
+    "third_party_liability_limit": "2000000",
+    "collision_deductible": "1000",
+    "comprehensive_deductible": "1000",
+    "dcpd_included": "true",
+    "opcf_44r_requested": "true",
+    "term_months": "12"
+  },
+
+  "vault_refs": {},
+
+  "active_modules": ["registry", "benefit_probe", "parity_measured", "vehicle_inversion"],
+  "gated_modules": ["voice", "broker_human"]
+}

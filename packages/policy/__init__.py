@@ -16,6 +16,7 @@ from .actions import (
     LOCAL_KINDS,
     ActionKind,
     CallState,
+    FieldValue,
     HumanCheckpoint,
     PolicyDecision,
     ProposedAction,
@@ -26,6 +27,7 @@ from .actions import (
     fact_hash,
     is_sandbox_target,
 )
+from .approvals import Approval, ApprovalStore
 from .audit import AuditEntry, AuditLog, ChainVerification, GENESIS_HASH, verify_entries
 from .engine import CheckpointRequest, PolicyEngine
 from .rules import DEFAULT_RULES, NO_RULE_FIRED, SPECIFIED_DENY_RULE_IDS, Rule
@@ -35,12 +37,15 @@ __all__ = [
     "HUMAN_CONTACT_KINDS",
     "LOCAL_KINDS",
     "ActionKind",
+    "Approval",
+    "ApprovalStore",
     "AuditEntry",
     "AuditLog",
     "CallState",
     "ChainVerification",
     "CheckpointRequest",
     "DEFAULT_RULES",
+    "FieldValue",
     "GENESIS_HASH",
     "HumanCheckpoint",
     "NO_RULE_FIRED",

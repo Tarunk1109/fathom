@@ -12,8 +12,11 @@
 > explicit that manual form filling is unacceptable and an agentic element is required. Everything
 > learned here becomes a route recipe (§11.1) executed by the web executor.
 
-**Status:** `IN_PROGRESS`
+**Status:** `CLOSED_PARTIAL` — closed 2026-08-09 by operator decision, one route walked of four
 **Build plan:** `PLAN A` (fixed by AC-001; no longer selected by this probe)
+**Routes walked:** Sonnet (`profile_hypo_clean` pass only)
+**Routes deferred to the agent:** belairdirect, RBC Insurance, Desjardins — `reconnaissance_pending`
+**Incident:** INC-001, resolved. See `docs/OPEN_QUESTIONS.md`.
 **Operator:** Tarun Karnati, Toronto, Ontario
 **Probe window:** _(start ISO 8601)_ → _(end ISO 8601)_
 
@@ -23,14 +26,15 @@ raw-then-clean path here either.
 
 ---
 
-## 0. Why this runs before any code
+## 0. Why this ran before the executor
 
-§5 selects the build plan. Under **Plan A** the Benefit Price Probe, measured parity, vehicle
-inversion and channel arbitrage are live for the `operator` profile. Under **Plan B** those four
-modules run only in the sandbox under `sim_g2_no_car`, and weight shifts to the Rulebook Compiler,
-the Rate-Source Graph, the Eligibility Frontier and the Broker Harvester.
+*Rewritten 2026-08-09 under AC-001. The former plan-selection rationale is obsolete: **Plan A
+applies**, and no probe outcome can change that.*
 
-Guessing this wrong costs days. §5.3: *do not discover Plan B on day three.*
+The probe exists to give the web executor known ground: the field taxonomy a real Ontario journey
+demands, the step order it demands them in, the interruptions it throws mid-journey, and where a
+hypothetical profile hits a wall. One route walked to a hard stop supplies all four. It is
+reconnaissance, not retrieval.
 
 ---
 
@@ -41,7 +45,9 @@ These are binding for the probe itself, not just for the built system.
 | Rule | Detail |
 | --- | --- |
 | **Manual only** | Hand-driven in an ordinary browser. No Playwright, no agent, no automation of any kind. §5.1. |
-| **Real information only** | The operator's own real, accurate data. G1, no owned vehicle, no Canadian history, no prior insurance. §2.2. |
+| **One profile per pass, no mixing** | *Added after INC-001.* A pass is run under exactly one profile. Every field comes from that profile. Populating a hypothetical profile with a real-world address, name, phone, email or licence — the operator's or anyone's — is prohibited. |
+| **Real information only, under `profile_operator`** | The operator's own real, accurate data. G1, no owned vehicle, no Canadian history, no prior insurance. §2.2. |
+| **Fully synthetic, under `profile_hypo_clean`** | *Added after INC-001.* Every field synthetic. No real-world identifier anywhere. No accuracy, truthfulness or fraud-acknowledgement checkbox ticked — emit `manual_handoff` and stop. |
 | **One vehicle, genuinely considered** | The same prospective vehicle across all four routes, so the routes are comparable. Not a placeholder. |
 | **Stop at the wall** | Record the exact stopping point. Do not work around it, do not retry a rejection, do not attempt a different licence class to "see what happens." |
 | **Hard stop before commitment** | No payment, no e-signature, no application declaration, no bind. §2.1. |
@@ -165,104 +171,80 @@ them.
 A route can halt with a precise stopping step and no stated reason at all. That is a complete,
 usable record.
 
-### Route 1 — Sonnet
+### Route 1 — Sonnet · pass A · `profile_hypo_clean`
+
+**WALKED. Terminal status: `blocked`.**
 
 | Field | Value |
 | --- | --- |
-| Started at (ISO 8601, ET) | |
-| Ended at (ISO 8601, ET) | |
-| Entry URL | |
-| **Reached a priced screen?** | `YES` / `NO` |
-| **Exact stopping step** (`page → section → field`) | _(e.g. `Driver details → Licence information → Licence class selector`)_ |
-| Stated reason, verbatim, redacted | _(quote exactly; `reason_not_stated` if none — never guess, §8.2)_ |
-| Proposed `TerminalStatus` | _(§8.1)_ |
-| Proposed `ReasonCode` | _(§8.2)_ |
-| Was G1 selectable as licence class? | `YES` / `NO` / `N/A` |
-| Was "do not yet own the vehicle" expressible? | `YES` / `NO` / how it was expressed |
-| Did it demand a licence number to proceed? | `YES` / `NO` — at which step |
-| **Exposed AB election toggles?** (post-1 Jul 2026 optional benefits) | `YES` / `NO` / `NOT_REACHED` |
-| Coverage toggles visible before pricing? | `YES` / `NO` |
-| CAPTCHA / bot check encountered? | `YES` / `NO` — at which step |
-| Contact capture required before price? | `YES` / `NO` |
-| Friction observed (§10.7 — observations only, no characterization) | |
-| **Quote reference ID + its grammar** (§9.3 signal 2) | _(the ID, plus its shape — e.g. `3 letters + 8 digits`)_ |
-| Vehicle substitution, if the exact trim was unavailable | `NONE` / _(what was selected and why)_ |
-| Evidence captured | `verbatim_only` (per OQ-004 — no screenshots this cycle) |
+| Profile | `profile_hypo_clean` (hypothetical, clean record) |
+| Entry URL | https://www.sonnet.ca/auto-insurance/ontario |
+| **Reached a priced screen?** | **NO** |
+| **Exact stopping step** | `Driver details → Your Information → Driver's licence number` |
+| Field characteristics at the stop | **Mandatory.** Marked case sensitive. Carries a "Why do we need this?" explanatory link. |
+| Stated reason, verbatim, redacted | No refusal message was displayed. The journey did not decline the applicant — it required a value the profile cannot supply. Recorded as a structural block, not a decline. |
+| **Terminal status** | `blocked` |
+| **Reason code** | `RC_HYPO_LICENCE_REQUIRED` *(new — see §7.2)* |
+| Why blocked | A hypothetical profile cannot supply a driver's licence number under `P-HYPO-LICENCE-01`, and the field cannot be skipped. |
+| Was G1 selectable as licence class? | Not reached — the number is demanded at the same step |
+| Did it demand a licence number to proceed? | **YES** — `Driver details → Your Information` |
+| **Exposed AB election toggles?** | `NOT_REACHED` |
+| Coverage toggles visible before pricing? | `NOT_REACHED` |
+| CAPTCHA / bot check encountered? | NO, up to the stopping step |
+| Contact capture required before price? | Not reached |
+| **Quote reference ID + grammar** | **None issued before the block.** No reference ID exists for this route yet. |
+| Vehicle substitution | `NONE` — 2019 Honda Civic LX accepted |
+| Evidence captured | `verbatim_only` (OQ-004) |
 
-### Route 2 — belairdirect
+#### 1.1 Journey order observed
 
-| Field | Value |
+The step sequence, which becomes the route recipe skeleton (§11.1):
+
+```
+Province → Get started → Vehicles → Driver details → Other drivers → Assign drivers
+```
+
+The licence-number wall sits at step 4 of 6. Everything before it is reachable by a hypothetical
+profile, which means the vehicle and coverage taxonomy on this route is harvestable even though the
+price is not.
+
+#### 1.2 automation_notes — carried to the registry row and the executor
+
+| Observation | Consequence for the executor |
 | --- | --- |
-| Started at (ISO 8601, ET) | |
-| Ended at (ISO 8601, ET) | |
-| Entry URL | |
-| **Reached a priced screen?** | `YES` / `NO` |
-| **Exact stopping step** (`page → section → field`) | |
-| Stated reason, verbatim, redacted | |
-| Proposed `TerminalStatus` | |
-| Proposed `ReasonCode` | |
-| Was G1 selectable as licence class? | `YES` / `NO` / `N/A` |
-| Was "do not yet own the vehicle" expressible? | `YES` / `NO` / how it was expressed |
-| Did it demand a licence number to proceed? | `YES` / `NO` — at which step |
-| **Exposed AB election toggles?** | `YES` / `NO` / `NOT_REACHED` |
-| Coverage toggles visible before pricing? | `YES` / `NO` |
-| CAPTCHA / bot check encountered? | `YES` / `NO` — at which step |
-| Contact capture required before price? | `YES` / `NO` |
-| Friction observed | |
-| **Quote reference ID + its grammar** | |
-| Vehicle substitution, if the exact trim was unavailable | `NONE` / _(what and why)_ |
-| Evidence captured | `verbatim_only` |
+| **Address-validation modal on the Vehicles step.** Text begins "Heads up!", references a "mixed use residence", offers `Cancel` / `Okay`. | **A naive executor hangs here.** Modals are a first-class executor case, not an exception path (§11.1, operator constraint 1). Log every modal encountered with its text. |
+| **Fraud-acknowledgement checkbox on the Vehicles step**, tied to address accuracy. | Denied under a hypothetical profile by `P-HYPO-ATTEST-01`. Emit `manual_handoff`, do not tick, do not work around. |
+| Licence-number field is mandatory and case sensitive | Structural block for `profile_hypo_clean`. The `profile_operator` pass may pass this step, which is why pass B is still worth running by the agent. |
 
-### Route 3 — RBC Insurance
+#### 1.3 What this route still owes
 
-| Field | Value |
-| --- | --- |
-| Started at (ISO 8601, ET) | |
-| Ended at (ISO 8601, ET) | |
-| Entry URL | |
-| **Reached a priced screen?** | `YES` / `NO` |
-| **Exact stopping step** (`page → section → field`) | |
-| Stated reason, verbatim, redacted | |
-| Proposed `TerminalStatus` | |
-| Proposed `ReasonCode` | |
-| Was G1 selectable as licence class? | `YES` / `NO` / `N/A` |
-| Was "do not yet own the vehicle" expressible? | `YES` / `NO` / how it was expressed |
-| Did it demand a licence number to proceed? | `YES` / `NO` — at which step |
-| **Exposed AB election toggles?** | `YES` / `NO` / `NOT_REACHED` |
-| Coverage toggles visible before pricing? | `YES` / `NO` |
-| CAPTCHA / bot check encountered? | `YES` / `NO` — at which step |
-| Contact capture required before price? | `YES` / `NO` |
-| Friction observed | |
-| **Quote reference ID + its grammar** | |
-| Vehicle substitution, if the exact trim was unavailable | `NONE` / _(what and why)_ |
-| Evidence captured | `verbatim_only` |
-
-### Route 4 — Desjardins
-
-| Field | Value |
-| --- | --- |
-| Started at (ISO 8601, ET) | |
-| Ended at (ISO 8601, ET) | |
-| Entry URL | |
-| **Reached a priced screen?** | `YES` / `NO` |
-| **Exact stopping step** (`page → section → field`) | |
-| Stated reason, verbatim, redacted | |
-| Proposed `TerminalStatus` | |
-| Proposed `ReasonCode` | |
-| Was G1 selectable as licence class? | `YES` / `NO` / `N/A` |
-| Was "do not yet own the vehicle" expressible? | `YES` / `NO` / how it was expressed |
-| Did it demand a licence number to proceed? | `YES` / `NO` — at which step |
-| **Exposed AB election toggles?** | `YES` / `NO` / `NOT_REACHED` |
-| Coverage toggles visible before pricing? | `YES` / `NO` |
-| CAPTCHA / bot check encountered? | `YES` / `NO` — at which step |
-| Contact capture required before price? | `YES` / `NO` |
-| Friction observed | |
-| **Quote reference ID + its grammar** | |
-| Vehicle substitution, if the exact trim was unavailable | `NONE` / _(what and why)_ |
-| Evidence captured | `verbatim_only` |
+- **Pass B (`profile_operator`) not run.** Deferred to the agent. The operator holds a real G1 and
+  can supply a real licence number, so this route may reach further under that profile — and its
+  refusal, wherever it lands, is a Frontier row.
 
 ---
 
+### Route 2 — belairdirect
+
+**`reconnaissance_pending`** — deferred to the agent, under supervision, with the gate live.
+
+Not walked by hand. This is a deliberate deferral under the §7.3 decision, **not** an unresolved
+route and **not** a failure. It carries no terminal status because no attempt has been made; it
+enters the registry as a route awaiting its first agentic attempt.
+
+---
+
+### Route 3 — RBC Insurance
+
+**`reconnaissance_pending`** — deferred to the agent, under supervision, with the gate live.
+
+---
+
+### Route 4 — Desjardins
+
+**`reconnaissance_pending`** — deferred to the agent, under supervision, with the gate live.
+
+---
 ## 6. Substitutions and deviations
 
 | Route replaced | Replaced with | Reason | Timestamp |
@@ -272,37 +254,84 @@ usable record.
 
 ## 7. Result
 
-| Question | Answer |
-| --- | --- |
-| Routes reaching a priced screen | _( / 4)_ |
-| Routes stopping at licence class | |
-| Routes stopping at vehicle ownership | |
-| Routes stopping at a contact-capture or human gate | |
-| Routes exposing AB election toggles at any point | |
+| Measure | Value | Denominator note |
+| --- | --- | --- |
+| Routes walked by hand | **1** of 4 | Sonnet, `profile_hypo_clean` pass only |
+| Routes reaching a priced screen | **0** of 1 walked | Not 0 of 4 — three routes were never attempted |
+| Routes blocked at a mandatory licence-number field | **1** of 1 walked | Sonnet |
+| Routes exposing AB election toggles | **0** of 1 walked | Never reached on the only route walked |
+| Quote reference IDs obtained | **0** | None issued before the block |
+| Routes `reconnaissance_pending` | **3** | belairdirect, RBC, Desjardins |
+
+**`reconnaissance_pending` is not `unresolved`.** An unresolved route is one FATHOM attempted and
+could not resolve, and §2.2 keeps those in every denominator. These three were never attempted.
+They are pending work, and they are reported as pending rather than folded into a failure count
+they did not earn. When the agent walks them, whatever comes back — including `unresolved` — enters
+the denominators properly.
 
 ### 7.1 Findings (§5.1 as amended)
 
-Plan selection is gone — **Plan A applies**. Fill these four instead.
-
 | Question | Answer |
 | --- | --- |
-| **1. Which routes returned a rate under `profile_hypo_clean`?** | |
-| **2. Which exposed the post-1-Jul-2026 AB election toggles?** | _(per route; gates §10.2 per carrier)_ |
-| **3. Quote reference ID grammar, per route** | _(fingerprinting signal 2, §9.3)_ |
-| **4. Operator-profile outcomes** | _(status + reason code per route; feeds §10.3)_ |
+| **1. Which routes returned a rate under `profile_hypo_clean`?** | None of the one walked. Sonnet blocks at a mandatory, case-sensitive driver's licence number field on `Driver details → Your Information`, which a hypothetical profile cannot supply under `P-HYPO-LICENCE-01`. |
+| **2. Which exposed the post-1-Jul-2026 AB election toggles?** | Unknown. Sonnet's block sits at step 4 of 6, before any coverage screen. §10.2 gating stays open for all four routes. |
+| **3. Quote reference ID grammar, per route** | None obtained. Sonnet issues no reference before the block. Fingerprinting signal 2 (§9.3) has no data yet, so dedup will lean on signals 1, 3 and 4 until the agent runs. |
+| **4. Operator-profile outcomes** | Not run. Pass B was deferred with the other routes. The Eligibility Frontier has no rows from Day 0. |
 
-**Summary:** _(one paragraph, citing the route records above)_
+**Summary.** One route was walked and it produced a hard structural result rather than a price: the
+Sonnet journey demands a driver's licence number, mandatory and case sensitive, at
+`Driver details → Your Information`, four steps into a six-step flow, and that field cannot be
+skipped. Under `profile_hypo_clean` that is a terminal `blocked`, not a decline — the journey never
+assessed the applicant, it required a value the profile is forbidden to hold. The walk also yielded
+the three things the executor actually needed: the step order
+(`Province → Get started → Vehicles → Driver details → Other drivers → Assign drivers`), a
+mid-journey address-validation modal that will hang a naive executor, and a fraud-acknowledgement
+checkbox tied to address accuracy. Probing was closed here by operator decision (§7.3) after
+INC-001. Three routes remain `reconnaissance_pending` and will be walked by the agent under
+supervision with the gate live.
 
-### 7.2 Carry-forward
+### 7.2 New reason code
 
-Findings that become inputs to later milestones — fill these in as they emerge, they are not
-overhead:
+`RC_HYPO_LICENCE_REQUIRED` — *"a mandatory driver's licence number field cannot be satisfied by a
+hypothetical profile"*. Added to the §8.2 taxonomy.
 
-- Registry rows created or corrected by this probe: _(→ Milestone 3)_
-- Reason codes observed in the wild: _(→ Eligibility Frontier, §10.3)_
-- Friction observations: _(→ Friction Ledger, §10.7)_
-- Routes worth a recipe: _(→ Milestone 7, §11.1)_
-- AB-toggle availability per carrier: _(→ Benefit Price Probe gating, §10.2)_
+It is distinct from `RC_LICENCE_CLASS`, which means the market declined the applicant's licence
+class. This code means the market never assessed the applicant at all: the journey demanded a
+credential the profile is prohibited from holding. Its unlock is `run_under_operator_profile`, not
+`obtain_g2` — which is exactly the kind of distinction the Eligibility Frontier exists to keep
+straight, and folding the two together would put a false row on the unlock ladder.
+
+### 7.3 Decision — manual probing ends here
+
+**Decided by the operator 2026-08-09. Three routes deferred to the agent.**
+
+Recorded because a partially-run probe needs its reasoning attached, or it reads later as an
+abandonment:
+
+1. **AC-001 items 2 and 4 are explicit** that manual form filling is not what is being judged and
+   that an agentic element is required. Hand-walking three more journeys spends hours on work that
+   does not count toward the submission.
+2. **It repeats the exposure that produced INC-001.** Every additional hand-run pass is another
+   opportunity for profile bleed, and the gate cannot protect a journey it is not in.
+3. **Sonnet already yielded what the executor needed** — field taxonomy, journey order, a known
+   mid-journey modal, and one confirmed terminal status.
+
+belairdirect, RBC Insurance and Desjardins are walked by the agent, **under supervision, with the
+gate live, and with the full intended payload approved field-by-field before any real destination is
+touched** (operator constraint 2, enforced by `P-APPROVAL-01`).
+
+### 7.4 Carry-forward
+
+| Destination | Carried |
+| --- | --- |
+| **Milestone 3 — registry** | Sonnet row: `distribution_type: direct`, `status: blocked`, `reason_code: RC_HYPO_LICENCE_REQUIRED`, with the journey order and both `automation_notes` observations. Three rows created as `reconnaissance_pending`. |
+| **Milestone 3 — profiles** | `profile_hypo_clean` must carry a synthetic value for every field this journey demands, and must be *unable* to carry a licence number. Per-field provenance is required so `P-PROFILE-BLEED-01` has something to read. |
+| **Milestone 4 — executor** | **Modals are a first-class case.** The Sonnet address-validation modal is the proof. Log every modal encountered, with its text. |
+| **Milestone 4 — executor** | Fraud/accuracy acknowledgement checkboxes are denied under a hypothetical profile (`P-HYPO-ATTEST-01`) → `manual_handoff`. |
+| **§8.2 taxonomy** | `RC_HYPO_LICENCE_REQUIRED` added. |
+| **§10.2 gating** | Undetermined for all four routes. No AB toggle was reached. |
+| **§9.3 fingerprinting** | Signal 2 (reference ID grammar) has no data. Dedup leans on signals 1, 3 and 4 until the agent runs. |
+| **§10.7 Friction Ledger** | Sonnet: mandatory case-sensitive licence field at step 4 of 6; mid-journey address-validation modal. Observations only, no characterization. |
 
 ---
 

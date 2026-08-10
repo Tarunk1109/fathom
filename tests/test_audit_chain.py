@@ -43,6 +43,7 @@ class AuditTestCase(unittest.TestCase):
 
     def ctx(self) -> SessionContext:
         return SessionContext(session_id="ses_1", profile_id="profile_operator",
+                              approved_routes=frozenset({"rt_1"}),
                               call=CallState(disclosure_delivered=True))
 
     def fill(self, km: int) -> ProposedAction:

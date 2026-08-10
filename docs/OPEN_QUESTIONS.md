@@ -174,3 +174,75 @@ judging criteria are unchanged and still reward trustworthy over numerous.
 
 Skip optional licence plate fields. If a plate is mandatory, record `blocked` with the exact field
 and stop. Enforced by `P-PLATE-01`.
+
+---
+
+## Incidents
+
+### INC-001 — Profile bleed during the Sonnet hypothetical pass
+
+**Date: 2026-08-09. Status: RESOLVED. Severity: near-miss — nothing was submitted.**
+
+**What happened.** During the `profile_hypo_clean` pass of the Sonnet journey, the operator entered
+a **real third-party address** — not the operator's, not the hypothetical profile's — and ticked an
+**address-accuracy fraud-acknowledgement checkbox**. The journey was aborted before submission.
+**Nothing was sent.**
+
+**Root cause: profile bleed.** A hypothetical profile was populated with real-world data partway
+through a journey. This is precisely the class of failure fact-lock exists to prevent, and no gate
+caught it — because the mixing happened *outside the system*, in a hand-driven browser session that
+the Policy Engine was not in.
+
+**Why this is the important finding of Day 0.** It is not a mistake that a rule would have caught
+and did not; it is a mistake that had no rule at all. The gate protected nothing here because the
+gate was not in the path. Two consequences follow, and both are adopted:
+
+1. A rule must exist so that the same mixing is impossible **once the agent is doing the work**.
+2. **Hand-driven probing of real journeys stops** — see DAY0_PROBE.md §7.3. Every additional manual
+   pass is another journey the gate is not in.
+
+**Resolution — three additions, below.** No data reached any insurer, so there is nothing to
+retract or notify. The registry row for Sonnet records the block; it records no submission, because
+none occurred.
+
+#### Resulting rule: `P-PROFILE-BLEED-01`
+
+Added to §2.1 and §9.1. Implemented in Milestone 3, because it needs per-field provenance that the
+profile registry supplies.
+
+> Deny any action whose payload mixes fields originating from different profiles. Every field value
+> carries its source `profile_id`. A single submission must resolve to exactly one profile. The
+> denial names the offending field and both profiles.
+
+Naming both profiles is deliberate: "profile bleed detected" is not actionable, and a denial that
+cannot be acted on gets suppressed.
+
+#### Resulting directive: no real-world identifiers in a hypothetical profile
+
+Added to §2.1 *Never do*:
+
+> Never populate a hypothetical profile with any real-world identifier — address, name, phone,
+> email, licence — belonging to the operator or any third party. **A hypothetical profile is
+> hypothetical in every field or it is not hypothetical.**
+
+Enforced at two layers: the profile registry refuses to load a hypothetical profile carrying a
+value that matches a vault-held operator value, and `P-PROFILE-BLEED-01` denies the mixed submission
+at the gate.
+
+#### Resulting rule: `P-HYPO-ATTEST-01`
+
+Added to §2.1 and §9.1:
+
+> Never tick an accuracy, truthfulness or fraud-acknowledgement checkbox under a hypothetical
+> profile. Emit `manual_handoff` and stop.
+
+Distinct from `P-HYPO-STEP-01` even though both emit `manual_handoff`, because the audit trail
+should say *attestation* rather than *step*. INC-001 is exactly this case, and a rule that names it
+is a rule that can be pointed at.
+
+### INC-001 follow-on: operator constraint 2 is enforced in code
+
+The operator's requirement — *show me the full payload the agent intends to submit, field by field
+with its source profile, and wait for my approval; one approval per route; no route runs
+unattended* — is implemented as `P-APPROVAL-01` rather than as a habit. A convention that depends on
+remembering is the same class of control that failed in INC-001.

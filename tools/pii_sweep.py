@@ -66,7 +66,18 @@ BINARY_EXTENSIONS = {
 
 MAX_FILE_BYTES = 8 * 1024 * 1024
 
-ALLOW_PRAGMA = re.compile(r"pii-sweep:\s*allow(?:\s+([A-Z_]+(?:\s*,\s*[A-Z_]+)*))?")
+ALLOW_PRAGMA = re.compile(r"pii-sweep:\s*allow(?!-file)(?:\s+([A-Z_]+(?:\s*,\s*[A-Z_]+)*))?")
+
+#: File-scoped allowance, for files whose entire content is synthetic by construction — the
+#: hypothetical profile records. JSON cannot carry a comment, so a per-line pragma is impossible
+#: there, and the alternative is excluding the directory, which would hide real leaks.
+#:
+#: Deliberately narrower than the line pragma in two ways: the rules must be named (there is no
+#: bare `allow-file`), and it is only honoured in files the sweep can see the declaration in, so
+#: it appears in the data a reader is already looking at. It is also backed by a real check
+#: elsewhere — `packages.profiles.validate` refuses to load a hypothetical profile carrying any
+#: value the vault holds for the operator.
+ALLOW_FILE_PRAGMA = re.compile(r"pii-sweep:\s*allow-file\s+([A-Z_]+(?:\s*,\s*[A-Z_]+)*)")
 
 # --------------------------------------------------------------------------------------
 # Rules
@@ -260,6 +271,7 @@ class SweepReport:
     files_scanned: int = 0
     binaries_for_review: list[str] = field(default_factory=list)
     skipped_too_large: list[str] = field(default_factory=list)
+    file_allowances: list[tuple[str, list[str]]] = field(default_factory=list)
 
     @property
     def clean(self) -> bool:
@@ -294,9 +306,21 @@ def allowed_rules_on_line(line: str) -> set[str] | None:
     return {rule_id.strip() for rule_id in rule_ids.split(",") if rule_id.strip()}
 
 
-def scan_line(path_label: str, line_number: int, line: str) -> Iterator[Finding]:
+def file_allowed_rules(text: str) -> set[str]:
+    """Rules allowed for a whole file by an `allow-file` declaration inside it."""
+    allowed: set[str] = set()
+    for match in ALLOW_FILE_PRAGMA.finditer(text):
+        allowed.update(rule_id.strip() for rule_id in match.group(1).split(",") if rule_id.strip())
+    return allowed
+
+
+def scan_line(path_label: str, line_number: int, line: str,
+              file_allowed: set[str] | None = None) -> Iterator[Finding]:
     allowed = allowed_rules_on_line(line)
+    file_allowed = file_allowed or set()
     for rule in RULES:
+        if rule.rule_id in file_allowed:
+            continue
         if allowed is not None and (not allowed or rule.rule_id in allowed):
             continue
         for match in rule.findings(line):
@@ -330,8 +354,11 @@ def scan_file(path: Path, root: Path, report: SweepReport) -> None:
         return
 
     report.files_scanned += 1
+    file_allowed = file_allowed_rules(text)
+    if file_allowed:
+        report.file_allowances.append((label, sorted(file_allowed)))
     for line_number, line in enumerate(text.splitlines(), start=1):
-        report.findings.extend(scan_line(label, line_number, line))
+        report.findings.extend(scan_line(label, line_number, line, file_allowed))
 
 
 def sweep(root: Path) -> SweepReport:
@@ -363,6 +390,13 @@ def render(report: SweepReport, root: Path) -> str:
         )
     else:
         lines.append("PASS — no PII-shaped content found in text files.")
+
+    if report.file_allowances:
+        lines.append("")
+        lines.append("File-scoped allowances in effect (every value in these files is synthetic "
+                     "by construction):")
+        for path, rules in report.file_allowances:
+            lines.append(f"    {path}  ->  {', '.join(rules)}")
 
     if report.binaries_for_review:
         lines.append("")
@@ -416,6 +450,7 @@ def main(argv: list[str] | None = None) -> int:
                 }
                 for f in report.findings
             ],
+            "file_allowances": [{"path": p, "rules": r} for p, r in report.file_allowances],
             "binaries_for_review": report.binaries_for_review,
             "skipped_too_large": report.skipped_too_large,
         }, indent=2))

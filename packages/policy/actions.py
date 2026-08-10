@@ -50,6 +50,31 @@ HUMAN_CONTACT_KINDS: frozenset[str] = frozenset({"dial", "speak", "record"})
 
 
 @dataclass(frozen=True)
+class FieldValue:
+    """A submitted value tagged with the profile it came from.
+
+    Added after INC-001. A hypothetical profile was populated with a real third-party address
+    partway through a hand-driven journey; nothing caught it because provenance did not exist as a
+    concept, so there was nothing to compare. Every value the intake produces now carries the
+    profile that produced it, and `P-PROFILE-BLEED-01` refuses any payload that resolves to more
+    than one.
+
+    Payload values may still be raw. Rules read values through `data_fields()`, which unwraps, so
+    provenance is additive rather than a rewrite of every rule.
+    """
+
+    value: object
+    source_profile_id: str
+
+    def __str__(self) -> str:  # so a raw-string rule sees the value, not the wrapper
+        return str(self.value)
+
+
+def unwrap(value: object) -> object:
+    return value.value if isinstance(value, FieldValue) else value
+
+
+@dataclass(frozen=True)
 class ProposedAction:
     kind: ActionKind
     target: str
@@ -86,13 +111,24 @@ class ProposedAction:
                 names.append(value.lower())
         return names
 
+    CONTROL_KEYS = frozenset({
+        "label", "text", "selector", "name", "id", "aria_label", "button", "control",
+        "field", "input", "is_disclosure_prelude", "human_checkpoint", "control_type",
+    })
+
     def data_fields(self) -> dict[str, object]:
-        """Payload entries that represent submitted data rather than control metadata."""
-        control_keys = {
-            "label", "text", "selector", "name", "id", "aria_label", "button", "control",
-            "field", "input", "is_disclosure_prelude", "human_checkpoint",
-        }
-        return {k: v for k, v in self.payload_items().items() if str(k).lower() not in control_keys}
+        """Submitted data rather than control metadata, with any provenance wrapper removed."""
+        return {k: unwrap(v) for k, v in self.payload_items().items()
+                if str(k).lower() not in self.CONTROL_KEYS}
+
+    def field_provenance(self) -> dict[str, str]:
+        """Field name -> source profile, for values that declare one."""
+        return {str(k): v.source_profile_id for k, v in self.payload_items().items()
+                if isinstance(v, FieldValue) and str(k).lower() not in self.CONTROL_KEYS}
+
+    def unprovenanced_fields(self) -> list[str]:
+        return sorted(str(k) for k, v in self.payload_items().items()
+                      if not isinstance(v, FieldValue) and str(k).lower() not in self.CONTROL_KEYS)
 
 
 @dataclass(frozen=True)
@@ -194,6 +230,15 @@ class SessionContext:
     budgets: dict[str, RouteBudget] = field(default_factory=dict)
     call: CallState = field(default_factory=CallState)
     stop_requested: bool = False
+
+    #: Routes whose intended payload the operator has approved field-by-field (P-APPROVAL-01).
+    #: **Empty by default — approval is opt-in, so a route runs only after a deliberate act.**
+    #: One approval per route. Populated from `packages/policy/approvals.py`.
+    approved_routes: frozenset[str] = frozenset()
+
+    #: When True, a data field with no declared provenance is itself a denial (P-PROFILE-BLEED-01).
+    #: Turned on for real destinations once intake tags every field, at Milestone 4.
+    require_provenance: bool = False
 
     def budget_for(self, route_id: str) -> RouteBudget:
         return self.budgets.setdefault(route_id, RouteBudget())

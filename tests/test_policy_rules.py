@@ -30,6 +30,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from packages.policy import (  # noqa: E402
     CallState,
+    FieldValue,
     PolicyEngine,
     ProposedAction,
     RecordingConsent,
@@ -67,6 +68,9 @@ class PolicyTestCase(unittest.TestCase):
         defaults = dict(
             session_id="ses_test", profile_id="profile_operator",
             hypothetical=False, sandbox_only=False,
+            # P-APPROVAL-01 denies by default; these fixtures exercise other rules, so the
+            # route under test is pre-approved. TestApprovalRule covers the gate itself.
+            approved_routes=frozenset({"rt_1"}),
         )
         defaults.update(overrides)
         return SessionContext(**defaults)
@@ -75,6 +79,7 @@ class PolicyTestCase(unittest.TestCase):
         defaults = dict(
             session_id="ses_test", profile_id="profile_hypo_clean",
             hypothetical=True, sandbox_only=False,
+            approved_routes=frozenset({"rt_1"}),
         )
         defaults.update(overrides)
         return SessionContext(**defaults)
@@ -467,6 +472,116 @@ class TestHumanCheckpointRule(PolicyTestCase):
                         payload={"consent_receipt_id": "cr_0004"},
                         rationale="Record the consent receipt id for this route."),
             ctx)
+
+
+# ======================================================================================
+# P-APPROVAL-01  — added after INC-001
+# ======================================================================================
+
+class TestApprovalRule(PolicyTestCase):
+    def test_denies_a_real_destination_on_an_unapproved_route(self):
+        """Default deny. A route runs only after a deliberate act, never by omission."""
+        ctx = self.operator_ctx(approved_routes=frozenset())
+        self.assertDenied(self.action(kind="navigate", target=REAL), ctx, "P-APPROVAL-01")
+
+    def test_permits_a_real_destination_once_the_route_is_approved(self):
+        ctx = self.operator_ctx(approved_routes=frozenset({"rt_1"}))
+        self.assertAllowed(self.action(kind="navigate", target=REAL), ctx)
+
+    def test_permits_the_sandbox_without_any_approval(self):
+        """Approval guards real destinations. Requiring it for the sandbox would push development
+        toward live sites, which is the §18 anti-goal."""
+        ctx = self.operator_ctx(approved_routes=frozenset())
+        self.assertAllowed(self.action(kind="navigate", target=SANDBOX), ctx)
+
+    def test_permits_recording_an_outcome_without_approval(self):
+        ctx = self.operator_ctx(approved_routes=frozenset())
+        self.assertAllowed(self.action(kind="write", target="out/results.jsonl",
+                                       payload={"status": "blocked"}), ctx)
+
+
+# ======================================================================================
+# P-PROFILE-BLEED-01  — added after INC-001
+# ======================================================================================
+
+class TestProfileBleedRule(PolicyTestCase):
+    def test_denies_a_field_sourced_from_another_profile(self):
+        """INC-001 itself: a real-world address dropped into a hypothetical journey."""
+        decision = self.assertDenied(
+            self.action(payload={"address": FieldValue("a real address",
+                                                       "profile_operator")},
+                        profile_id="profile_hypo_clean"),
+            self.hypo_ctx(), "P-PROFILE-BLEED-01")
+        self.assertIn("address", decision.explanation)
+        self.assertIn("profile_operator", decision.explanation)
+        self.assertIn("profile_hypo_clean", decision.explanation)
+
+    def test_denies_a_payload_mixing_two_profiles(self):
+        self.assertDenied(
+            self.action(payload={
+                "first_name": FieldValue("Synthetic", "profile_sim_g2"),
+                "last_name": FieldValue("Also synthetic", "profile_hypo_clean"),
+            }, profile_id="profile_hypo_clean"),
+            self.hypo_ctx(), "P-PROFILE-BLEED-01")
+
+    def test_permits_a_payload_entirely_from_the_running_profile(self):
+        self.assertAllowed(
+            self.action(payload={
+                "first_name": FieldValue("Synthetic", "profile_hypo_clean"),
+                "annual_km": FieldValue("12000", "profile_hypo_clean"),
+            }, profile_id="profile_hypo_clean"),
+            self.hypo_ctx())
+
+    def test_permits_untagged_fields_while_provenance_is_being_rolled_out(self):
+        """Provenance is populated by intake at Milestone 3. Denying every untagged payload today
+        would stop the system rather than protect it — see the PARTIAL row in PRIME_DIRECTIVES."""
+        self.assertAllowed(self.action(payload={"annual_km": "12000"}), self.operator_ctx())
+
+    def test_denies_untagged_fields_once_the_session_requires_provenance(self):
+        ctx = self.operator_ctx(require_provenance=True)
+        self.assertDenied(self.action(payload={"annual_km": "12000"}), ctx,
+                          "P-PROFILE-BLEED-01")
+
+
+# ======================================================================================
+# P-HYPO-ATTEST-01  — added after INC-001
+# ======================================================================================
+
+class TestHypotheticalAttestationRule(PolicyTestCase):
+    def test_denies_an_accuracy_acknowledgement_and_emits_manual_handoff(self):
+        """The exact control INC-001 ticked."""
+        self.assertDenied(
+            self.action(kind="click", target="https://insurer.example.com/vehicles",
+                        payload={"label": "I confirm the address information is accurate",
+                                 "control_type": "checkbox"},
+                        profile_id="profile_hypo_clean"),
+            self.hypo_ctx(), "P-HYPO-ATTEST-01", terminal_status="manual_handoff")
+
+    def test_denies_a_fraud_acknowledgement(self):
+        self.assertDenied(
+            self.action(kind="click", target="https://insurer.example.com/vehicles",
+                        payload={"label": "I understand that insurance fraud is a criminal offence",
+                                 "control_type": "checkbox"},
+                        profile_id="profile_hypo_clean"),
+            self.hypo_ctx(), "P-HYPO-ATTEST-01", terminal_status="manual_handoff")
+
+    def test_permits_marketing_copy_containing_the_word_accurate(self):
+        """A bare adjective is not an attestation. Requiring attestational phrasing keeps the
+        rule from firing on half the page."""
+        self.assertAllowed(
+            self.action(kind="click", target="https://insurer.example.com/start",
+                        payload={"label": "Get accurate quotes in 3 minutes"},
+                        profile_id="profile_hypo_clean"),
+            self.hypo_ctx())
+
+    def test_permits_the_operator_confirming_their_own_real_information(self):
+        """Under profile_operator the information genuinely is accurate, so confirming it is
+        honest. The rule is about a hypothetical attesting, not about attestation as such."""
+        self.assertAllowed(
+            self.action(kind="click", target="https://insurer.example.com/vehicles",
+                        payload={"label": "I confirm the address information is accurate",
+                                 "control_type": "checkbox"}),
+            self.operator_ctx())
 
 
 if __name__ == "__main__":

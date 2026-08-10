@@ -1,0 +1,51 @@
+{
+  "_note": "The operator's real profile. NO REAL VALUES LIVE IN THIS FILE — every real value is held in the encrypted vault and referenced by key. That is why this file trips no PII rule and needs no allow-file declaration: there is nothing here to trip one. FATHOM 2.1, 9.2.",
+
+  "profile_id": "profile_operator",
+  "hypothetical": false,
+  "sandbox_only": false,
+  "label": "OPERATOR — real information",
+  "description": "The operator's own real, accurate information (FATHOM 2.2). Powers the Eligibility Frontier, the Friction Ledger and the Broker Harvester. Full voice and human-contact permissions.",
+
+  "facts": {
+    "licence_class": "G1",
+    "licence_province": "ON",
+    "vehicle_ownership": "none_prospective_purchase",
+    "canadian_history_months": "0",
+    "prior_insurance": "false",
+    "residence_province": "ON",
+    "at_fault_accidents_6y": "0",
+    "convictions_3y": "0",
+    "vehicle_year": "2019",
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_trim": "LX",
+    "requested_effective_date": "2026-09-01"
+  },
+
+  "elections": {
+    "third_party_liability_limit": "2000000",
+    "collision_deductible": "1000",
+    "comprehensive_deductible": "1000",
+    "dcpd_included": "true",
+    "opcf_49_elected": "false",
+    "opcf_44r_requested": "true",
+    "term_months": "12",
+    "telematics": "declined"
+  },
+
+  "vault_refs": {
+    "first_name": "operator.first_name",
+    "last_name": "operator.last_name",
+    "date_of_birth": "operator.date_of_birth",
+    "address_line_1": "operator.address_line_1",
+    "city": "operator.city",
+    "postal_code": "operator.postal_code",
+    "licence_number": "operator.licence_number",
+    "contact_email": "operator.contact_email",
+    "contact_phone": "operator.contact_phone"
+  },
+
+  "active_modules": ["registry", "graph", "rater", "frontier", "friction", "harvester", "voice"],
+  "gated_modules": []
+}

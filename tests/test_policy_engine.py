@@ -42,6 +42,7 @@ class EngineTestCase(unittest.TestCase):
     def ctx(self, **overrides) -> SessionContext:
         defaults = dict(session_id="ses_1", profile_id="profile_operator",
                         hypothetical=False, sandbox_only=False,
+                        approved_routes=frozenset({"rt_1"}),
                         call=CallState(disclosure_delivered=True))
         defaults.update(overrides)
         return SessionContext(**defaults)

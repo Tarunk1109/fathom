@@ -1,0 +1,71 @@
+{
+  "_pii_sweep": "pii-sweep: allow-file STREET_ADDRESS,PC_FULL_POSTAL,DOB_LABELLED — every value in this file is synthetic by construction. This profile is hypothetical in every field (FATHOM 2.1). packages.profiles.validate refuses to load it if any value matches a vault-held operator value, so this allowance is backed by a real check, not by assertion.",
+  "_note": "PRIMARY profile. Clean-record hypothetical driver. Permitted by organizer Q&A AC-001, which recommends a clean record to maximise returned rates. Never carries a licence number, never contacts a human, never completes a commitment step.",
+
+  "profile_id": "profile_hypo_clean",
+  "hypothetical": true,
+  "sandbox_only": false,
+  "label": "HYPOTHETICAL — clean-record driver",
+  "description": "Synthetic clean-record Ontario driver used for broad rate retrieval. Every field is invented. Not a real person. Labelled as hypothetical everywhere it appears (FATHOM 2.3).",
+
+  "facts": {
+    "first_name": "Avery",
+    "last_name": "Sandbourne",
+    "birth_year": "1988",
+    "date_of_birth": "1988-04-12",
+    "gender": "prefer_not_to_say",
+    "marital_status": "single",
+    "address_line_1": "480 Meridian Hollow Way",
+    "city": "Toronto",
+    "province": "ON",
+    "postal_code": "M4W 3T9",
+    "residence_type": "rented_apartment",
+    "years_at_address": "4",
+    "licence_class": "G",
+    "licence_province": "ON",
+    "years_licensed_g": "12",
+    "years_licensed_total": "15",
+    "date_first_licensed": "2011-06-01",
+    "driver_training": "completed",
+    "prior_insurance": "true",
+    "years_continuously_insured": "10",
+    "at_fault_accidents_6y": "0",
+    "not_at_fault_accidents_6y": "0",
+    "convictions_3y": "0",
+    "licence_suspensions_3y": "0",
+    "claims_6y": "0",
+    "lapse_in_coverage": "none",
+    "vehicle_year": "2019",
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_trim": "LX",
+    "vehicle_ownership": "owned",
+    "vehicle_purchase_type": "used",
+    "annual_km": "12000",
+    "commute_one_way_km": "9",
+    "primary_use": "commute",
+    "parking_location": "driveway",
+    "winter_tires": "true",
+    "other_drivers": "none",
+    "requested_effective_date": "2026-09-01"
+  },
+
+  "elections": {
+    "third_party_liability_limit": "2000000",
+    "collision_deductible": "1000",
+    "comprehensive_deductible": "1000",
+    "dcpd_included": "true",
+    "opcf_49_elected": "false",
+    "opcf_44r_requested": "true",
+    "term_months": "12",
+    "telematics": "declined"
+  },
+
+  "vault_refs": {},
+
+  "active_modules": [
+    "registry", "graph", "rater", "benefit_probe", "parity_measured",
+    "vehicle_inversion", "channel_arbitrage", "friction"
+  ],
+  "gated_modules": ["voice", "broker_human", "frontier"]
+}
