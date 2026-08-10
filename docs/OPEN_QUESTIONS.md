@@ -87,13 +87,26 @@ profile or lets a simulated one reach a real site.
 The brief bans a fabricated licence number under "Participant profile and eligibility" and §8, and
 AC-001 did not address it. `P-HYPO-LICENCE-01` is therefore non-negotiable regardless of profile.
 
-**Interpretation 1 — `P-SANDBOX-01` is retained, not deleted.** Amendment A says "replace"; item B
-retains `sandbox_only` as the field governing real-destination access and keeps `profile_sim_g2`
-sandbox-only and unchanged. With no rule reading that field, nothing would enforce it. The rule is
-kept with narrowed semantics: it now keys off `sandbox_only` alone and says nothing about
-hypothetical profiles. **Flagged for operator confirmation.**
+**Interpretation 1 — `P-SANDBOX-01` is retained, not deleted. CONFIRMED by the operator
+2026-08-09.** Amendment A says "replace"; item B retains `sandbox_only` as the field governing
+real-destination access and keeps `profile_sim_g2` sandbox-only and unchanged. With no rule reading
+that field, nothing would enforce it. The rule is kept with narrowed semantics: it now keys off
+`sandbox_only` alone and says nothing about hypothetical profiles.
 
-**Interpretation 2 — `P-FACT-01` and `P-REAL-FACT-01` are a mirrored pair, not a duplicate.**
+> Operator's rationale: *"Redundancy in a safety layer costs nothing. Do not delete gate rules this
+> close to the deadline."*
+
+**Interpretation 2 — `P-FACT-01` and `P-REAL-FACT-01` are a mirrored pair, not a duplicate.
+CONFIRMED by the operator 2026-08-09.**
+
+> Operator's rationale: *"Fact-lock applies to `profile_hypo_clean` exactly as it does to
+> `profile_operator`. If the hypothetical profile's facts drift between insurers, every parity and
+> channel-arbitrage claim is invalid and the comparison is worthless. This is not optional."*
+
+Consequence to carry forward: **`profile_hypo_clean` is fact-locked at session start like any other
+profile.** Its facts are invented once, sealed, and never varied across routes. §10.6 channel
+arbitrage depends on this directly — comparing two channels at "identical fact-lock" is meaningless
+if the facts were not identical.
 
 - `P-FACT-01` applies to **every** profile, hypothetical included. Fact-lock is what makes results
   comparable across insurers; if the clean hypothetical's facts drifted between routes, the whole
@@ -104,7 +117,8 @@ hypothetical profiles. **Flagged for operator confirmation.**
   other: a hypothetical may never carry a real licence, and the operator's profile may never carry
   an invented fact.
 
-**Flagged for operator confirmation.**
+**Both interpretations RESOLVED 2026-08-09. No code change required — the shipped rule set already
+implements both, and `tests/test_policy_rules.py` covers each with a denial and an over-block case.**
 
 **Interpretation 3 — contact capture that produces real human follow-up is callback enrolment.**
 `P-HYPO-STEP-01` therefore denies submitting contact details under a hypothetical profile where the
