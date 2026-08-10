@@ -54,7 +54,12 @@ If you are Claude Code reading this at the start of a session:
 | Never enter another person's data without consent | Intake refuses third-party PII entirely in this build |
 | Never change material facts about the operator across insurers to chase a lower price | Fact-lock: facts hashed at session start; divergent submissions denied |
 | Never present an estimate, lead form or callback promise as a firm quote | Status enum mandatory; UI renders estimates in a separate band |
-| Never send a hypothetical or simulated profile to a real destination | Profile registry marks non-operator profiles `sandbox_only`; Policy Engine denies any real-destination action carrying one |
+| Never submit a driver's licence number under a hypothetical profile | `P-HYPO-LICENCE-01`. Non-negotiable: the brief bans it and the organizer Q&A did not address it |
+| Never place a voice, callback or human-contact action under a hypothetical profile | `P-HYPO-HUMAN-01`. The Q&A covered web forms; representing a hypothetical to a real person remains prohibited |
+| Never complete identity verification, consent attestation, declaration, callback enrolment or purchase steps under a hypothetical profile | `P-HYPO-STEP-01`; emits `manual_handoff` |
+| Never submit a fabricated material fact under a non-hypothetical profile | `P-REAL-FACT-01`. Mirrors `P-HYPO-LICENCE-01`; the two profiles may not bleed into each other |
+| Never send a `sandbox_only` profile to a real destination | `P-SANDBOX-01`. Governs real-destination access only; no longer conflated with `hypothetical` |
+| Never submit a licence plate. Skip optional plate fields; if a plate is mandatory, record `blocked` with the exact field and stop | `P-PLATE-01` |
 | Never misrepresent the caller as a human, broker, agent, or insurer employee | Voice disclosure prelude is non-removable and checksummed |
 | Never record or transcribe a call without affirmative consent | Consent state machine gates the recorder; default `NO_AUDIO` |
 | Never place repeated calls or continue after a request to stop | One call, one retry only on pre-connection failure |
@@ -71,21 +76,51 @@ If you are Claude Code reading this at the start of a session:
 - Keep unresolved records in the denominator of every metric.
 - Treat every route identically. No route is favoured, promoted, criticized or omitted for any reason other than an evidenced one.
 
-### 2.3 The alias and simulation rule
+### 2.3 The hypothetical-profile rule
 
-Non-operator profiles exist **only** in the local synthetic sandbox. They may never touch a real destination, may never be paired with a real licence number, and must be visibly labelled as simulations in every view and in the walkthrough. If a sandbox flow reaches an identity check, the run stops and records `manual_handoff`.
+*Amended 2026-08-09 following the organizer Q&A (AC-001). Supersedes the prior alias and simulation
+rule, which barred every non-operator profile from every real destination.*
+
+**Two flags, no longer one concept.**
+
+- `hypothetical` governs **conduct**: licence-number submission, human contact, and step gating.
+- `sandbox_only` governs **reach**: whether the profile may touch a real destination at all.
+
+A hypothetical profile **may** complete quote forms at real destinations. The organizers explicitly
+permit it and recommend a clean-record profile to maximise returned rates.
+
+A hypothetical profile may **never**: carry a driver's licence number; reach a real human by voice,
+callback or any other human-contact channel; or complete identity verification, consent attestation,
+a declaration, callback enrolment or a purchase step. Any of those stops the run and records
+`manual_handoff`.
+
+A `sandbox_only` profile may never touch a real destination, and must be visibly labelled as a
+simulation in every view and in the walkthrough.
+
+**Every hypothetical profile is labelled as hypothetical in every view and in the walkthrough.** The
+distinction between a retrieved rate for a hypothetical driver and one for the operator is never
+blurred, in the UI or in the submission.
 
 ---
 
 ## 3. Thesis
 
-The operator holds a G1 licence and owns no vehicle. He therefore cannot obtain a standard retail quote as principal driver of an owned car.
+*Reframed 2026-08-09 following the organizer Q&A (AC-001). Every evidence, dedup and parity
+requirement in this document is unchanged.*
 
-**This is not a limitation. It is the premise.**
+**Primary output: broad, evidenced retrieval across as many rate sources as the agent can reach**,
+run agentically under `profile_hypo_clean`, a clean-record hypothetical driver. The organizers
+permit any driver profile and require an agentic element — automation is the ask, not a bonus, and
+form coverage is a graded outcome.
 
-The operator is the profile the Ontario market is structurally worst at serving: learner permit only, no owned vehicle, no Canadian driving history. That profile produces the richest distribution of refusals, conditions and stated reasons available to any participant.
+**Second lens, layered on top: the operator's own G1, no-vehicle profile.** It is the profile the
+Ontario market is structurally worst at serving — learner permit only, no owned vehicle, no Canadian
+driving history — and it produces the richest distribution of refusals, conditions and stated
+reasons available to any participant. Those refusals are what power the Eligibility Frontier.
 
-So FATHOM does not shop. It **measures**.
+So FATHOM both **retrieves** and **measures**. The clean profile establishes reach; the operator
+profile establishes the boundary. Neither result is ever presented as the other: a rate returned for
+a hypothetical driver is labelled as such everywhere it appears.
 
 Four outputs, each of which a conventional participant cannot produce:
 
@@ -110,79 +145,101 @@ This is architecturally important and it is also the answer to the obvious judge
 
 Profiles live in `data/profiles/` as records, not code paths.
 
+*Amended 2026-08-09 following AC-001. `sandbox_only: bool` is replaced by two independent fields.*
+
 ```json
 {
-  "profile_id": "operator",
+  "profile_id": "profile_hypo_clean",
+  "hypothetical": true,
   "sandbox_only": false,
-  "licence_class": "G1",
-  "vehicle_status": "none_prospective_purchase",
-  "canadian_history_months": 0,
-  "prior_insurance": false,
+  "licence_class": "G",
+  "vehicle_status": "owned",
+  "canadian_history_months": 120,
+  "prior_insurance": true,
+  "claims": [],
+  "convictions": [],
   "residence": "Ontario",
-  "eligible_channels": ["direct_web", "broker", "residual_computed", "aggregator"],
-  "active_modules": ["registry","graph","frontier","rater","friction","harvester"],
-  "gated_modules": ["benefit_probe","parity_measured","vehicle_inversion","channel_arbitrage"]
+  "licence_number": null,
+  "eligible_channels": ["direct_web", "aggregator"],
+  "active_modules": ["registry","graph","rater","benefit_probe","parity_measured",
+                     "vehicle_inversion","channel_arbitrage","friction"],
+  "gated_modules": ["voice","broker_human","frontier"]
 }
 ```
 
-| Profile | `sandbox_only` | What activates |
-| --- | --- | --- |
-| `operator` (G1, no car) | false | Registry, graph, computed rater, frontier, friction ledger, broker harvester. Priced-state modules gated pending Day 0 result. |
-| `sim_g2_no_car` | **true** | Adds benefit probe, measured parity, vehicle inversion |
-| `sim_g_owner` | **true** | Adds channel arbitrage, telematics separation, full claims-history branch |
+| Profile | `hypothetical` | `sandbox_only` | Role and what activates |
+| --- | --- | --- | --- |
+| `profile_hypo_clean` | **true** | false | **PRIMARY.** Clean-record hypothetical. Maximises returned rates and unlocks every priced-state module: benefit probe, measured parity, vehicle inversion, channel arbitrage. **No licence number, ever. No voice, no callback, no human contact.** |
+| `profile_operator` (real G1, no car) | false | false | Real information. Powers the Eligibility Frontier, friction ledger and broker harvester. **Full voice and human-contact permissions.** Fact-locked to the vault's registered values. |
+| `profile_sim_g2` | true | **true** | Sandbox only, unchanged. Never touches a real destination. |
 
-The Route Planner reads the active profile and lights up the corresponding modules. **Nothing is hardcoded to the operator's licence class.**
+**The two fields are independent.** `hypothetical` governs conduct — licence number, human contact,
+step gating. `sandbox_only` governs reach. A profile can be hypothetical and still run against real
+quote forms; that is the primary profile. A profile can be sandbox-only for reasons unrelated to
+being hypothetical.
+
+The Route Planner reads the active profile and lights up the corresponding modules. **Nothing is
+hardcoded to any licence class.**
 
 ### 4.2 Why this matters
 
 It proves the system is general rather than built around one person's circumstances, and it gives the operator an honest, confident answer to "what if you had a G2?" that is demonstrated rather than claimed.
 
-**Enforcement:** the Policy Engine denies any real-destination action carrying a profile with `sandbox_only: true`. Simulated profiles run only against `sandbox/`.
+**Enforcement:** `P-SANDBOX-01` denies any real-destination action carrying `sandbox_only: true`.
+`P-HYPO-LICENCE-01`, `P-HYPO-HUMAN-01` and `P-HYPO-STEP-01` govern `hypothetical: true` regardless
+of destination. `P-REAL-FACT-01` binds a non-hypothetical profile to the vault's registered values.
 
-### 4.3 Expected result distribution for the operator
+### 4.3 Expected result distributions
 
-Design the UI for this, not for a wall of quotes:
+**Two distributions, never merged in the UI.**
+
+Under `profile_hypo_clean` (primary), design for a wall of quotes:
+
+- Majority: `quoted_comparable`, `quoted_non_comparable`
+- Minority: `estimate_only`, `callback_required`, `blocked`
+- Expected: `manual_handoff` wherever a journey reaches an identity, consent, declaration or
+  purchase step — that is `P-HYPO-STEP-01` working, not a failure
+
+Under `profile_operator` (second lens), design for evidenced refusal:
 
 - Majority: `ineligible`, `manual_handoff`, `callback_required`, `specialty_only`
 - Minority: `estimate_only`, `quoted_non_comparable`
 - Rare: `quoted_comparable`
 - Guaranteed: exactly one `computed` residual-market premium
 
-Two retrieved results, one computed price and twenty-eight evidenced declines is a **success**. Build the interface so it reads as one.
+Broad retrieval under the clean profile, plus an ordered ladder of what unlocks what under the
+operator profile, is the submission. Neither half is presented as the other.
 
 ---
 
-## 5. Day 0 Viability Probe
+## 5. Day 0 Reconnaissance Probe
 
-**Run this before writing any code. It takes under an hour and it selects the build plan.**
+*Purpose amended 2026-08-09 following AC-001. **Plan A applies.** The probe no longer selects a
+build plan — it maps the four routes so the web executor is built against known ground.*
 
-### 5.1 The probe
+### 5.1 What the probe now answers
 
-Manually, by hand, no automation, using the operator's own real information:
+1. **Which of the four routes returns a rate under `profile_hypo_clean`?** This sizes the primary
+   retrieval surface.
+2. **Which expose the post-1-July-2026 accident-benefit election toggles?** This gates the Benefit
+   Price Probe (§10.2) per route.
+3. **What is each route's quote reference ID grammar?** Fingerprinting signal 2 (§9.3).
+4. **What are the operator-profile outcomes?** Still recorded, because every refusal, its exact
+   stopping step and its stated reason feed the Eligibility Frontier (§10.3).
 
-1. Open four direct-writer Ontario quote journeys.
-2. Enter the operator's real profile, with a genuinely considered prospective vehicle.
-3. Record for each: does the journey reach a priced screen, or does it stop at the licence-class or vehicle-ownership step? Capture the exact stopping point and stated reason.
+### 5.2 Conduct
 
-Record results in `docs/DAY0_PROBE.md`. This is itself submission evidence, so timestamp it and redact it.
+Record results in `docs/DAY0_PROBE.md`. This is itself submission evidence, so timestamp it and
+redact it.
 
-### 5.2 Decision matrix
+The probe is hand-run reconnaissance for the operator's own benefit. **It is not the submission's
+automation, and it never substitutes for it** — AC-001 item 2 is explicit that manual form filling
+is not acceptable and an agentic element is required. Everything the probe learns becomes a route
+recipe (§11.1) executed by the web executor.
 
-| Outcome | Plan | Consequence |
-| --- | --- | --- |
-| At least one route reaches a priced screen | **Plan A** | Full spec applies. Benefit Price Probe, measured parity, vehicle inversion and channel arbitrage are live for the `operator` profile. |
-| No route reaches a priced screen | **Plan B** | Those four modules run **only** under `sim_g2_no_car` in the sandbox, clearly labelled. Weight shifts to the Rulebook Compiler, the Rate-Source Graph, the Eligibility Frontier and the Broker Harvester. |
-
-### 5.3 Plan B is not a downgrade
-
-Under Plan B the submission still satisfies every minimum acceptance check:
-
-- **Retrieval:** an exact terminal blocker satisfies the check. A returned rate is not required.
-- **Normalization, two outcomes with coverage differences:** satisfied by the `computed` residual result paired with one `estimate_only` or `quoted_non_comparable` result. Both carry full coverage detail.
-- **Cross-channel:** the broker voice or email route with context handoff.
-- **Market map and evidence:** unaffected.
-
-**Do not discover Plan B on day three.** Probe first.
+Under `profile_hypo_clean`: no licence number, no plate, and stop at any identity, consent,
+declaration, callback-enrolment or purchase step. Under `profile_operator`: the operator's own real
+information, per §2.2.
 
 ---
 
@@ -510,10 +567,15 @@ class PolicyDecision:
 | `P-PAY-01` | payment fields, card numbers, banking fields |
 | `P-CAPTCHA-01` | any interaction with a CAPTCHA or bot check |
 | `P-AUTH-01` | credential entry to unregistered services |
-| `P-FACT-01` | any submitted value diverging from the session fact-lock |
+| `P-FACT-01` | any submitted value diverging from the session fact-lock — **every profile**, so results stay comparable across insurers |
 | `P-LICENCE-01` | any licence value not matching the vault's registered operator value |
 | `P-THIRDPARTY-01` | third-party personal data |
 | `P-SANDBOX-01` | any real-destination action carrying a `sandbox_only` profile |
+| `P-HYPO-LICENCE-01` | any driver's licence number submitted under a `hypothetical` profile |
+| `P-HYPO-HUMAN-01` | any voice, callback or human-contact action carrying a `hypothetical` profile |
+| `P-HYPO-STEP-01` | identity verification, consent attestation, declaration, callback enrolment or purchase steps under a `hypothetical` profile — emits `manual_handoff` |
+| `P-REAL-FACT-01` | any fabricated material fact submitted under a non-`hypothetical` profile |
+| `P-PLATE-01` | submission of a licence plate value — emits `blocked` where the field is mandatory |
 | `P-BUDGET-01` | actions exceeding the route's attempt or time budget |
 | `P-DISCLOSE-01` | `speak` on a fresh call not preceded by the disclosure prelude |
 | `P-RECORD-01` | `record` while consent state is not `GRANTED` |
@@ -812,8 +874,16 @@ Seven views. Clean and plain. Nobody scores the CSS.
 
 **Do not reorder. Do not skip ahead.**
 
-### Milestone 0: Day 0 Viability Probe
-Run Section 5 by hand. Write `docs/DAY0_PROBE.md`. Select Plan A or Plan B. **Nothing else starts until this is done.**
+*Amended 2026-08-09 following AC-001. Automation is the ask, not a bonus, and form coverage is a
+graded outcome — so the web executor, route recipes and the field ontology mapper move up.*
+
+**The constraint that does not move:** evidence discipline is never traded for form count. The
+written brief's judging criteria are unchanged and still reward trustworthy over numerous. A
+schema-valid result with an evidence artifact counts; a number scraped without one does not.
+
+### Milestone 0: Day 0 Reconnaissance Probe
+Run Section 5 by hand. Write `docs/DAY0_PROBE.md`. **Plan A applies** — this is reconnaissance for
+the web executor, not plan selection.
 
 ### Milestone 1: the contract
 Repo scaffold, LICENSE with personal-use statement, README stating scope, `docs/PRIME_DIRECTIVES.md`, CI check that greps for PII patterns and fails the build on a hit.
@@ -826,13 +896,17 @@ Policy Engine with every rule in 9.1. Hash-chained audit log with `verify_chain(
 Profile registry. Vault, fact-lock, adaptive intake, Field Passport. Evidence chain plus redactor. Registry seeded from Appendix A, every row unverified.
 **Checkpoint: an evidence artifact can be written, redacted and verified.**
 
-### Milestone 4: first blood
-Web executor against `sandbox-alpha`. Then one real route to a real terminal status. Normalizer producing a schema-valid result with an assessment verdict.
+### Milestone 4: first blood, then reach
+Web executor against `sandbox-alpha`. Then one real route to a real terminal status. Normalizer
+producing a schema-valid result with an assessment verdict.
+**Then immediately: the field ontology mapper and route recipes (§11.1), and breadth across the
+four probed routes under `profile_hypo_clean`.** Form coverage is graded, and every route completed
+here is a recipe the later milestones replay for free.
 **Checkpoint: minimum demo acceptance is met. Everything after is upside.**
 
 ### Milestone 5: the signature
 Rulebook Compiler with self-verification. **Highest-value single item. Give it real time.**
-Then, per Day 0 plan: Benefit Price Probe and Parity Solver, live or sandboxed.
+Then Benefit Price Probe and Parity Solver, live under `profile_hypo_clean` (Plan A applies).
 
 ### Milestone 6: the market
 Fingerprinting and dedup. Rate Filing Radar into the planner. Broker Disclosure Harvester by email, then voice. Eligibility Frontier solver.
@@ -870,7 +944,8 @@ Vehicle Inversion. Channel Arbitrage. Honest Scorecard. Live Narration. Profile 
 - [ ] Every demonstrated outcome has a timestamp and redacted evidence
 - [ ] No real licence number, full address, payment data or unredacted call recording anywhere
 - [ ] No route used a fabricated licence number
-- [ ] Every simulated profile visibly labelled, and none touched a real destination
+- [ ] Every hypothetical profile visibly labelled everywhere it appears, and never paired with a licence number, a real human, or an identity, consent, declaration or purchase step
+- [ ] Every `sandbox_only` profile visibly labelled, and none touched a real destination
 - [ ] Final PII sweep across repo, `out/`, screenshots and the Loom recording
 
 ### 15.2 Known limitations, write these honestly
@@ -966,7 +1041,10 @@ fathom/
 - Calling a representative more than the budget allows
 - Hammering live insurer sites during development instead of using the sandbox
 - Letting an LLM compute a premium at runtime. It writes the rater once; the shipped rater is arithmetic.
-- Sending a simulated profile to a real destination, for any reason
+- Sending a `sandbox_only` profile to a real destination, for any reason
+- Pairing a hypothetical profile with a licence number, a real human, or an identity, consent, declaration or purchase step
+- Presenting a rate retrieved for a hypothetical driver as a rate for the operator, or the reverse
+- Trading evidence discipline for form count
 - Any raw PII near a prompt, trace, screenshot, log or the repo
 - Filling a parity gap with an invented number
 - Opening the walkthrough with what could not be done

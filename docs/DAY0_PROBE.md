@@ -1,7 +1,19 @@
-# Day 0 Viability Probe
+# Day 0 Reconnaissance Probe
 
-**Status:** `NOT_YET_RUN`
-**Selected plan:** `PENDING` (Plan A / Plan B — do not fill until all four routes are recorded)
+> **Purpose amended 2026-08-09** following the organizer Q&A (AC-001), amendment D-005.
+> **Plan A applies** — this probe no longer selects a build plan. It is reconnaissance that maps
+> the four routes so the web executor is built against known ground.
+>
+> It now answers: which routes return a rate under `profile_hypo_clean`; which expose the
+> post-1-July-2026 accident-benefit toggles; what each quote reference ID grammar is; and what the
+> operator-profile outcomes are, since those feed the Eligibility Frontier.
+>
+> **This probe is not the submission's automation and never substitutes for it.** AC-001 item 2 is
+> explicit that manual form filling is unacceptable and an agentic element is required. Everything
+> learned here becomes a route recipe (§11.1) executed by the web executor.
+
+**Status:** `IN_PROGRESS`
+**Build plan:** `PLAN A` (fixed by AC-001; no longer selected by this probe)
 **Operator:** Tarun Karnati, Toronto, Ontario
 **Probe window:** _(start ISO 8601)_ → _(end ISO 8601)_
 
@@ -64,6 +76,22 @@ is not a risk the operator is taking. Verbatim redacted quotes are the sole evid
 probe, and they satisfy the evidence requirement on their own.
 
 Nothing from this probe goes in `out/` yet.
+
+---
+
+## 2a. Two profiles per route
+
+*Added 2026-08-09, amendment D-003/D-005.*
+
+Each route is walked twice where the journey allows it. Record both in the route block.
+
+| Pass | Profile | Conduct |
+| --- | --- | --- |
+| **A — primary** | `profile_hypo_clean` — clean-record hypothetical | **No licence number, ever. No plate.** Stop at any identity verification, consent attestation, declaration, callback enrolment or purchase step and record `manual_handoff`. **Never speak to a person under this profile.** |
+| **B — second lens** | `profile_operator` — the operator's real G1, no vehicle | The operator's own real, accurate information (§2.2). Full human-contact permissions. Produces the refusals that feed the Eligibility Frontier. |
+
+If a route only permits one pass within a sensible time budget, run **pass A** — it is the primary
+retrieval surface — and note that pass B was not run.
 
 ---
 
@@ -252,16 +280,18 @@ usable record.
 | Routes stopping at a contact-capture or human gate | |
 | Routes exposing AB election toggles at any point | |
 
-### 7.1 Plan selection (§5.2)
+### 7.1 Findings (§5.1 as amended)
 
-| Outcome | Plan | Consequence |
-| --- | --- | --- |
-| ≥1 route reaches a priced screen | **Plan A** | Full spec. Benefit Price Probe, measured parity, vehicle inversion, channel arbitrage live for `operator`. |
-| 0 routes reach a priced screen | **Plan B** | Those four modules run only under `sim_g2_no_car` in the sandbox, visibly labelled. Weight shifts to Rulebook Compiler, Rate-Source Graph, Eligibility Frontier, Broker Harvester. |
+Plan selection is gone — **Plan A applies**. Fill these four instead.
 
-**SELECTED PLAN:** `PENDING`
+| Question | Answer |
+| --- | --- |
+| **1. Which routes returned a rate under `profile_hypo_clean`?** | |
+| **2. Which exposed the post-1-Jul-2026 AB election toggles?** | _(per route; gates §10.2 per carrier)_ |
+| **3. Quote reference ID grammar, per route** | _(fingerprinting signal 2, §9.3)_ |
+| **4. Operator-profile outcomes** | _(status + reason code per route; feeds §10.3)_ |
 
-**Justification:** _(one paragraph, citing the route records above)_
+**Summary:** _(one paragraph, citing the route records above)_
 
 ### 7.2 Carry-forward
 
@@ -276,13 +306,15 @@ overhead:
 
 ---
 
-## 8. Plan B is not a downgrade
+## 8. What counts as a complete probe
 
-Recorded here so it is read before the result is known, not after (§5.3). Under Plan B the
-submission still satisfies every minimum acceptance check in §15.1: an exact terminal blocker
-satisfies the retrieval check; the `computed` residual result paired with one `estimate_only` or
-`quoted_non_comparable` result satisfies the two-outcome coverage-difference check; the broker
-voice or email route satisfies cross-channel; market map and evidence are unaffected.
+*Rewritten 2026-08-09; the former "Plan B is not a downgrade" section is obsolete under AC-001.*
 
-Four clean refusals with exact stopping points and stated reasons is a **complete Day 0**, not a
-failed one.
+A complete Day 0 is **four routes mapped**, not four rates returned. Under `profile_hypo_clean` a
+returned rate is the expected outcome and sizes the retrieval surface. Under `profile_operator` a
+clean refusal with an exact stopping step and a stated reason is exactly as useful — it is a row in
+the Eligibility Frontier.
+
+A route that stops at an identity, consent, declaration, callback-enrolment or purchase step under
+the hypothetical profile is **`manual_handoff`, correctly recorded**. That is `P-HYPO-STEP-01`
+doing its job, not a route that failed.

@@ -43,10 +43,10 @@ Built in the order given in `fathom.md` §14. The spine before the signature fea
 
 | Milestone | Scope | Status |
 | --- | --- | --- |
-| 0 | Day 0 Viability Probe → selects Plan A or Plan B | **in progress** — probe running by hand, see [`docs/DAY0_PROBE.md`](docs/DAY0_PROBE.md) |
+| 0 | Day 0 reconnaissance probe → maps the four routes (Plan A applies) | **in progress** — probe running by hand, see [`docs/DAY0_PROBE.md`](docs/DAY0_PROBE.md) |
 | 1 | The contract: scaffold, licence, directives, PII-sweep CI | **done** |
-| 2 | The gate: Policy Engine + hash-chained audit log | blocked on Milestone 0 |
-| 3 | The spine: profiles, vault, fact-lock, intake, evidence, redactor, registry | blocked |
+| 2 | The gate: Policy Engine + hash-chained audit log | **done** — `make demo`, `make verify` |
+| 3 | The spine: profiles, vault, fact-lock, intake, evidence, redactor, registry | blocked on Milestone 0 |
 | 4 | First blood: web executor, first real terminal status, normalizer | blocked |
 | 5 | The signature: Rulebook Compiler, Benefit Price Probe, Parity Solver | blocked |
 | 6 | The market: fingerprinting, Rate Filing Radar, Broker Harvester, Frontier | blocked |
@@ -54,8 +54,29 @@ Built in the order given in `fathom.md` §14. The spine before the signature fea
 | 8 | The voice: disclosure, consent state machine, escalation, callbacks | blocked |
 | 9 | The submission: vehicle inversion, arbitrage, scorecard, narration | blocked |
 
-Nothing past Milestone 1 begins until the Day 0 probe is recorded and the plan is selected
-(§14). Milestone 1 is plan-independent, which is why it ran in parallel with the probe.
+Milestones 1 and 2 are plan-independent, so they ran in parallel with the probe (amendment D-001).
+Nothing past Milestone 2 begins until the probe is recorded.
+
+The specification was amended on 2026-08-09 following an organizer Q&A: a hypothetical clean-record
+driver profile is permitted and automation is required. See `docs/OPEN_QUESTIONS.md` — AC-001 and
+amendments D-002 through D-007.
+
+---
+
+## The gate
+
+```bash
+make demo      # a bind attempt denied, with rule ID and audit chain index, then chain verification
+make verify    # verify the audit chain — judge-facing, no code reading required
+make rules     # list every registered rule and what it denies
+```
+
+Everything routes through the Policy Engine (§7.1). No executor calls a browser, phone or API
+directly. 18 deny rules plus one escalate rule, deterministic, no LLM in the decision path, every
+decision appended to a hash-chained log.
+
+Three verdicts with different downstream behaviour: `ALLOW` proceeds, `DENY` refuses and the route
+ends, `ESCALATE` sends the request to the operator and leaves the route open.
 
 ---
 

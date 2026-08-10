@@ -219,6 +219,41 @@ def mask(value: str) -> str:
     return f"{visible}{'*' * max(len(value) - 2, 1)} ({len(value)} chars)"
 
 
+def redact_text(text: str, max_length: int | None = None) -> str:
+    """Replace every PII-shaped span with a rule-tagged placeholder.
+
+    The sweep detects; this scrubs. They share one rule set on purpose — two pattern lists
+    drift, and the one that drifts is always the one doing the redacting.
+
+    Used by the Policy Engine audit log so caller-supplied free text cannot carry PII into an
+    append-only file. It is a floor, not the redactor: it cannot catch a name written in prose.
+    `packages/redactor/` (Milestone 3) is the real defence.
+    """
+    scrubbed = text
+    for rule in RULES:
+        def _replace(match: re.Match[str], rule_id: str = rule.rule_id) -> str:
+            return f"[REDACTED:{rule_id}]"
+
+        if rule.validator is None:
+            scrubbed = rule.pattern.sub(_replace, scrubbed)
+        else:
+            # Rebuild around validated matches only, so a version string is not mangled.
+            pieces: list[str] = []
+            cursor = 0
+            for match in rule.pattern.finditer(scrubbed):
+                if not rule.validator(match.group(0)):
+                    continue
+                pieces.append(scrubbed[cursor:match.start()])
+                pieces.append(f"[REDACTED:{rule.rule_id}]")
+                cursor = match.end()
+            pieces.append(scrubbed[cursor:])
+            scrubbed = "".join(pieces)
+
+    if max_length is not None and len(scrubbed) > max_length:
+        scrubbed = scrubbed[: max_length - 1].rstrip() + "…"
+    return scrubbed
+
+
 @dataclass
 class SweepReport:
     findings: list[Finding] = field(default_factory=list)

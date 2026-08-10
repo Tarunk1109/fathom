@@ -27,7 +27,12 @@ the operator if he asks to break them.**
 | Never enter another person's data without consent | Intake refuses third-party PII entirely in this build |
 | Never change material facts about the operator across insurers to chase a lower price | Fact-lock: facts hashed at session start; divergent submissions denied |
 | Never present an estimate, lead form or callback promise as a firm quote | Status enum mandatory; UI renders estimates in a separate band |
-| Never send a hypothetical or simulated profile to a real destination | Profile registry marks non-operator profiles `sandbox_only`; Policy Engine denies any real-destination action carrying one |
+| Never submit a driver's licence number under a hypothetical profile | `P-HYPO-LICENCE-01`. Non-negotiable: the brief bans it and the organizer Q&A did not address it |
+| Never place a voice, callback or human-contact action under a hypothetical profile | `P-HYPO-HUMAN-01`. The Q&A covered web forms; representing a hypothetical to a real person remains prohibited |
+| Never complete identity verification, consent attestation, declaration, callback enrolment or purchase steps under a hypothetical profile | `P-HYPO-STEP-01`; emits `manual_handoff` |
+| Never submit a fabricated material fact under a non-hypothetical profile | `P-REAL-FACT-01`. Mirrors `P-HYPO-LICENCE-01`; the two profiles may not bleed into each other |
+| Never send a `sandbox_only` profile to a real destination | `P-SANDBOX-01`. Governs real-destination access only; no longer conflated with `hypothetical` |
+| Never submit a licence plate. Skip optional plate fields; if a plate is mandatory, record `blocked` with the exact field and stop | `P-PLATE-01` |
 | Never misrepresent the caller as a human, broker, agent, or insurer employee | Voice disclosure prelude is non-removable and checksummed |
 | Never record or transcribe a call without affirmative consent | Consent state machine gates the recorder; default `NO_AUDIO` |
 | Never place repeated calls or continue after a request to stop | One call, one retry only on pre-connection failure |
@@ -44,31 +49,81 @@ the operator if he asks to break them.**
 - Keep unresolved records in the denominator of every metric.
 - Treat every route identically. No route is favoured, promoted, criticized or omitted for any reason other than an evidenced one.
 
-### 2.3 The alias and simulation rule
+### 2.3 The hypothetical-profile rule
 
-Non-operator profiles exist **only** in the local synthetic sandbox. They may never touch a real
-destination, may never be paired with a real licence number, and must be visibly labelled as
-simulations in every view and in the walkthrough. If a sandbox flow reaches an identity check, the
-run stops and records `manual_handoff`.
+*Amended 2026-08-09 following the organizer Q&A (AC-001). Supersedes the prior alias and simulation
+rule, which barred every non-operator profile from every real destination.*
+
+**Two flags, no longer one concept.**
+
+- `hypothetical` governs **conduct**: licence-number submission, human contact, and step gating.
+- `sandbox_only` governs **reach**: whether the profile may touch a real destination at all.
+
+A hypothetical profile **may** complete quote forms at real destinations. The organizers explicitly
+permit it and recommend a clean-record profile to maximise returned rates.
+
+A hypothetical profile may **never**: carry a driver's licence number; reach a real human by voice,
+callback or any other human-contact channel; or complete identity verification, consent attestation,
+a declaration, callback enrolment or a purchase step. Any of those stops the run and records
+`manual_handoff`.
+
+A `sandbox_only` profile may never touch a real destination, and must be visibly labelled as a
+simulation in every view and in the walkthrough.
+
+**Every hypothetical profile is labelled as hypothetical in every view and in the walkthrough.** The
+distinction between a retrieved rate for a hypothetical driver and one for the operator is never
+blurred, in the UI or in the submission.
 
 ---
 
 ## Enforcement status
 
+**A living artifact. Updated at every milestone. Never mark a directive enforced before the gate
+exists.**
+
 The directives are enforced in code, not by convention. This table tracks which enforcement
 mechanism actually exists, so the safety claim stays demonstrable rather than aspirational (§7.1).
+The honest split between *enforced* and *documented only* is a submission asset: it is the
+difference between a system that has been built and one that has been described.
+
+**Status values.** `LIVE` — the gate exists, is wired in, and has tests proving both that it denies
+what it must and that it does not over-block. `PARTIAL` — the gate exists but something it depends
+on does not. `DOCUMENTED ONLY` — written down, nothing enforces it yet.
 
 | Directive area | Enforcement mechanism | Milestone | Status |
 | --- | --- | --- | --- |
-| No PII in the repo, logs or submission | `tools/pii_sweep.py`, run in CI and pre-commit | 1 | **LIVE** |
+| No PII in the repo, logs or submission | `tools/pii_sweep.py`, in CI and pre-commit | 1 | **LIVE** |
+| No PII in the policy audit log | `packages/policy/audit.py` — field names + digest only, targets stripped, rationale scrubbed | 2 | **LIVE** |
 | Personal use only | `LICENSE`, `README.md` | 1 | **LIVE** |
-| Bind / sign / pay / CAPTCHA / auth denial | Policy Engine `P-BIND-01`, `P-SIGN-01`, `P-PAY-01`, `P-CAPTCHA-01`, `P-AUTH-01` | 2 | not yet built |
-| Fact-lock, licence-value binding | `P-FACT-01`, `P-LICENCE-01` | 2–3 | not yet built |
-| Sandbox profiles never reach a real destination | `P-SANDBOX-01` | 2–3 | not yet built |
-| Attempt and time budgets | `P-BUDGET-01` | 2 | not yet built |
-| Voice disclosure, recording consent, stop request | `P-DISCLOSE-01`, `P-RECORD-01`, `P-STOP-01` | 2 / 8 | not yet built |
-| Redaction before every write | `packages/redactor/` (local text + vision) | 3 | not yet built |
-| No legal characterization | Friction Ledger write path + review | 6 | not yet built |
+| Never bind, purchase, renew, cancel or modify | `P-BIND-01` | 2 | **LIVE** |
+| Never submit a signature or application declaration | `P-SIGN-01` | 2 | **LIVE** |
+| Never submit payment information | `P-PAY-01` | 2 | **LIVE** |
+| Never bypass a CAPTCHA or bot control | `P-CAPTCHA-01` | 2 | **LIVE** |
+| Never enter credentials to an unregistered service | `P-AUTH-01` | 2 | **LIVE** |
+| Never continue after a stop request | `P-STOP-01` | 2 | **LIVE** |
+| Attempt and time budgets | `P-BUDGET-01` — drawn down by the gate, not the caller | 2 | **LIVE** |
+| Never record without affirmative consent | `P-RECORD-01` | 2 | **LIVE** |
+| Disclose automation at the start of every call | `P-DISCLOSE-01` | 2 | **LIVE** |
+| Never submit a licence number under a hypothetical profile | `P-HYPO-LICENCE-01` | 2 | **LIVE** |
+| No human contact under a hypothetical profile | `P-HYPO-HUMAN-01` | 2 | **LIVE** |
+| No identity/consent/declaration/callback/purchase step under a hypothetical profile | `P-HYPO-STEP-01` → `manual_handoff` | 2 | **LIVE** |
+| Skip optional plate fields; record `blocked` if mandatory | `P-PLATE-01` → `blocked` | 2 | **LIVE** |
+| Escalate identity lookup, consent attestation, coverage advice | `P-HUMAN-01` → `ESCALATE` + checkpoint queue | 2 | **LIVE** |
+| Every decision recorded in a verifiable chain | `AuditLog.verify_chain()`, `scripts/verify_chain.py` | 2 | **LIVE** |
+| Never change material facts across insurers | `P-FACT-01` | 2 | **PARTIAL** — rule live and tested; the session fact-lock it reads is populated by intake at Milestone 3 |
+| Use the operator's own real information | `P-REAL-FACT-01` | 2 | **PARTIAL** — rule live and tested; `registered_facts` is populated by the vault at Milestone 3 |
+| Never fabricate, borrow or alter a licence number | `P-LICENCE-01` | 2 | **PARTIAL** — rule live and tested; `registered_licence_hash` comes from the vault at Milestone 3 |
+| Never enter another person's data without consent | `P-THIRDPARTY-01` | 2 | **PARTIAL** — explicit third-party fields denied now; identity comparison needs the vault at Milestone 3 |
+| Sandbox-only profiles never reach a real destination | `P-SANDBOX-01` | 2 | **PARTIAL** — rule live and tested; the profile registry that sets the flag arrives at Milestone 3 |
+| Redaction before every write | `packages/redactor/` (local text + vision) | 3 | DOCUMENTED ONLY |
+| Voice disclosure prelude checksummed, consent state machine | `packages/executors/voice/` | 8 | DOCUMENTED ONLY — `P-DISCLOSE-01` and `P-RECORD-01` gate the actions; the state machine driving them is Milestone 8 |
+| No legal characterization | Friction Ledger write path + review | 6 | DOCUMENTED ONLY |
+| Every hypothetical result visibly labelled | UI + normalizer | 4–9 | DOCUMENTED ONLY |
 
-Update this table at the milestone that delivers each mechanism. An empty row is a claim without a
-gate behind it.
+**The `PARTIAL` rows are the honest ones.** Each of those rules is written, registered and tested,
+and each reads session state that a later milestone populates. A rule reading an empty fact-lock
+denies nothing — so the rule is live, and the directive is not fully enforced until Milestone 3
+fills it. Saying "LIVE" there would be the exact overclaim this table exists to prevent.
+
+Verify the current state yourself: `make rules` lists every registered rule, `make demo` shows one
+being enforced, and `make verify` checks the audit chain.

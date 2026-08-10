@@ -49,6 +49,60 @@ past it.
 **Entry points.** `make sweep` · `make check` · `python3 tools/pii_sweep.py [root] [--json]
 [--list-rules]` · `.githooks/pre-commit` (install with `make hooks`) · `.github/workflows/ci.yml`.
 
+### `packages/policy/` — Policy Engine
+
+**Milestone 2. Tests: `tests/test_policy_rules.py`, `tests/test_policy_engine.py`,
+`tests/test_audit_chain.py` (78 cases).**
+
+The gate of §7.1: everything routes through here, no executor calls a browser, phone or API
+directly. **Deterministic — no LLM in the decision path.** Rules are pure functions of the action
+and the session context, evaluated in fixed order, first match wins.
+
+| Module | Role |
+| --- | --- |
+| `actions.py` | `ProposedAction` and `PolicyDecision` field-for-field from §9.1, plus `SessionContext` — the state the rules read |
+| `rules.py` | 18 deny rules + `P-HUMAN-01` (escalate), with precedence documented and justified |
+| `audit.py` | Hash-chained append-only JSONL log, `verify_chain()` |
+| `engine.py` | Evaluation, audit append, budget draw-down, checkpoint queue |
+
+**Design decisions.**
+
+*Both dataclasses are frozen.* A proposal must not change between being judged and being executed,
+or the audit log records a decision about something other than what happened — and that log is the
+whole basis of the safety claim.
+
+*Session state is not on the action.* Rules need the fact-lock, the registered licence, profile
+flags, budgets and consent. Putting them on `ProposedAction` would break the §9.1 shape and make
+the action something other than a statement of intent. They live on `SessionContext`, supplied by
+the caller and populated by the vault, profile registry and intake at Milestone 3.
+
+*`PolicyDecision` gained one additive field.* `terminal_status` carries the §8.1 status a rule
+requires the executor to record — `manual_handoff` for `P-HYPO-STEP-01`, `blocked` for
+`P-PLATE-01`. The four specified fields are unchanged. A status carried in prose is a status that
+gets transcribed wrongly.
+
+*The gate draws down the budget itself*, on ALLOW, for attempt-consuming kinds. §9.4 calls bounded
+attempts non-negotiable, and a budget the caller is trusted to decrement is not enforced.
+
+*The audit log stores no payload values, ever* — field names plus a SHA-256 digest, targets with
+query strings and fragments stripped, caller rationale scrubbed through the shared PII rule set.
+Enough to prove what was proposed and detect tampering; insufficient to reconstruct one value. An
+append-only file is the worst place to discover a leak, because there is no clean way to remove it.
+
+**Verdicts are not severity levels.** `ALLOW` proceeds. `DENY` refuses and the route ends.
+`ESCALATE` sends the request to the operator and **leaves the route open**. Confusing the last two
+either abandons a route a human could have finished, or carries on past a point §2.2 says needs a
+person.
+
+**Testing invariant, enforced by a test.** Every registered rule has a case proving it denies what
+it must and a case proving it permits the nearest legitimate neighbour. Over-block cases assert
+`ALLOW` outright, so a neighbour caught by some *other* rule fails too. `test_policy_engine.py`
+fails if a rule is registered without both.
+
+**Entry points.** `make demo` (§16 step 6: a denied bind with rule ID and chain index, then chain
+verification, then a tamper check) · `make verify` / `scripts/verify_chain.py` (judge-facing) ·
+`make rules`.
+
 ---
 
 ## Planned
@@ -57,8 +111,7 @@ Not yet built. Listed so the map is legible; each becomes a full entry at its mi
 
 | Module | Path | Milestone | Role |
 | --- | --- | --- | --- |
-| Policy Engine | `packages/policy/` | 2 | Deterministic gate, no LLM in the decision path. 13 rules, hash-chained audit log, `verify_chain()`. |
-| Profile registry | `packages/profiles/` | 3 | Profiles as records, not code paths. Module gating. `sandbox_only` enforcement. |
+| Profile registry | `packages/profiles/` | 3 | Profiles as records, not code paths. Module gating. Populates `hypothetical` and `sandbox_only`. |
 | Vault + fact-lock | `packages/vault/` | 3 | Encrypted at rest, injected by destination, never returned raw. Session fact hash. |
 | Adaptive intake | `packages/intake/` | 3 | Uncertainty-ordered questioning, Field Passport, consent receipts. |
 | Evidence chain | `packages/evidence/` | 3 | Content-addressed by sha256 of *redacted* bytes, append-only, verifiable. |
