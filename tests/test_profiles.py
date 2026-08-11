@@ -161,8 +161,8 @@ class TestFileScopedSweepAllowance(unittest.TestCase):
 
     def test_a_named_allowance_suppresses_only_its_rules(self):
         text = ('{"_pii_sweep": "pii-sweep: allow-file STREET_ADDRESS",\n'
-                ' "a": "123 Fake Street",\n'
-                ' "b": "K1A 0B1"}\n')  # pii-sweep: allow PC_FULL_POSTAL,STREET_ADDRESS  synthetic
+                ' "a": "123 Fake Street",\n'   # pii-sweep: allow STREET_ADDRESS  synthetic
+                ' "b": "K1A 0B1"}\n')          # pii-sweep: allow PC_FULL_POSTAL  synthetic
         allowed = pii_sweep.file_allowed_rules(text)
         self.assertEqual(allowed, {"STREET_ADDRESS"})
         rules = {f.rule_id for line_no, line in enumerate(text.splitlines(), 1)
@@ -173,6 +173,16 @@ class TestFileScopedSweepAllowance(unittest.TestCase):
     def test_there_is_no_bare_allow_file(self):
         """A file-wide blanket allowance would be a hole. The rules must be named."""
         self.assertEqual(pii_sweep.file_allowed_rules('"pii-sweep: allow-file"'), set())
+
+    def test_a_declaration_below_the_header_is_ignored(self):
+        """Otherwise any file that merely discusses the pragma grants itself one — which is how
+        this very test file acquired an unintended allowance before the header rule existed."""
+        buried = "\n".join(["padding"] * 40 + ['"pii-sweep: allow-file STREET_ADDRESS"'])
+        self.assertEqual(pii_sweep.file_allowed_rules(buried), set())
+
+    def test_this_test_file_grants_itself_no_file_wide_allowance(self):
+        own_text = Path(__file__).read_text(encoding="utf-8")
+        self.assertEqual(pii_sweep.file_allowed_rules(own_text), set())
 
     def test_allowances_are_reported_not_silent(self):
         report = pii_sweep.sweep(REPO_ROOT)

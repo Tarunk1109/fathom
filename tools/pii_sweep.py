@@ -306,10 +306,18 @@ def allowed_rules_on_line(line: str) -> set[str] | None:
     return {rule_id.strip() for rule_id in rule_ids.split(",") if rule_id.strip()}
 
 
+#: An `allow-file` declaration is only honoured in the file's header. Without this, any file that
+#: merely *discusses* the pragma — this module's own docstring, a test fixture, a design note —
+#: silently grants itself a file-wide allowance. Found exactly that way: `tests/test_profiles.py`
+#: acquired a STREET_ADDRESS allowance from a string inside a test asserting how the pragma works.
+ALLOW_FILE_HEADER_LINES = 20
+
+
 def file_allowed_rules(text: str) -> set[str]:
-    """Rules allowed for a whole file by an `allow-file` declaration inside it."""
+    """Rules allowed for a whole file by an `allow-file` declaration in its header."""
+    header = "\n".join(text.splitlines()[:ALLOW_FILE_HEADER_LINES])
     allowed: set[str] = set()
-    for match in ALLOW_FILE_PRAGMA.finditer(text):
+    for match in ALLOW_FILE_PRAGMA.finditer(header):
         allowed.update(rule_id.strip() for rule_id in match.group(1).split(",") if rule_id.strip())
     return allowed
 
