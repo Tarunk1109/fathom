@@ -1,0 +1,177 @@
+{
+  "route_id": "rt_reg_0004",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "https://www.desjardins.com/en/insurance/auto.html",
+  "status": "unresolved",
+  "reason_code": null,
+  "stopping_step": "exhausted 12 steps",
+  "stated_reason": "",
+  "premium": null,
+  "quote_reference": "",
+  "coverage": {},
+  "steps": [
+    {
+      "step": 1,
+      "url": "https://www.desjardins.com/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang_modal",
+        "lang_modal",
+        "province_modal",
+        "postalCode"
+      ],
+      "fields_filled": [
+        "province",
+        "postal_code"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 2,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 3,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province"
+      ],
+      "fields_filled": [
+        "province"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 4,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 5,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province"
+      ],
+      "fields_filled": [
+        "province"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 6,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 7,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province"
+      ],
+      "fields_filled": [
+        "province"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 8,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 9,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province"
+      ],
+      "fields_filled": [
+        "province"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 10,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 11,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province"
+      ],
+      "fields_filled": [
+        "province"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 12,
+      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-29ff596c6b6afea5e7f8efcf31f2637c88296adc3f992eaaeedeedff6ac784bc",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

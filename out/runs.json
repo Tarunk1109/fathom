@@ -1,5 +1,749 @@
 [
   {
+    "route_id": "rt_reg_0002",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "step 3: no actionable control",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+        "title": "Human Verification",
+        "fields_seen": [
+          "?"
+        ],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+        "title": "Human Verification",
+        "fields_seen": [
+          "?"
+        ],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 3,
+        "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+        "title": "Human Verification",
+        "fields_seen": [
+          "?"
+        ],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-77e059f8027d3bda2a297da89bbcdfbeaffb02ad312f40aa3fc902dce587c4cf",
+      "cid:sha256-bbd4115d1696e13ec2df9347ccdd33cf4576d22a5726f50dc17f32d16c30ee69",
+      "cid:sha256-abae0197adbf05f68a6de43ae1315541bff14bb263f7010d96b413660f792cc7"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_0003",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "step 1: no actionable control",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+        "title": "Car Insurance Ontario \u2013 Free Online Auto Insurance Quote | RBC Insurance",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-912eb25e80382c5f2b42b459608675a9de2e578ea67cac13f493278833e87a9c"
+    ],
+    "policy_denials": [
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ]
+    ],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_0004",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://www.desjardins.com/en/insurance/auto.html",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "exhausted 12 steps",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://www.desjardins.com/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang_modal",
+          "lang_modal",
+          "province_modal",
+          "postalCode"
+        ],
+        "fields_filled": [
+          "province",
+          "postal_code"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 3,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang",
+          "lang",
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 4,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 5,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang",
+          "lang",
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 6,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 7,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang",
+          "lang",
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 8,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 9,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang",
+          "lang",
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 10,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 11,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [
+          "lang",
+          "lang",
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 12,
+        "url": "https://www.desjardins.com/on/en/insurance/auto.html",
+        "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-29ff596c6b6afea5e7f8efcf31f2637c88296adc3f992eaaeedeedff6ac784bc",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+      "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+      "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+      "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+      "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
+      "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
+      "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_0100",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://rates.ca/insurance-quotes/auto/ontario",
+    "status": "blocked",
+    "reason_code": "RC_ACCESS_CONTROL",
+    "stopping_step": "step 1: bot check",
+    "stated_reason": "A CAPTCHA or bot control was presented.",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://rates.ca/insurance-quotes/auto/ontario",
+        "title": "Attention Required! | Cloudflare",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-ff2a27e0fa13994ada861e4c2677973993a2b89c5293d8637f0d9ac3e957df02"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_0101",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://www.lowestrates.ca/insurance/auto",
+    "status": "blocked",
+    "reason_code": "RC_ACCESS_CONTROL",
+    "stopping_step": "step 1: bot check",
+    "stated_reason": "A CAPTCHA or bot control was presented.",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://www.lowestrates.ca/insurance/auto",
+        "title": "Attention Required! | Cloudflare",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-add5048485a0e4b617e8b65bc5adbc19f937e729686eca8eb7ceeb5c74c6fd99"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_0102",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "https://www.mychoice.ca/insurance/car/",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "step 7: could not advance",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "https://www.mychoice.ca/insurance/car/",
+        "title": "Affordable Car Insurance in Canada from $94/month | MyChoice",
+        "fields_seen": [
+          "postal_code",
+          "postal_code"
+        ],
+        "fields_filled": [
+          "postal_code",
+          "postal_code"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      },
+      {
+        "step": 3,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      },
+      {
+        "step": 4,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      },
+      {
+        "step": 5,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "url": "https://quote.mychoice.ca/insurance/car",
+        "title": "Get a Quote and Save Money | MyChoice",
+        "fields_seen": [
+          "carYear",
+          "purchaseMonth",
+          "purchaseYear",
+          "parkingLocation",
+          "distanceDaily",
+          "distanceYearly",
+          "policyStartDay",
+          "policyStartMonth",
+          "policyStartYear"
+        ],
+        "fields_filled": [
+          "vehicle_year",
+          "vehicle_year",
+          "parking_location"
+        ],
+        "fields_denied": [
+          [
+            "vehicle_year",
+            "FILL_FAILED"
+          ],
+          [
+            "vehicle_year",
+            "P-BUDGET-01"
+          ]
+        ],
+        "hypotheses": [
+          [
+            "vehicle_year",
+            0.576
+          ]
+        ]
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-bd3ce4f9cc5ad453dbe2af6a594c9b4418bc95c024d309e8a20b784eb6c60d53",
+      "cid:sha256-138f67879d30bea76d15207fe0aab2782ab5e0cb9f841db84829b698f9af0dae",
+      "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
+      "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
+      "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
+      "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
+      "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042"
+    ],
+    "policy_denials": [
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ],
+      [
+        "P-BUDGET-01",
+        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+      ]
+    ],
+    "pending_block": null
+  },
+  {
     "route_id": "rt_reg_9001",
     "profile_id": "profile_hypo_clean",
     "entry_url": "http://localhost:8801/alpha",
@@ -286,7 +1030,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1712.0,
-    "quote_reference": "FOX-86130944",
+    "quote_reference": "FOX-85016827",
     "coverage": {
       "third_party_liability_limit": 2000000,
       "collision_deductible": 1000,
@@ -339,7 +1083,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-      "cid:sha256-6f82596e210048a9fdb52c3d9ffc23441aaba7dc494edc0cf0e7a27fab9c24dc"
+      "cid:sha256-9ecd6efabb4c62925dacd35395372ebbb69c73aa229fdfbc5835f8736b45a8bf"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -353,7 +1097,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1634.0,
-    "quote_reference": "GLF-96777323",
+    "quote_reference": "GLF-93784411",
     "coverage": {
       "third_party_liability_limit": 1000000,
       "collision_deductible": 500,
@@ -406,7 +1150,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-      "cid:sha256-30cd62b02290f28e62f3099f486ec5adfb73314140537c1aab73faa15caaa9a7"
+      "cid:sha256-269d146ed165212ef5a3b459a651166e74efb45b54690476d505e650854b65e8"
     ],
     "policy_denials": [],
     "pending_block": null

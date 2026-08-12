@@ -1,0 +1,55 @@
+{
+  "route_id": "rt_reg_0002",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+  "status": "unresolved",
+  "reason_code": null,
+  "stopping_step": "step 3: no actionable control",
+  "stated_reason": "",
+  "premium": null,
+  "quote_reference": "",
+  "coverage": {},
+  "steps": [
+    {
+      "step": 1,
+      "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "title": "Human Verification",
+      "fields_seen": [
+        "?"
+      ],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 2,
+      "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "title": "Human Verification",
+      "fields_seen": [
+        "?"
+      ],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 3,
+      "url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "title": "Human Verification",
+      "fields_seen": [
+        "?"
+      ],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-77e059f8027d3bda2a297da89bbcdfbeaffb02ad312f40aa3fc902dce587c4cf",
+    "cid:sha256-bbd4115d1696e13ec2df9347ccdd33cf4576d22a5726f50dc17f32d16c30ee69",
+    "cid:sha256-abae0197adbf05f68a6de43ae1315541bff14bb263f7010d96b413660f792cc7"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

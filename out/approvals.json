@@ -1,0 +1,62 @@
+[
+  {
+    "route_id": "rt_reg_0002",
+    "target": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:04+00:00",
+    "approved_by": "operator",
+    "note": ""
+  },
+  {
+    "route_id": "rt_reg_0003",
+    "target": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:12+00:00",
+    "approved_by": "operator",
+    "note": ""
+  },
+  {
+    "route_id": "rt_reg_0004",
+    "target": "https://www.desjardins.com/en/insurance/auto.html",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:22+00:00",
+    "approved_by": "operator",
+    "note": ""
+  },
+  {
+    "route_id": "rt_reg_0100",
+    "target": "https://rates.ca/insurance-quotes/auto/ontario",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:27+00:00",
+    "approved_by": "operator",
+    "note": ""
+  },
+  {
+    "route_id": "rt_reg_0101",
+    "target": "https://www.lowestrates.ca/insurance/auto",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:32+00:00",
+    "approved_by": "operator",
+    "note": ""
+  },
+  {
+    "route_id": "rt_reg_0102",
+    "target": "https://www.mychoice.ca/insurance/car/",
+    "profile_id": "profile_hypo_clean",
+    "payload_digest": "d0c3bdfd9867d3dbe13216778203fb85b108ef95567cf66a9649723716382bde",
+    "field_count": 45,
+    "approved_at": "2026-08-12T03:15:37+00:00",
+    "approved_by": "operator",
+    "note": ""
+  }
+]

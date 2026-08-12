@@ -31,13 +31,14 @@
         border-radius:6px;font-size:14px;margin:10px 0 0}
  .banner{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;padding:10px 14px;
           border-radius:6px;font-size:13px;font-weight:600}
+ tr.merged{background:#ecfdf5} tr.merged td:first-child{border-left:3px solid #10b981}
  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
  @media(max-width:900px){.grid{grid-template-columns:1fr}}
 </style></head><body>
 <header>
   <h1>FATHOM</h1>
   <p>Ontario private-passenger auto market instrument · generated
-     2026-08-12T03:11:30+00:00</p>
+     2026-08-12T05:58:59+00:00</p>
 </header>
 <main>
   <div class="banner">Results below were retrieved under <code>profile_hypo_clean</code>, a
@@ -73,6 +74,78 @@
               evidence verified</div></td>
           <td class="sub">measured</td>
           <td class="sub">2 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0002</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">3 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0003</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">1 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0004</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">12 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0100</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill blocked">blocked</span>
+              <div class="sub">RC_ACCESS_CONTROL</div></td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">1 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0101</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill blocked">blocked</span>
+              <div class="sub">RC_ACCESS_CONTROL</div></td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">1 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_0102</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">7 artifacts</td>
         </tr>
         <tr class="fail">
           <td><strong>rt_reg_9001</strong><div class="sub">profile_hypo_clean</div></td>
@@ -145,92 +218,339 @@
         <tr><th>Rate source</th><th>Brands</th><th>Legal underwriter</th><th>Signals</th>
             <th>Dedup</th></tr>
         
-        <tr><td><strong>rs_0001</strong></td><td>Sonnet</td>
+        <tr class="">
+            <td><strong>rs_0001</strong></td><td>Sonnet</td>
             <td class="sub">Sonnet Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0002</strong></td><td>belairdirect</td>
+        <tr class="">
+            <td><strong>rs_0002</strong></td><td>belairdirect</td>
             <td class="sub">Belair Insurance Company Inc.</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0003</strong></td><td>RBC Insurance</td>
+        <tr class="">
+            <td><strong>rs_0003</strong></td><td>RBC Insurance</td>
             <td class="sub">RBC Insurance Company of Canada</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0004</strong></td><td>Desjardins Insurance</td>
+        <tr class="">
+            <td><strong>rs_0004</strong></td><td>Desjardins Insurance</td>
             <td class="sub">Certas Home and Auto Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0005</strong></td><td>Onlia</td>
+        <tr class="">
+            <td><strong>rs_0005</strong></td><td>Onlia</td>
             <td class="sub">unknown — requires regulator evidence (OQ-003)</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0006</strong></td><td>TD Insurance</td>
+        <tr class="">
+            <td><strong>rs_0006</strong></td><td>TD Insurance</td>
             <td class="sub">unknown — not yet verified</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0007</strong></td><td>CAA Insurance</td>
+        <tr class="">
+            <td><strong>rs_0007</strong></td><td>CAA Insurance</td>
             <td class="sub">CAA Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0008</strong></td><td>Intact Insurance</td>
+        <tr class="">
+            <td><strong>rs_0008</strong></td><td>Intact Insurance</td>
             <td class="sub">Intact Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0009</strong></td><td>Jevco</td>
+        <tr class="">
+            <td><strong>rs_0009</strong></td><td>Jevco</td>
             <td class="sub">Jevco Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0010</strong></td><td>Aviva Insurance, Pilot Insurance, Elite Insurance, Traders General Insurance</td>
+        <tr class="merged">
+            <td><strong>rs_0010</strong></td><td>Aviva Insurance, Pilot Insurance, Elite Insurance, Traders General Insurance</td>
             <td class="sub">Aviva Insurance Company of Canada</td>
             <td class="num">2</td>
             <td class="sub">merged</td></tr>
-        <tr><td><strong>rs_0011</strong></td><td>Economical Insurance</td>
+        <tr class="">
+            <td><strong>rs_0011</strong></td><td>Economical Insurance</td>
             <td class="sub">Economical Mutual Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0012</strong></td><td>Travelers Canada (personal lines)</td>
+        <tr class="">
+            <td><strong>rs_0012</strong></td><td>Travelers Canada (personal lines)</td>
             <td class="sub">unknown — acquisition completed 2026-01-02, entity structure not yet verified</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0013</strong></td><td>Allstate</td>
+        <tr class="">
+            <td><strong>rs_0013</strong></td><td>Allstate</td>
             <td class="sub">Allstate Insurance Company of Canada</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0014</strong></td><td>Pembridge</td>
+        <tr class="">
+            <td><strong>rs_0014</strong></td><td>Pembridge</td>
             <td class="sub">Pembridge Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0015</strong></td><td>Co-operators</td>
+        <tr class="">
+            <td><strong>rs_0015</strong></td><td>Co-operators</td>
             <td class="sub">The Co-operators General Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0016</strong></td><td>The Personal</td>
+        <tr class="">
+            <td><strong>rs_0016</strong></td><td>The Personal</td>
             <td class="sub">The Personal Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0017</strong></td><td>Wawanesa Insurance</td>
+        <tr class="">
+            <td><strong>rs_0017</strong></td><td>Wawanesa Insurance</td>
             <td class="sub">Wawanesa Mutual Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0018</strong></td><td>Gore Mutual</td>
+        <tr class="">
+            <td><strong>rs_0018</strong></td><td>Gore Mutual</td>
             <td class="sub">Gore Mutual Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0019</strong></td><td>Northbridge</td>
+        <tr class="">
+            <td><strong>rs_0019</strong></td><td>Northbridge</td>
             <td class="sub">Northbridge General Insurance Corporation</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0020</strong></td><td>Rates.ca</td>
+        <tr class="">
+            <td><strong>rs_0020</strong></td><td>Rates.ca</td>
             <td class="sub">n/a — comparison platform</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0021</strong></td><td>LowestRates.ca</td>
+        <tr class="">
+            <td><strong>rs_0021</strong></td><td>LowestRates.ca</td>
             <td class="sub">n/a — comparison platform</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
-        <tr><td><strong>rs_0022</strong></td><td>MyChoice</td>
+        <tr class="">
+            <td><strong>rs_0022</strong></td><td>MyChoice</td>
             <td class="sub">n/a — comparison platform</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0023</strong></td><td>AIG Insurance Company of Canada</td>
+            <td class="sub">AIG Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0024</strong></td><td>Esurance Insurance Company of Canada</td>
+            <td class="sub">Esurance Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0025</strong></td><td>Pafco Insurance Company</td>
+            <td class="sub">Pafco Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0026</strong></td><td>Aviva General Insurance Company</td>
+            <td class="sub">Aviva General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0027</strong></td><td>S&amp;Y Insurance Company</td>
+            <td class="sub">S&amp;Y Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0028</strong></td><td>Scottish &amp; York Insurance Co. Limited</td>
+            <td class="sub">Scottish &amp; York Insurance Co. Limited</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0029</strong></td><td>Traders General Insurance Company</td>
+            <td class="sub">Traders General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0030</strong></td><td>Unica Insurance Inc.</td>
+            <td class="sub">Unica Insurance Inc.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0031</strong></td><td>Echelon Insurance</td>
+            <td class="sub">Echelon Insurance</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0032</strong></td><td>Chubb Insurance Company of Canada</td>
+            <td class="sub">Chubb Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0033</strong></td><td>COSECO Insurance Company</td>
+            <td class="sub">COSECO Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0034</strong></td><td>CUMIS General Insurance Company</td>
+            <td class="sub">CUMIS General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0035</strong></td><td>The Sovereign General Insurance Company</td>
+            <td class="sub">The Sovereign General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0036</strong></td><td>The Commonwell Mutual Insurance Group</td>
+            <td class="sub">The Commonwell Mutual Insurance Group</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0037</strong></td><td>Continental Casualty Company</td>
+            <td class="sub">Continental Casualty Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0038</strong></td><td>Definity Insurance Company</td>
+            <td class="sub">Definity Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0039</strong></td><td>Certas Direct Insurance Company</td>
+            <td class="sub">Certas Direct Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0040</strong></td><td>Facility Association</td>
+            <td class="sub">Facility Association</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0041</strong></td><td>Farm Mutual Reinsurance Plan Inc. (on behalf of Ontario Mutuals)</td>
+            <td class="sub">Farm Mutual Reinsurance Plan Inc. (on behalf of Ontario Mutuals)</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0042</strong></td><td>Hartford Fire Insurance Company</td>
+            <td class="sub">Hartford Fire Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0043</strong></td><td>Heartland Farm Mutual Inc.</td>
+            <td class="sub">Heartland Farm Mutual Inc.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0044</strong></td><td>The Guarantee Company of North America</td>
+            <td class="sub">The Guarantee Company of North America</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0045</strong></td><td>Novex Insurance Company</td>
+            <td class="sub">Novex Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0046</strong></td><td>Royal &amp; SunAlliance Insurance Company of Canada</td>
+            <td class="sub">Royal &amp; SunAlliance Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0047</strong></td><td>Unifund Assurance Company</td>
+            <td class="sub">Unifund Assurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0048</strong></td><td>Western Assurance Company</td>
+            <td class="sub">Western Assurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0049</strong></td><td>Liberty Mutual Insurance Company</td>
+            <td class="sub">Liberty Mutual Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0050</strong></td><td>Federated Insurance Company of Canada</td>
+            <td class="sub">Federated Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0051</strong></td><td>Verassure Insurance Company</td>
+            <td class="sub">Verassure Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0052</strong></td><td>Zenith Insurance Company</td>
+            <td class="sub">Zenith Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0053</strong></td><td>Optimum Insurance Company Inc.</td>
+            <td class="sub">Optimum Insurance Company Inc.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0054</strong></td><td>PURE Insurance</td>
+            <td class="sub">PURE Insurance</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0055</strong></td><td>Peel Mutual Insurance Company</td>
+            <td class="sub">Peel Mutual Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0056</strong></td><td>The Portage la Prairie Mutual Insurance Company</td>
+            <td class="sub">The Portage la Prairie Mutual Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0057</strong></td><td>Coachman Insurance Company</td>
+            <td class="sub">Coachman Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0058</strong></td><td>SGI CANADA Insurance Services Ltd.</td>
+            <td class="sub">SGI CANADA Insurance Services Ltd.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0059</strong></td><td>Endurance Specialty Insurance Ltd.</td>
+            <td class="sub">Endurance Specialty Insurance Ltd.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0060</strong></td><td>Sompo Japan Insurance Inc.</td>
+            <td class="sub">Sompo Japan Insurance Inc.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0061</strong></td><td>Primmum Insurance Company</td>
+            <td class="sub">Primmum Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0062</strong></td><td>Security National Insurance Company</td>
+            <td class="sub">Security National Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0063</strong></td><td>TD General Insurance Company</td>
+            <td class="sub">TD General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0064</strong></td><td>Tokio Marine and Nichido Fire Insurance Company Limited</td>
+            <td class="sub">Tokio Marine and Nichido Fire Insurance Company Limited</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0065</strong></td><td>The Dominion of Canada General Insurance Company</td>
+            <td class="sub">The Dominion of Canada General Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0066</strong></td><td>XL Specialty Insurance Company</td>
+            <td class="sub">XL Specialty Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr class="">
+            <td><strong>rs_0067</strong></td><td>Zurich Insurance Company</td>
+            <td class="sub">Zurich Insurance Company</td>
             <td class="num">—</td>
             <td class="sub">distinct</td></tr>
       </table>
@@ -239,17 +559,17 @@
     </div>
     <div>
       <h2>Metrics</h2>
-      <table><tr><td>verified applicable rate sources</td><td class='num'>22</td></tr><tr><td>records total</td><td class='num'>25</td></tr><tr><td>records attempted</td><td class='num'>1</td></tr><tr><td>records reconnaissance pending</td><td class='num'>24</td></tr><tr><td>market completion</td><td class='num'>1/1 (100%)</td></tr><tr><td>comparable quote yield</td><td class='num'>0/1 (0%)</td></tr><tr><td>evidence rate</td><td class='num'>0/1 (0%)</td></tr><tr><td>duplicate suppression</td><td class='num'>4/25 (16%)</td></tr><tr><td>freshness</td><td class='num'>1/1 (100%)</td></tr><tr><td>synthetic records excluded</td><td class='num'>7</td></tr></table>
+      <table><tr><td>verified applicable rate sources</td><td class='num'>67</td></tr><tr><td>records total</td><td class='num'>70</td></tr><tr><td>records attempted</td><td class='num'>52</td></tr><tr><td>records reconnaissance pending</td><td class='num'>18</td></tr><tr><td>market completion</td><td class='num'>3/52 (6%)</td></tr><tr><td>comparable quote yield</td><td class='num'>0/52 (0%)</td></tr><tr><td>evidence rate</td><td class='num'>6/52 (12%)</td></tr><tr><td>duplicate suppression</td><td class='num'>4/70 (6%)</td></tr><tr><td>freshness</td><td class='num'>7/52 (13%)</td></tr><tr><td>synthetic records excluded</td><td class='num'>7</td></tr></table>
       <p class="sub">reconnaissance_pending routes were never attempted and are reported separately rather than counted as failures. Unresolved routes stay in every denominator.</p>
-      <p class="sub">Evidence chain: chain intact — 15 artifacts<br>
-         Policy audit chain: chain intact — 53 entries verified</p>
+      <p class="sub">Evidence chain: chain intact — 30 artifacts<br>
+         Policy audit chain: chain intact — 103 entries verified</p>
     </div>
   </div>
 
   <h2>Policy gate — last 60 decisions</h2>
   <table>
     <tr><th>#</th><th>Verdict</th><th>Rule</th><th>Action</th><th>Target</th></tr>
-    <tr><td class='num'>0</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>1</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>2</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>3</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>4</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>5</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>6</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>7</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>8</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>9</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>10</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>11</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>12</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>13</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>14</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>15</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>16</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>17</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>18</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>19</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>20</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>21</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>22</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>23</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>24</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>25</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>26</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>27</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>28</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>29</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>30</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>31</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>32</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>33</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>34</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>35</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>36</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>37</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>38</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>39</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>40</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>41</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>42</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>43</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>44</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>45</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>46</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>47</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>48</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>49</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>50</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>51</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>52</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr>
+    <tr><td class='num'>43</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>44</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>45</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>46</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>47</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>48</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>49</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>50</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>51</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>52</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>53</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>54</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>55</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>56</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>57</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>58</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>59</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>60</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>61</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>62</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>63</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>64</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>65</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>66</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>67</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>68</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>69</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>70</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>71</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>72</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>73</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>74</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>75</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>76</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>77</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>78</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>79</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>80</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>81</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>82</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>83</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>84</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>85</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>86</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>87</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>88</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>89</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>90</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>91</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>92</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>93</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>94</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>95</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>96</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>97</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>98</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>99</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>100</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>101</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>102</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr>
   </table>
   <p class="sub">Every decision, allow or deny, is appended to a hash-chained log. Verify with
      <code>make verify</code>.</p>

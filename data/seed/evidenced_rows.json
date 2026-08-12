@@ -1,0 +1,452 @@
+{
+  "_note": "Evidenced seed. Every row carries source_url and last_verified_at; unverified fields read 'unknown' rather than being filled in. This is NOT the brief's Appendix A, which was not available to the build \u2014 see DL-16.",
+  "records": [
+    {
+      "registry_id": "reg_0001",
+      "legal_underwriter": "Sonnet Insurance Company",
+      "insurer_group": "Definity Financial",
+      "brand_or_program": "Sonnet",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "status": "blocked",
+      "source_url": "https://www.sonnet.ca/auto-insurance/ontario",
+      "last_verified_at": "2026-08-09T00:00:00+00:00",
+      "quote_url": "https://www.sonnet.ca/auto-insurance/ontario",
+      "requirements": [
+        "licence_number"
+      ],
+      "reason_code": "licence_number_required_hypothetical_profile",
+      "fingerprint": {
+        "underwriter_disclosed": "Sonnet Insurance Company"
+      },
+      "automation_notes": "Journey order: Province -> Get started -> Vehicles -> Driver details -> Other drivers -> Assign drivers. Address-validation modal on the Vehicles step ('Heads up! ... mixed use residence', Cancel/Okay) \u2014 a naive executor hangs on it. Fraud-acknowledgement checkbox tied to address accuracy on the same step. Driver's licence number mandatory and case sensitive at Driver details -> Your Information."
+    },
+    {
+      "registry_id": "reg_0002",
+      "legal_underwriter": "Belair Insurance Company Inc.",
+      "insurer_group": "Intact Financial",
+      "brand_or_program": "belairdirect",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "fingerprint": {
+        "underwriter_disclosed": "Belair Insurance Company Inc."
+      }
+    },
+    {
+      "registry_id": "reg_0003",
+      "legal_underwriter": "RBC Insurance Company of Canada",
+      "insurer_group": "Royal Bank of Canada",
+      "brand_or_program": "RBC Insurance",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/"
+    },
+    {
+      "registry_id": "reg_0004",
+      "legal_underwriter": "Certas Home and Auto Insurance Company",
+      "insurer_group": "Desjardins Group",
+      "brand_or_program": "Desjardins Insurance",
+      "distribution_type": "agent",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.desjardins.com/en/insurance/auto.html",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.desjardins.com/en/insurance/auto.html"
+    },
+    {
+      "registry_id": "reg_0005",
+      "legal_underwriter": "unknown \u2014 requires regulator evidence (OQ-003)",
+      "insurer_group": "unknown",
+      "brand_or_program": "Onlia",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.onlia.ca/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.onlia.ca/",
+      "licensed_intermediary": "RIBO-licensed brokerage per public sources; regulator evidence pending"
+    },
+    {
+      "registry_id": "reg_0006",
+      "legal_underwriter": "unknown \u2014 not yet verified",
+      "insurer_group": "TD Bank Group",
+      "brand_or_program": "TD Insurance",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.tdinsurance.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "requirements": [
+        "membership_or_group"
+      ],
+      "automation_notes": "Large share of Ontario volume is affinity/group; expect RC_MEMBERSHIP."
+    },
+    {
+      "registry_id": "reg_0007",
+      "legal_underwriter": "CAA Insurance Company",
+      "insurer_group": "CAA Club Group",
+      "brand_or_program": "CAA Insurance",
+      "distribution_type": "affinity",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.caainsurancecompany.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "requirements": [
+        "membership"
+      ]
+    },
+    {
+      "registry_id": "reg_0010",
+      "legal_underwriter": "Intact Insurance Company",
+      "insurer_group": "Intact Financial",
+      "brand_or_program": "Intact Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.intact.ca/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Intact Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0011",
+      "legal_underwriter": "Jevco Insurance Company",
+      "insurer_group": "Intact Financial",
+      "brand_or_program": "Jevco",
+      "distribution_type": "broker",
+      "product_scope": "nonstandard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.jevco.ca/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Jevco Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0020",
+      "legal_underwriter": "Aviva Insurance Company of Canada",
+      "insurer_group": "Aviva Canada",
+      "brand_or_program": "Aviva Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.avivacanada.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "automation_notes": "Pilot, Elite and Traders General amalgamated into Aviva Insurance Company of Canada, effective 2026-01-01. Source: https://www.avivacanada.com/",
+      "fingerprint": {
+        "underwriter_disclosed": "Aviva Insurance Company of Canada",
+        "regulatory_amalgamation": "aviva_canada_2026_01_01"
+      }
+    },
+    {
+      "registry_id": "reg_0021",
+      "legal_underwriter": "Aviva Insurance Company of Canada",
+      "insurer_group": "Aviva Canada",
+      "brand_or_program": "Pilot Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.avivacanada.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "automation_notes": "Pilot, Elite and Traders General amalgamated into Aviva Insurance Company of Canada, effective 2026-01-01. Source: https://www.avivacanada.com/",
+      "fingerprint": {
+        "underwriter_disclosed": "Aviva Insurance Company of Canada",
+        "regulatory_amalgamation": "aviva_canada_2026_01_01"
+      }
+    },
+    {
+      "registry_id": "reg_0022",
+      "legal_underwriter": "Aviva Insurance Company of Canada",
+      "insurer_group": "Aviva Canada",
+      "brand_or_program": "Elite Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.avivacanada.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "automation_notes": "Pilot, Elite and Traders General amalgamated into Aviva Insurance Company of Canada, effective 2026-01-01. Source: https://www.avivacanada.com/",
+      "fingerprint": {
+        "underwriter_disclosed": "Aviva Insurance Company of Canada",
+        "regulatory_amalgamation": "aviva_canada_2026_01_01"
+      }
+    },
+    {
+      "registry_id": "reg_0023",
+      "legal_underwriter": "Aviva Insurance Company of Canada",
+      "insurer_group": "Aviva Canada",
+      "brand_or_program": "Traders General Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.avivacanada.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "automation_notes": "Pilot, Elite and Traders General amalgamated into Aviva Insurance Company of Canada, effective 2026-01-01. Source: https://www.avivacanada.com/",
+      "fingerprint": {
+        "underwriter_disclosed": "Aviva Insurance Company of Canada",
+        "regulatory_amalgamation": "aviva_canada_2026_01_01"
+      }
+    },
+    {
+      "registry_id": "reg_0030",
+      "legal_underwriter": "Economical Mutual Insurance Company",
+      "insurer_group": "Definity Financial",
+      "brand_or_program": "Economical Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.definityfinancial.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Economical Mutual Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0031",
+      "legal_underwriter": "unknown \u2014 acquisition completed 2026-01-02, entity structure not yet verified",
+      "insurer_group": "Definity Financial",
+      "brand_or_program": "Travelers Canada (personal lines)",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.definityfinancial.com/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "automation_notes": "Definity completed the acquisition of Travelers Canada personal lines on 2026-01-02. Whether these rates are filed under an existing Definity entity is unverified \u2014 recorded as unknown rather than assumed."
+    },
+    {
+      "registry_id": "reg_0040",
+      "legal_underwriter": "Allstate Insurance Company of Canada",
+      "insurer_group": "Allstate Canada",
+      "brand_or_program": "Allstate",
+      "distribution_type": "agent",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Allstate Insurance Company of Canada"
+      }
+    },
+    {
+      "registry_id": "reg_0041",
+      "legal_underwriter": "Pembridge Insurance Company",
+      "insurer_group": "Allstate Canada",
+      "brand_or_program": "Pembridge",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Pembridge Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0050",
+      "legal_underwriter": "The Co-operators General Insurance Company",
+      "insurer_group": "Co-operators",
+      "brand_or_program": "Co-operators",
+      "distribution_type": "agent",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "The Co-operators General Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0060",
+      "legal_underwriter": "The Personal Insurance Company",
+      "insurer_group": "Desjardins Group",
+      "brand_or_program": "The Personal",
+      "distribution_type": "affinity",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "The Personal Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0070",
+      "legal_underwriter": "Wawanesa Mutual Insurance Company",
+      "insurer_group": "Wawanesa",
+      "brand_or_program": "Wawanesa Insurance",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Wawanesa Mutual Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0080",
+      "legal_underwriter": "Gore Mutual Insurance Company",
+      "insurer_group": "Gore Mutual",
+      "brand_or_program": "Gore Mutual",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Gore Mutual Insurance Company"
+      }
+    },
+    {
+      "registry_id": "reg_0090",
+      "legal_underwriter": "Northbridge General Insurance Corporation",
+      "insurer_group": "Fairfax Financial",
+      "brand_or_program": "Northbridge",
+      "distribution_type": "broker",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.fsrao.ca/industry/auto-insurance",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "fingerprint": {
+        "underwriter_disclosed": "Northbridge General Insurance Corporation"
+      }
+    },
+    {
+      "registry_id": "reg_0100",
+      "legal_underwriter": "n/a \u2014 comparison platform",
+      "insurer_group": "RATESDOTCA Group Ltd.",
+      "brand_or_program": "Rates.ca",
+      "distribution_type": "aggregator",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://rates.ca/insurance-quotes/auto/ontario",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://rates.ca/insurance-quotes/auto/ontario",
+      "automation_notes": "Comparison platform. Output bounded by its live panel and by applicant eligibility (\u00a76.2). Run neutrally, like every other route."
+    },
+    {
+      "registry_id": "reg_0101",
+      "legal_underwriter": "n/a \u2014 comparison platform",
+      "insurer_group": "LowestRates.ca",
+      "brand_or_program": "LowestRates.ca",
+      "distribution_type": "aggregator",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.lowestrates.ca/insurance/auto",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.lowestrates.ca/insurance/auto",
+      "automation_notes": "Comparison platform. Same neutral treatment (\u00a76.2)."
+    },
+    {
+      "registry_id": "reg_0102",
+      "legal_underwriter": "n/a \u2014 comparison platform",
+      "insurer_group": "MyChoice Financial Inc.",
+      "brand_or_program": "MyChoice",
+      "distribution_type": "aggregator",
+      "product_scope": "standard_PPA",
+      "status": "reconnaissance_pending",
+      "source_url": "https://www.mychoice.ca/insurance/car/",
+      "last_verified_at": "2026-08-12T00:00:00+00:00",
+      "quote_url": "https://www.mychoice.ca/insurance/car/",
+      "automation_notes": "Comparison platform. Included because omitting a major route would be a more serious error than including one that declines (\u00a76.2)."
+    },
+    {
+      "registry_id": "reg_9001",
+      "legal_underwriter": "Sandbox Alpha Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Alpha",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/alpha",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9002",
+      "legal_underwriter": "Sandbox Bravo Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Bravo",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/bravo",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9003",
+      "legal_underwriter": "Sandbox Charlie Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Charlie",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/charlie",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9004",
+      "legal_underwriter": "Sandbox Delta Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Delta",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/delta",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9005",
+      "legal_underwriter": "Sandbox Echo Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Echo",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/echo",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9006",
+      "legal_underwriter": "Sandbox Foxtrot Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Foxtrot",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/foxtrot",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    },
+    {
+      "registry_id": "reg_9007",
+      "legal_underwriter": "Sandbox Golf Insurance Company",
+      "insurer_group": "FATHOM synthetic sandbox",
+      "brand_or_program": "Sandbox Golf",
+      "distribution_type": "direct",
+      "product_scope": "standard_PPA",
+      "quote_url": "http://localhost:8801/golf",
+      "source_url": "sandbox/server.py",
+      "automation_notes": "Local synthetic site (\u00a711.5). Not a real insurer. Excluded from market metrics; reliability numbers only.",
+      "status": "unresolved",
+      "is_synthetic": true
+    }
+  ]
+}

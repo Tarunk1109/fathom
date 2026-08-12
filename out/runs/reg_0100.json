@@ -1,0 +1,29 @@
+{
+  "route_id": "rt_reg_0100",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "https://rates.ca/insurance-quotes/auto/ontario",
+  "status": "blocked",
+  "reason_code": "RC_ACCESS_CONTROL",
+  "stopping_step": "step 1: bot check",
+  "stated_reason": "A CAPTCHA or bot control was presented.",
+  "premium": null,
+  "quote_reference": "",
+  "coverage": {},
+  "steps": [
+    {
+      "step": 1,
+      "url": "https://rates.ca/insurance-quotes/auto/ontario",
+      "title": "Attention Required! | Cloudflare",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-ff2a27e0fa13994ada861e4c2677973993a2b89c5293d8637f0d9ac3e957df02"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

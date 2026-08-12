@@ -1,0 +1,29 @@
+{
+  "route_id": "rt_reg_0101",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "https://www.lowestrates.ca/insurance/auto",
+  "status": "blocked",
+  "reason_code": "RC_ACCESS_CONTROL",
+  "stopping_step": "step 1: bot check",
+  "stated_reason": "A CAPTCHA or bot control was presented.",
+  "premium": null,
+  "quote_reference": "",
+  "coverage": {},
+  "steps": [
+    {
+      "step": 1,
+      "url": "https://www.lowestrates.ca/insurance/auto",
+      "title": "Attention Required! | Cloudflare",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-add5048485a0e4b617e8b65bc5adbc19f937e729686eca8eb7ceeb5c74c6fd99"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

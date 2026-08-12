@@ -132,6 +132,11 @@ class WebExecutor:
             page = browser.new_page()
             try:
                 page.goto(entry_url, wait_until="domcontentloaded")
+                # Real insurer journeys are JS-rendered; the form does not exist at DOMContentLoaded.
+                try:
+                    page.wait_for_load_state("networkidle", timeout=4000)
+                except Exception:
+                    pass
                 self._walk(page, result, profile, ctx)
             finally:
                 browser.close()
@@ -141,6 +146,13 @@ class WebExecutor:
 
     def _walk(self, page, result: RunResult, profile: Profile, ctx: SessionContext) -> None:
         for step_index in range(1, self.max_steps + 1):
+            budget = ctx.budget_for(result.route_id)
+            if budget.expired():
+                result.status = "unresolved"
+                result.stopping_step = f"step {step_index}: route time budget exhausted"
+                result.stated_reason = ("The journey did not reach a terminal state within the "
+                                        "route's time budget (§9.4).")
+                return
             self._handle_modals(page, result, step_index)
 
             record = StepRecord(step=step_index, url=page.url, title=page.title())
@@ -158,7 +170,12 @@ class WebExecutor:
                 result.stated_reason = "A CAPTCHA or bot control was presented."
                 return
 
-            price = self._read_price(page, text)
+            # A price is only believed when this run actually submitted something. Landing pages
+            # advertise "from $177/mo" and the reader happily returned it — a fabricated quote,
+            # which §6.1 says ends the submission. Filling at least one field is the minimum
+            # evidence that the number on screen is a response to our inputs rather than copy.
+            price = (self._read_price(page, text)
+                     if any(st.fields_filled for st in result.steps) else None)
             if price is not None:
                 result.premium = price
                 result.quote_reference = self._read_quote_ref(text)
@@ -333,8 +350,22 @@ class WebExecutor:
 
     # -- advancing ----------------------------------------------------------------------
 
+    #: Call-to-action text that starts a quote journey from a marketing page. Real entry points
+    #: are frequently links, not buttons, so a button-only search stalls at step 1.
+    START_LINK_TEXTS = ("get a quote", "get quotes", "start my quote", "get my quote",
+                        "compare quotes", "get started", "quote now", "car insurance quote")
+
     def _advance(self, page, result: RunResult, ctx: SessionContext, step_index: int) -> bool:
-        for button in page.query_selector_all("button, input[type=submit]"):
+        candidates = list(page.query_selector_all("button, input[type=submit]"))
+        for anchor in page.query_selector_all("a"):
+            try:
+                label = (anchor.inner_text() or "").strip().lower()
+            except Exception:
+                continue
+            if any(phrase in label for phrase in self.START_LINK_TEXTS):
+                candidates.append(anchor)
+
+        for button in candidates:
             try:
                 if not button.is_visible():
                     continue
@@ -357,7 +388,11 @@ class WebExecutor:
             before = page.url + page.inner_text("body")[:200]
             try:
                 button.click()
-                page.wait_for_timeout(400)
+                page.wait_for_timeout(600)
+                try:
+                    page.wait_for_load_state("networkidle", timeout=3000)
+                except Exception:
+                    pass
             except Exception:
                 continue
             if page.url + page.inner_text("body")[:200] != before:
@@ -376,12 +411,23 @@ class WebExecutor:
         except Exception:
             return ""
 
-    @staticmethod
-    def _detect_bot_check(page, text: str) -> bool:
+    #: Detection only. §2.1 forbids bypassing a bot control, so recognising one is the whole
+    #: response: record `blocked`, end the route, keep the evidence. A managed challenge that is
+    #: not detected becomes a silent `unresolved`, which understates the market map.
+    BOT_CHECK_PHRASES = (
+        "not a robot", "recaptcha", "hcaptcha", "turnstile",
+        "you have been blocked", "attention required", "access denied",
+        "security service to protect itself", "unusual traffic",
+        "verify you are human", "checking your browser", "ray id",
+    )
+
+    @classmethod
+    def _detect_bot_check(cls, page, text: str) -> bool:
         lowered = text.lower()
-        if "not a robot" in lowered or "recaptcha" in lowered:
+        if any(phrase in lowered for phrase in cls.BOT_CHECK_PHRASES):
             return True
-        return bool(page.query_selector("#recaptcha-box, .g-recaptcha, iframe[title*=recaptcha]"))
+        return bool(page.query_selector(
+            "#recaptcha-box, .g-recaptcha, iframe[title*=recaptcha], iframe[src*=turnstile]"))
 
     @staticmethod
     def _detect_callback_only(page, text: str) -> bool:
@@ -389,15 +435,33 @@ class WebExecutor:
         return ("can't quote online" in lowered or "cannot quote online" in lowered
                 or "an advisor will call" in lowered)
 
-    @staticmethod
-    def _read_price(page, text: str) -> float | None:
+    #: Marketing copy that disqualifies a number on the same page from being a quote.
+    ADVERTISED_PRICE_PHRASES = (
+        "as low as", "starting at", "from $", "average", "save up to", "up to $",
+        "rates from", "per month*", "on average",
+    )
+
+    @classmethod
+    def _read_price(cls, page, text: str) -> float | None:
+        """Read a premium, but only from a genuine price container.
+
+        Two guards, both learned from a live false positive: prefer an explicit price element over
+        free page text, and refuse any number sitting next to advertising language. A wrong
+        premium is worse than no premium — it is the one error that cannot be walked back.
+        """
         import re
-        node = page.query_selector(".price")
-        source = node.inner_text() if node else text
-        match = re.search(r"\$\s?([\d,]+\.\d{2})", source)
-        if not match:
+
+        node = page.query_selector(".price, [data-testid*=premium], [class*=quote-price], "
+                                   "[class*=premium-amount]")
+        if node:
+            match = re.search(r"\$\s?([\d,]+(?:\.\d{2})?)", node.inner_text() or "")
+            return float(match.group(1).replace(",", "")) if match else None
+
+        lowered = text.lower()
+        if any(phrase in lowered for phrase in cls.ADVERTISED_PRICE_PHRASES):
             return None
-        return float(match.group(1).replace(",", ""))
+        match = re.search(r"\$\s?([\d,]+\.\d{2})", text)
+        return float(match.group(1).replace(",", "")) if match else None
 
     @staticmethod
     def _read_quote_ref(text: str) -> str:

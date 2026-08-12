@@ -12,13 +12,15 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from packages.evidence import EvidenceStore                      # noqa: E402
 from packages.executors.web import WebExecutor                   # noqa: E402
-from packages.policy import ApprovalStore, PolicyEngine, SessionContext  # noqa: E402
+from packages.policy import (ApprovalStore, PolicyEngine, RouteBudget,  # noqa: E402
+                             SessionContext)
 from packages.profiles import ProfileRegistry                    # noqa: E402
 
 
@@ -29,6 +31,8 @@ def main(argv=None) -> int:
     ap.add_argument("--profile", default="profile_hypo_clean")
     ap.add_argument("--headed", action="store_true", help="show the browser")
     ap.add_argument("--out", default=None, help="write the RunResult as JSON here")
+    ap.add_argument("--seconds", type=int, default=150,
+                    help="wall-clock budget for this route (P-BUDGET-01 enforces it)")
     args = ap.parse_args(argv)
 
     registry = ProfileRegistry()
@@ -43,6 +47,11 @@ def main(argv=None) -> int:
         sandbox_only=profile.sandbox_only,
         fact_lock=profile.fact_lock(),
         approved_routes=approvals.approved_route_ids,
+        # A real journey can stall on a JS page forever. §9.4's time budget is the existing
+        # answer; it just was not being populated.
+        budgets={args.route: RouteBudget(
+            max_attempts=2,
+            deadline=datetime.now(timezone.utc) + timedelta(seconds=args.seconds))},
     )
 
     executor = WebExecutor(engine, EvidenceStore(), slow_mo_ms=120 if args.headed else 0)

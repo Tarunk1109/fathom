@@ -69,8 +69,10 @@ def build_ui(results, registry, groups, engine, evidence, note: str) -> Path:
         underwriters = ", ".join(sorted({esc(rec.legal_underwriter) for rec in records}))
         signals = max(rec.signals_agreeing for rec in records)
         hypo = [rec for rec in records if rec.dedup_hypothesis_with]
+        merged = signals >= 2 and len(records) > 1
         graph_rows.append(f"""
-        <tr><td><strong>{esc(rate_source)}</strong></td><td>{brands}</td>
+        <tr class="{'merged' if merged else ''}">
+            <td><strong>{esc(rate_source)}</strong></td><td>{brands}</td>
             <td class="sub">{underwriters}</td>
             <td class="num">{signals or '—'}</td>
             <td class="sub">{'hypothesis: ' + esc(hypo[0].dedup_hypothesis_with) if hypo
@@ -123,6 +125,7 @@ def build_ui(results, registry, groups, engine, evidence, note: str) -> Path:
         border-radius:6px;font-size:14px;margin:10px 0 0}}
  .banner{{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;padding:10px 14px;
           border-radius:6px;font-size:13px;font-weight:600}}
+ tr.merged{{background:#ecfdf5}} tr.merged td:first-child{{border-left:3px solid #10b981}}
  .grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px}}
  @media(max-width:900px){{.grid{{grid-template-columns:1fr}}}}
 </style></head><body>
@@ -181,7 +184,45 @@ def build_ui(results, registry, groups, engine, evidence, note: str) -> Path:
     return path
 
 
-def write_run_report(results, registry, note, evidence, engine) -> Path:
+def collapse_section(registry, groups) -> list[str]:
+    """The dedup finding, written out. §9.3 asserts only at >=2 agreeing signals."""
+    market = [r for r in registry.records.values() if not r.is_synthetic]
+    sources = {r.distinct_rate_source_id for r in market}
+    lines = ["## Rate-source collapse", "",
+             f"**{len(market)} market brands and legal entities resolve to "
+             f"{len(sources)} distinct rate sources.**", "",
+             "FATHOM counts distinct rate sources, not brands. `same_rate_source_as` is asserted "
+             "only where at least two independent signals agree (§9.3); a single-signal match is "
+             "recorded as a hypothesis and never merged.", ""]
+
+    merges = []
+    for rate_source, members in sorted(groups.items()):
+        records = [registry.get(m) for m in members]
+        if len(records) < 2 or all(r.is_synthetic for r in records):
+            continue
+        merges.append((rate_source, records))
+
+    if not merges:
+        lines += ["No merges were evidenced.", ""]
+    for rate_source, records in merges:
+        signals = max(r.signals_agreeing for r in records)
+        lines += [
+            f"### `{rate_source}` — {len(records)} brands, {signals} agreeing signals", "",
+            f"**Legal underwriter: {records[0].legal_underwriter}**", "",
+        ]
+        lines += [f"- {r.brand_or_program}" for r in records]
+        lines += ["", f"Evidence: {records[0].automation_notes[:400]}", ""]
+
+    hypotheses = [r for r in market if r.dedup_hypothesis_with]
+    lines += [f"Single-signal hypotheses recorded but **not** merged: {len(hypotheses)}.", "",
+              "The true number of distinct rate sources is very likely lower than "
+              f"{len(sources)} — several entities within the same group probably share filed "
+              "rates and FATHOM has not evidenced it. An unevidenced merge would inflate the "
+              "dedup metric, which §18 names directly as an anti-goal.", ""]
+    return lines
+
+
+def write_run_report(results, registry, note, evidence, engine, groups=None) -> Path:
     metrics = registry.metrics()
     chain_ok, _, chain_note = evidence.verify_chain()
     lines = [
@@ -224,6 +265,9 @@ def write_run_report(results, registry, note, evidence, engine) -> Path:
         lines.append(f"Stated reason: {r.decline['stated_reason_redacted'][:220]}")
         lines.append("")
 
+    if groups:
+        lines += collapse_section(registry, groups)
+
     lines += ["## Metrics", "", "| Metric | Value |", "| --- | --- |"]
     lines += [f"| {k.replace('_', ' ')} | {v} |" for k, v in metrics.items()
               if k != "denominator_note"]
@@ -262,15 +306,29 @@ def main(argv=None) -> int:
                     if not rec.is_synthetic and rec.quote_url
                     and f"rt_{rec.registry_id}" in approvals.approved_route_ids]
 
+    # Real routes are expensive and rate-limited; reuse a captured RunResult when one exists so
+    # the deliverables can be regenerated without hammering a live insurer (§18).
+    def cached(route_id: str):
+        path = OUT / "runs" / f"{route_id.replace('rt_', '')}.json"
+        if not path.exists():
+            return None
+        from packages.executors.web import RunResult
+        data = json.loads(path.read_text(encoding="utf-8"))
+        known = {f for f in RunResult.__dataclass_fields__}
+        return RunResult(**{k: v for k, v in data.items() if k in known})
+
     results, runs = [], []
     for index, (registry_id, url, route_id) in enumerate(sorted(targets), start=1):
         ctx = SessionContext(
             session_id=f"ses_{route_id}", profile_id=profile.profile_id,
             hypothetical=profile.hypothetical, sandbox_only=profile.sandbox_only,
             fact_lock=profile.fact_lock(), approved_routes=approvals.approved_route_ids)
-        run = executor.run(route_id=route_id, entry_url=url, profile=profile, ctx=ctx)
+        run = cached(route_id) if not registry.get(registry_id).is_synthetic else None
+        if run is None:
+            run = executor.run(route_id=route_id, entry_url=url, profile=profile, ctx=ctx)
         runs.append(run)
-        print(f"  {run.summary()}")
+        print(f"  {run.summary()}"
+              + ("   [cached]" if not registry.get(registry_id).is_synthetic else ""))
 
         registry.record_outcome(
             registry_id, status=run.status, reason_code=run.reason_code,
@@ -293,7 +351,7 @@ def main(argv=None) -> int:
         json.dumps([r.to_dict() for r in ordered], indent=2, default=str) + "\n", encoding="utf-8")
     (OUT / "runs.json").write_text(
         json.dumps([asdict(r) for r in runs], indent=2, default=str) + "\n", encoding="utf-8")
-    report = write_run_report(ordered, registry, note, evidence, engine)
+    report = write_run_report(ordered, registry, note, evidence, engine, groups)
     ui = build_ui(ordered, registry, groups, engine, evidence, note)
 
     print(f"\n{note}\n")

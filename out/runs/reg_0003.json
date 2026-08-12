@@ -1,0 +1,110 @@
+{
+  "route_id": "rt_reg_0003",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+  "status": "unresolved",
+  "reason_code": null,
+  "stopping_step": "step 1: no actionable control",
+  "stated_reason": "",
+  "premium": null,
+  "quote_reference": "",
+  "coverage": {},
+  "steps": [
+    {
+      "step": 1,
+      "url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+      "title": "Car Insurance Ontario \u2013 Free Online Auto Insurance Quote | RBC Insurance",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-912eb25e80382c5f2b42b459608675a9de2e578ea67cac13f493278833e87a9c"
+  ],
+  "policy_denials": [
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ],
+    [
+      "P-BUDGET-01",
+      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
+    ]
+  ],
+  "pending_block": null
+}

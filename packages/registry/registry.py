@@ -70,6 +70,13 @@ class RegistryRecord:
     signals_agreeing: int = 0
     dedup_hypothesis_with: str = ""
 
+    #: Appendix A provenance. `requires_current_validation` marks a row that came from the
+    #: regulator's public display dataset and has not been verified — §9.3 requires every row to
+    #: carry its own validation, and the appendix's own header says it proves nothing on its own.
+    appendix_group: str = ""
+    appendix_legal_name: str = ""
+    requires_current_validation: bool = False
+
     #: Sandbox sites live in the registry so the executor can be exercised against real records,
     #: but they are not the Ontario market. Excluded from every market metric; reliability
     #: numbers only (§11.5, §11.9).
