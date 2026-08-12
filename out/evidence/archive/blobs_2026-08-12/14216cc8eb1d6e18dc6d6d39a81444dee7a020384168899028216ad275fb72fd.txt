@@ -1,0 +1,14 @@
+FATHOM Day 0 Reconnaissance Probe — Route 1, Sonnet, profile_hypo_clean
+Hand-driven, no automation (FATHOM section 5.1). Recorded 2026-08-09 in docs/DAY0_PROBE.md.
+
+Entry URL: https://www.sonnet.ca/auto-insurance/ontario
+Reached a priced screen: NO
+Exact stopping step: Driver details -> Your Information -> Driver's licence number
+Field characteristics at the stop: Mandatory. Marked case sensitive. Carries a "Why do we need this?" explanatory link.
+Stated reason, verbatim, redacted: No refusal message was displayed. The journey did not decline the applicant -- it required a value the profile cannot supply. Recorded as a structural block, not a decline.
+Terminal status: blocked
+Reason code: RC_HYPO_LICENCE_REQUIRED
+Why blocked: A hypothetical profile cannot supply a driver's licence number under P-HYPO-LICENCE-01, and the field cannot be skipped.
+Journey order observed: Province -> Get started -> Vehicles -> Driver details -> Other drivers -> Assign drivers
+Vehicle substitution: NONE -- 2019 Honda Civic LX accepted
+Quote reference ID: none issued before the block.

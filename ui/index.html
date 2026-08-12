@@ -16,7 +16,7 @@
  .num{text-align:right;font-variant-numeric:tabular-nums}
  .sub{color:#64748b;font-size:12px}
  .cov ul{margin:0;padding-left:16px} .cov li{margin:2px 0;color:#b45309}
- .ok{color:#15803d}
+ .ok{color:#15803d} .not-assessed{color:#94a3b8;font-style:italic}
  .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;
         background:#e2e8f0;color:#334155}
  .pill.quoted_comparable{background:#dcfce7;color:#166534}
@@ -32,18 +32,50 @@
  .banner{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;padding:10px 14px;
           border-radius:6px;font-size:13px;font-weight:600}
  tr.merged{background:#ecfdf5} tr.merged td:first-child{border-left:3px solid #10b981}
+ tr.is-sandbox{background:#faf5ff}
+ .sandbox-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:10px;
+                  font-weight:800;letter-spacing:.04em;background:#9333ea;color:#fff;
+                  vertical-align:middle;margin-left:4px}
+ .findings{display:flex;flex-direction:column;gap:10px;margin:12px 0 28px}
+ .finding{background:#fff;border:1px solid #e2e8f0;border-left:4px solid #64748b;
+           border-radius:6px;padding:12px 14px;font-size:13px;line-height:1.5}
+ .finding.warn{border-left-color:#d97706} .finding.good{border-left-color:#10b981}
+ .finding b{display:block;font-size:13px;margin-bottom:3px}
  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
  @media(max-width:900px){.grid{grid-template-columns:1fr}}
 </style></head><body>
 <header>
   <h1>FATHOM</h1>
   <p>Ontario private-passenger auto market instrument · generated
-     2026-08-12T05:58:59+00:00</p>
+     2026-08-12T15:13:33+00:00</p>
+  <p style="margin:4px 0 0;font-size:12px;color:#94a3b8">profile <code>profile_hypo_clean</code> (hypothetical) &middot; vehicle 2019 Honda Civic LX &middot; effective 2026-09-01<br>benchmark: $2,000,000 third-party liability · $1000 collision deductible · $1000 comprehensive deductible · DCPD included · OPCF 44R included · 12-month term</p>
 </header>
 <main>
   <div class="banner">Results below were retrieved under <code>profile_hypo_clean</code>, a
      <strong>hypothetical</strong> clean-record driver. They are not quotes for the operator.
-     Synthetic sandbox routes are excluded from all market metrics.</div>
+     Rows marked <span class="sandbox-badge">SANDBOX</span> are from the local synthetic test
+     sites (§11.5), never a real destination, and are excluded from every market metric.</div>
+
+  <h2>Named findings</h2>
+  <div class="findings">
+    <div class="finding warn"><b>No real insurer route returned a price</b>
+      Every priced, benchmark-comparable outcome in this build is from the sandbox. Real routes
+      returned either a terminal blocker or an unresolved capability limit — see
+      <code>docs/LIMITATIONS.md</code> for the itemized reason per route.</div>
+    <div class="finding warn"><b>Two aggregator routes are Cloudflare-fronted (D-AGG)</b>
+      Rates.ca and LowestRates.ca both returned a managed challenge, detected and respected —
+      never bypassed (§2.1). The two broadest Ontario comparison routes are closed to an honest
+      agent. Accepted as a market finding, not retried.</div>
+    <div class="finding good"><b>The Aviva amalgamation, evidenced</b>
+      Aviva Insurance, Pilot Insurance, Elite Insurance and Traders General Insurance collapse to
+      one legal entity — Aviva Insurance Company of Canada — on two agreeing signals, effective
+      2026-01-01. See the market graph below.</div>
+    <div class="finding good"><b>A fabricated premium was caught before it reached this report</b>
+      A live run against MyChoice.ca returned $177.83 from landing-page marketing copy with zero
+      fields filled. Fixed and locked down as a test. Full account:
+      <code>docs/SAFETY.md</code> § "Worked example: the fabricated premium",
+      reproduce with <code>make demo-fabrication</code>.</div>
+  </div>
 
   <h2>Results</h2>
   <p class="note">The lowest price (rt_reg_9007) does not match the benchmark package — it differs in 5 respect(s). It is a different product, not a cheaper one, and the difference has not been priced.</p>
@@ -51,8 +83,9 @@
     <tr><th>Route</th><th>Status</th><th>Coverage vs benchmark</th><th>Annual</th>
         <th>Assessment</th><th>Parity</th><th>Evidence</th></tr>
     
-        <tr class="caution">
-          <td><strong>rt_reg_9007</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="caution is-sandbox">
+          <td><strong>rt_reg_9007</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill quoted_comparable">quoted_comparable</span>
               </td>
           <td class="cov"><ul><li>third-party liability limit: 1,000,000 vs benchmark 2,000,000 (lower)</li><li>collision deductible: 500 vs benchmark 1,000 (lower)</li><li>comprehensive deductible: 500 vs benchmark 1,000 (lower)</li><li>OPCF 44R family protection: excluded vs benchmark included</li><li>income replacement benefit: included — an optional benefit since 1 July 2026, included here and not in the benchmark</li></ul></td>
@@ -63,8 +96,9 @@
           <td class="sub">not_possible</td>
           <td class="sub">2 artifacts</td>
         </tr>
-        <tr class="pass">
-          <td><strong>rt_reg_9006</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="pass is-sandbox">
+          <td><strong>rt_reg_9006</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill quoted_comparable">quoted_comparable</span>
               </td>
           <td class="cov"><span class="ok">matches benchmark</span></td>
@@ -76,10 +110,11 @@
           <td class="sub">2 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0002</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0002</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -88,10 +123,11 @@
           <td class="sub">3 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0003</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0003</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -100,10 +136,11 @@
           <td class="sub">1 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0004</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0004</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -112,10 +149,11 @@
           <td class="sub">12 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0100</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0100</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill blocked">blocked</span>
               <div class="sub">RC_ACCESS_CONTROL</div></td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -124,10 +162,11 @@
           <td class="sub">1 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0101</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0101</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill blocked">blocked</span>
               <div class="sub">RC_ACCESS_CONTROL</div></td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -136,22 +175,11 @@
           <td class="sub">1 artifacts</td>
         </tr>
         <tr class="fail">
-          <td><strong>rt_reg_0102</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><strong>rt_reg_0102</strong>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
-          <td class="num">—</td>
-          <td><span class="verdict fail">FAIL</span>
-              <div class="sub">conf high ·
-              evidence verified</div></td>
-          <td class="sub">not_possible</td>
-          <td class="sub">7 artifacts</td>
-        </tr>
-        <tr class="fail">
-          <td><strong>rt_reg_9001</strong><div class="sub">profile_hypo_clean</div></td>
-          <td><span class="pill blocked">blocked</span>
-              <div class="sub">RC_HYPO_LICENCE_REQUIRED</div></td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -159,11 +187,25 @@
           <td class="sub">not_possible</td>
           <td class="sub">4 artifacts</td>
         </tr>
-        <tr class="fail">
-          <td><strong>rt_reg_9002</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="fail is-sandbox">
+          <td><strong>rt_reg_9001</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill blocked">blocked</span>
+              <div class="sub">RC_HYPO_LICENCE_REQUIRED</div></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">4 artifacts</td>
+        </tr>
+        <tr class="fail is-sandbox">
+          <td><strong>rt_reg_9002</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill blocked">blocked</span>
               <div class="sub">RC_ACCESS_CONTROL</div></td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -171,11 +213,12 @@
           <td class="sub">not_possible</td>
           <td class="sub">2 artifacts</td>
         </tr>
-        <tr class="fail">
-          <td><strong>rt_reg_9003</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="fail is-sandbox">
+          <td><strong>rt_reg_9003</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill callback_required">callback_required</span>
               <div class="sub">RC_HUMAN_REQUIRED</div></td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -183,11 +226,12 @@
           <td class="sub">not_possible</td>
           <td class="sub">2 artifacts</td>
         </tr>
-        <tr class="fail">
-          <td><strong>rt_reg_9004</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="fail is-sandbox">
+          <td><strong>rt_reg_9004</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -195,11 +239,12 @@
           <td class="sub">not_possible</td>
           <td class="sub">1 artifacts</td>
         </tr>
-        <tr class="fail">
-          <td><strong>rt_reg_9005</strong><div class="sub">profile_hypo_clean</div></td>
+        <tr class="fail is-sandbox">
+          <td><strong>rt_reg_9005</strong> <span class="sandbox-badge">SANDBOX</span>
+              <div class="sub">profile_hypo_clean</div></td>
           <td><span class="pill unresolved">unresolved</span>
               </td>
-          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="cov"><span class="not-assessed">not reached — no price returned</span></td>
           <td class="num">—</td>
           <td><span class="verdict fail">FAIL</span>
               <div class="sub">conf high ·
@@ -559,17 +604,29 @@
     </div>
     <div>
       <h2>Metrics</h2>
-      <table><tr><td>verified applicable rate sources</td><td class='num'>67</td></tr><tr><td>records total</td><td class='num'>70</td></tr><tr><td>records attempted</td><td class='num'>52</td></tr><tr><td>records reconnaissance pending</td><td class='num'>18</td></tr><tr><td>market completion</td><td class='num'>3/52 (6%)</td></tr><tr><td>comparable quote yield</td><td class='num'>0/52 (0%)</td></tr><tr><td>evidence rate</td><td class='num'>6/52 (12%)</td></tr><tr><td>duplicate suppression</td><td class='num'>4/70 (6%)</td></tr><tr><td>freshness</td><td class='num'>7/52 (13%)</td></tr><tr><td>synthetic records excluded</td><td class='num'>7</td></tr></table>
-      <p class="sub">reconnaissance_pending routes were never attempted and are reported separately rather than counted as failures. Unresolved routes stay in every denominator.</p>
-      <p class="sub">Evidence chain: chain intact — 30 artifacts<br>
-         Policy audit chain: chain intact — 103 entries verified</p>
+      <table><tr><td>verified applicable rate sources</td><td class='num'>7</td></tr><tr><td>distinct rate sources total</td><td class='num'>67</td></tr><tr><td>records total</td><td class='num'>70</td></tr><tr><td>records attempted</td><td class='num'>7</td></tr><tr><td>records never attempted</td><td class='num'>63</td></tr><tr><td>records never attempted reconnaissance pending</td><td class='num'>18</td></tr><tr><td>records never attempted appendix unvalidated</td><td class='num'>45</td></tr><tr><td>market completion</td><td class='num'>3/7 (43%)</td></tr><tr><td>comparable quote yield</td><td class='num'>0/7 (0%)</td></tr><tr><td>evidence rate</td><td class='num'>7/7 (100%)</td></tr><tr><td>duplicate suppression</td><td class='num'>4/70 (6%)</td></tr><tr><td>freshness</td><td class='num'>7/7 (100%)</td></tr><tr><td>synthetic records excluded</td><td class='num'>7</td></tr></table>
+      <p class="sub">Market completion and comparable quote yield are computed over distinct rate sources that have been attempted ('verified applicable rate sources'), per §11.9. Evidence rate, duplicate suppression and freshness are computed over records. Records never attempted — either FATHOM's own reconnaissance_pending routes, or Appendix A discovery-seed rows carrying requires_current_validation=true (whose exported status field reads 'unresolved' by explicit instruction, not because an attempt was made) — are excluded from these denominators and reported separately, rather than counted as failed attempts. A route FATHOM did attempt and could not resolve keeps status 'unresolved' and stays in every denominator; that is a different thing from a row nobody has touched yet.</p>
+      <p class="sub">Evidence chain: chain intact — 69 artifacts<br>
+         Policy audit chain: chain intact — 229 entries verified</p>
     </div>
   </div>
 
-  <h2>Policy gate — last 60 decisions</h2>
+  <h2>Policy gate — denials and escalations (24 of 229 total decisions)</h2>
   <table>
     <tr><th>#</th><th>Verdict</th><th>Rule</th><th>Action</th><th>Target</th></tr>
-    <tr><td class='num'>43</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>44</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>45</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>46</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>47</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>48</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>49</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>50</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>51</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>52</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>53</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>54</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>55</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>56</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>57</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>58</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>59</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>60</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>61</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>62</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>63</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>64</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>65</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>66</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>67</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>68</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>69</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>70</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>71</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>72</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>73</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>74</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>75</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>76</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>77</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>78</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>79</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>80</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>81</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>82</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>83</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>84</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>85</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>86</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>87</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>88</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>89</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>90</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>91</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>92</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>93</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>94</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>95</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>96</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>97</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>98</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>99</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>100</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>101</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>102</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr>
+    <tr><td class='num'>55</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>fill</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>56</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>57</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>58</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>59</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>60</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>61</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>62</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>63</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>64</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>65</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>66</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>67</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>68</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>69</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>70</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>71</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>72</td><td><span class='pill DENY'>DENY</span></td><td>P-BUDGET-01</td><td class='sub'>submit</td><td class='sub'>https://quote.mychoice.ca/insurance/car</td></tr><tr><td class='num'>82</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>89</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>132</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>139</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>185</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>192</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr>
+  </table>
+  <p class="sub">Every DENY or ESCALATE decision the gate has made, in full — not a sample. These
+     are the actual rules that produced this build's terminal statuses
+     (P-BUDGET-01, P-HYPO-ATTEST-01, P-HYPO-LICENCE-01).
+     <strong>P-BIND-01 does not appear here by design</strong> — the executor never attempts a
+     purchase action in normal operation, so a real run never reaches one. See
+     <code>make demo</code> for a live, deliberate demonstration of a bind attempt being denied.</p>
+
+  <h2>Policy gate — recent activity (last 30 ALLOW decisions)</h2>
+  <table>
+    <tr><th>#</th><th>Verdict</th><th>Rule</th><th>Action</th><th>Target</th></tr>
+    <tr><td class='num'>199</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>200</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>201</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>202</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>203</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>204</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>205</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>206</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>207</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>208</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>209</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>210</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>211</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>212</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>213</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>214</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>215</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>216</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>217</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>218</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>219</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>220</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>221</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>222</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>223</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>224</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>225</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>226</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>227</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>228</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr>
   </table>
   <p class="sub">Every decision, allow or deny, is appended to a hash-chained log. Verify with
      <code>make verify</code>.</p>

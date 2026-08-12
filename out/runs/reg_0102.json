@@ -4,7 +4,7 @@
   "entry_url": "https://www.mychoice.ca/insurance/car/",
   "status": "unresolved",
   "reason_code": null,
-  "stopping_step": "step 7: could not advance",
+  "stopping_step": "step 4: could not advance",
   "stated_reason": "",
   "premium": null,
   "quote_reference": "",
@@ -126,117 +126,6 @@
         ],
         [
           "vehicle_year",
-          "FILL_FAILED"
-        ]
-      ],
-      "hypotheses": [
-        [
-          "vehicle_year",
-          0.576
-        ]
-      ]
-    },
-    {
-      "step": 5,
-      "url": "https://quote.mychoice.ca/insurance/car",
-      "title": "Get a Quote and Save Money | MyChoice",
-      "fields_seen": [
-        "carYear",
-        "purchaseMonth",
-        "purchaseYear",
-        "parkingLocation",
-        "distanceDaily",
-        "distanceYearly",
-        "policyStartDay",
-        "policyStartMonth",
-        "policyStartYear"
-      ],
-      "fields_filled": [
-        "vehicle_year",
-        "vehicle_year",
-        "parking_location"
-      ],
-      "fields_denied": [
-        [
-          "vehicle_year",
-          "FILL_FAILED"
-        ],
-        [
-          "vehicle_year",
-          "FILL_FAILED"
-        ]
-      ],
-      "hypotheses": [
-        [
-          "vehicle_year",
-          0.576
-        ]
-      ]
-    },
-    {
-      "step": 6,
-      "url": "https://quote.mychoice.ca/insurance/car",
-      "title": "Get a Quote and Save Money | MyChoice",
-      "fields_seen": [
-        "carYear",
-        "purchaseMonth",
-        "purchaseYear",
-        "parkingLocation",
-        "distanceDaily",
-        "distanceYearly",
-        "policyStartDay",
-        "policyStartMonth",
-        "policyStartYear"
-      ],
-      "fields_filled": [
-        "vehicle_year",
-        "vehicle_year",
-        "parking_location"
-      ],
-      "fields_denied": [
-        [
-          "vehicle_year",
-          "FILL_FAILED"
-        ],
-        [
-          "vehicle_year",
-          "FILL_FAILED"
-        ]
-      ],
-      "hypotheses": [
-        [
-          "vehicle_year",
-          0.576
-        ]
-      ]
-    },
-    {
-      "step": 7,
-      "url": "https://quote.mychoice.ca/insurance/car",
-      "title": "Get a Quote and Save Money | MyChoice",
-      "fields_seen": [
-        "carYear",
-        "purchaseMonth",
-        "purchaseYear",
-        "parkingLocation",
-        "distanceDaily",
-        "distanceYearly",
-        "policyStartDay",
-        "policyStartMonth",
-        "policyStartYear"
-      ],
-      "fields_filled": [
-        "vehicle_year",
-        "vehicle_year",
-        "parking_location"
-      ],
-      "fields_denied": [
-        [
-          "vehicle_year",
-          "FILL_FAILED"
-        ],
-        [
-          "vehicle_year",
           "P-BUDGET-01"
         ]
       ],
@@ -250,23 +139,12 @@
   ],
   "modals": [],
   "evidence_cids": [
-    "cid:sha256-bd3ce4f9cc5ad453dbe2af6a594c9b4418bc95c024d309e8a20b784eb6c60d53",
-    "cid:sha256-138f67879d30bea76d15207fe0aab2782ab5e0cb9f841db84829b698f9af0dae",
-    "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
-    "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
-    "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
-    "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
-    "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042"
+    "cid:sha256-a84c8ded91c633c8a3fd6a8ef8b6bd00cbf6496b973ee1c439cbdbe327f2c194",
+    "cid:sha256-8ea46ff1ed4251c9db4199075693e5bf7c42b625d139870f2cba850ea0d70975",
+    "cid:sha256-c9e4b3b4eadc4a51083775aa2feae69009e9cd717fe6d164e43fea6c630d5c32",
+    "cid:sha256-a9282c9bf0ec2c2710ed78d04887bacc086a09660a919894a3571601a7588798"
   ],
   "policy_denials": [
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
     [
       "P-BUDGET-01",
       "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."

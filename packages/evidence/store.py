@@ -12,6 +12,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -21,6 +22,12 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from packages.redactor import redact  # noqa: E402
+
+try:
+    import fcntl
+    _HAS_FLOCK = True
+except ImportError:
+    _HAS_FLOCK = False
 
 GENESIS = "0" * 64
 DEFAULT_EVIDENCE_DIR = _REPO_ROOT / "out" / "evidence"
@@ -56,17 +63,40 @@ class Artifact:
 
 
 class EvidenceStore:
+    """Safe for concurrent multi-process writers — see `packages.policy.audit.AuditLog` for the
+    exact failure this mirrors and fixes: `index = len(self._artifacts)` from a stale in-memory
+    snapshot let two concurrent processes both claim the same index. `append()` now locks and
+    re-reads the file fresh before computing the next index."""
+
     def __init__(self, directory: Path | str | None = None) -> None:
         self.dir = Path(directory) if directory else DEFAULT_EVIDENCE_DIR
         self.index_path = self.dir / "chain.jsonl"
         self.blobs = self.dir / "blobs"
         self._artifacts: list[Artifact] = []
         if self.index_path.exists():
-            for line in self.index_path.read_text(encoding="utf-8").splitlines():
-                if line.strip():
-                    row = json.loads(line)
-                    row["redaction_rules_fired"] = tuple(row["redaction_rules_fired"])
-                    self._artifacts.append(Artifact(**row))
+            self._load()
+
+    def _load(self) -> None:
+        self._artifacts = []
+        for line in self.index_path.read_text(encoding="utf-8").splitlines():
+            if line.strip():
+                row = json.loads(line)
+                row["redaction_rules_fired"] = tuple(row["redaction_rules_fired"])
+                self._artifacts.append(Artifact(**row))
+
+    @contextmanager
+    def _locked(self):
+        if not _HAS_FLOCK:
+            yield
+            return
+        self.dir.mkdir(parents=True, exist_ok=True)
+        lock_path = self.index_path.with_suffix(".lock")
+        with open(lock_path, "a+") as lock_handle:
+            fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
 
     def __len__(self) -> int:
         return len(self._artifacts)
@@ -85,30 +115,35 @@ class EvidenceStore:
         report = redact(content)
         blob = report.text.encode("utf-8")
         cid = "cid:sha256-" + hashlib.sha256(blob).hexdigest()
+        safe_source = redact(source).text
 
-        unsealed = Artifact(
-            index=len(self._artifacts),
-            cid=cid,
-            timestamp=datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            route_id=route_id, profile_id=profile_id, kind=kind,
-            source=redact(source).text,
-            redaction_rules_fired=tuple(report.rules_fired),
-            byte_length=len(blob),
-            prev_hash=self.head,
-            entry_hash="",
-        )
-        sealed = Artifact(**{**unsealed.hashable(),
-                             "redaction_rules_fired": unsealed.redaction_rules_fired,
-                             "entry_hash": unsealed.compute_hash()})
+        with self._locked():
+            if self.index_path.exists():
+                self._load()
 
-        self.blobs.mkdir(parents=True, exist_ok=True)
-        (self.blobs / f"{cid.split('-', 1)[1]}.txt").write_bytes(blob)
-        with self.index_path.open("a", encoding="utf-8") as handle:
-            handle.write(json.dumps({**asdict(sealed),
-                                     "redaction_rules_fired": list(sealed.redaction_rules_fired)},
-                                    sort_keys=True) + "\n")
-        self._artifacts.append(sealed)
-        return sealed
+            unsealed = Artifact(
+                index=len(self._artifacts),
+                cid=cid,
+                timestamp=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                route_id=route_id, profile_id=profile_id, kind=kind,
+                source=safe_source,
+                redaction_rules_fired=tuple(report.rules_fired),
+                byte_length=len(blob),
+                prev_hash=self.head,
+                entry_hash="",
+            )
+            sealed = Artifact(**{**unsealed.hashable(),
+                                 "redaction_rules_fired": unsealed.redaction_rules_fired,
+                                 "entry_hash": unsealed.compute_hash()})
+
+            self.blobs.mkdir(parents=True, exist_ok=True)
+            (self.blobs / f"{cid.split('-', 1)[1]}.txt").write_bytes(blob)
+            with self.index_path.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(
+                    {**asdict(sealed), "redaction_rules_fired": list(sealed.redaction_rules_fired)},
+                    sort_keys=True) + "\n")
+            self._artifacts.append(sealed)
+            return sealed
 
     def fetch(self, cid: str) -> str:
         path = self.blobs / f"{cid.split('-', 1)[1]}.txt"

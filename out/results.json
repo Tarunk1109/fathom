@@ -48,19 +48,20 @@
       "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
     },
     "validity": {
-      "quote_reference_id": "GLF-93784411",
+      "quote_reference_id": "GLF-92401550",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:50+00:00",
       "source_url_or_phone_route": "http://localhost:8801/golf",
       "artifact_cids": [
         "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-        "cid:sha256-269d146ed165212ef5a3b459a651166e74efb45b54690476d505e650854b65e8"
+        "cid:sha256-5f4735a38efd056bc571d41f68615e8b18ad003d816531e4b818e87aafa57179"
       ],
       "artifact_count": 2
     },
-    "decline": {}
+    "decline": {},
+    "sandbox": true
   },
   {
     "result_id": "res_0012",
@@ -99,19 +100,20 @@
       "parity_note": "Coverage matches the benchmark, so the quoted price is the benchmark price."
     },
     "validity": {
-      "quote_reference_id": "FOX-85016827",
+      "quote_reference_id": "FOX-17309511",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:48+00:00",
       "source_url_or_phone_route": "http://localhost:8801/foxtrot",
       "artifact_cids": [
         "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-        "cid:sha256-9ecd6efabb4c62925dacd35395372ebbb69c73aa229fdfbc5835f8736b45a8bf"
+        "cid:sha256-faf8025a1b7b210139cd8ef37ae918c93cf83588d1db9f68f7f137bf49fa3253"
       ],
       "artifact_count": 2
     },
-    "decline": {}
+    "decline": {},
+    "sandbox": true
   },
   {
     "result_id": "res_0001",
@@ -148,8 +150,8 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
-      "source_url_or_phone_route": "https://www.belairdirect.com/en/car-insurance/ontario.html",
+      "timestamp": "2026-08-12T15:04:40+00:00",
+      "source_url_or_phone_route": "https://www.belairdirect.com/en/car-insurance.html",
       "artifact_cids": [
         "cid:sha256-77e059f8027d3bda2a297da89bbcdfbeaffb02ad312f40aa3fc902dce587c4cf",
         "cid:sha256-bbd4115d1696e13ec2df9347ccdd33cf4576d22a5726f50dc17f32d16c30ee69",
@@ -162,7 +164,8 @@
       "reason_code": null,
       "stopping_step": "step 3: no actionable control",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0002",
@@ -199,10 +202,10 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
-      "source_url_or_phone_route": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+      "timestamp": "2026-08-12T15:04:45+00:00",
+      "source_url_or_phone_route": "https://www.rbcinsurance.com/auto-insurance/",
       "artifact_cids": [
-        "cid:sha256-912eb25e80382c5f2b42b459608675a9de2e578ea67cac13f493278833e87a9c"
+        "cid:sha256-287a10c3a376e0026e5f22be571ca4b1da1406e4e27256843e8af335b15135f5"
       ],
       "artifact_count": 1
     },
@@ -210,10 +213,9 @@
       "stated_reason_redacted": "",
       "reason_code": null,
       "stopping_step": "step 1: no actionable control",
-      "policy_rules_fired": [
-        "P-BUDGET-01"
-      ]
-    }
+      "policy_rules_fired": []
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0003",
@@ -250,21 +252,21 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
-      "source_url_or_phone_route": "https://www.desjardins.com/en/insurance/auto.html",
+      "timestamp": "2026-08-12T15:05:48+00:00",
+      "source_url_or_phone_route": "https://www.desjardins.com/ca/personal/insurance/car/",
       "artifact_cids": [
-        "cid:sha256-29ff596c6b6afea5e7f8efcf31f2637c88296adc3f992eaaeedeedff6ac784bc",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-        "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-        "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-        "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-        "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-        "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-        "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917"
+        "cid:sha256-b21c78bf2557c56405019587de2ecdea7d06898d8051128cf2b5432f3b3420b8",
+        "cid:sha256-dc9fbc87c3034068ef0997081bc19e3802c0d8920a4cc9cc6ddb4ba01f5898e0",
+        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a"
       ],
       "artifact_count": 12
     },
@@ -273,7 +275,8 @@
       "reason_code": null,
       "stopping_step": "exhausted 12 steps",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0004",
@@ -310,10 +313,10 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:07:34+00:00",
       "source_url_or_phone_route": "https://rates.ca/insurance-quotes/auto/ontario",
       "artifact_cids": [
-        "cid:sha256-ff2a27e0fa13994ada861e4c2677973993a2b89c5293d8637f0d9ac3e957df02"
+        "cid:sha256-fc7b2bb923e2ed69189c21cb6a08048de61438788660c2561e904ed409ccb271"
       ],
       "artifact_count": 1
     },
@@ -322,7 +325,8 @@
       "reason_code": "RC_ACCESS_CONTROL",
       "stopping_step": "step 1: bot check",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0005",
@@ -359,10 +363,10 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:07:35+00:00",
       "source_url_or_phone_route": "https://www.lowestrates.ca/insurance/auto",
       "artifact_cids": [
-        "cid:sha256-add5048485a0e4b617e8b65bc5adbc19f937e729686eca8eb7ceeb5c74c6fd99"
+        "cid:sha256-deeea6dbfe9e8ee6a35df6b5e560780cf62f8e96906bd742440948ad0eacb4fc"
       ],
       "artifact_count": 1
     },
@@ -371,7 +375,8 @@
       "reason_code": "RC_ACCESS_CONTROL",
       "stopping_step": "step 1: bot check",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0006",
@@ -408,27 +413,25 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:07:38+00:00",
       "source_url_or_phone_route": "https://www.mychoice.ca/insurance/car/",
       "artifact_cids": [
-        "cid:sha256-bd3ce4f9cc5ad453dbe2af6a594c9b4418bc95c024d309e8a20b784eb6c60d53",
-        "cid:sha256-138f67879d30bea76d15207fe0aab2782ab5e0cb9f841db84829b698f9af0dae",
-        "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
-        "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
-        "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042",
-        "cid:sha256-e6e5ce8c54c2ba6783f0ca7e2bc5a0b318c00025f6e9ee4e91644c3270715b27",
-        "cid:sha256-d21c6ab73413d431080a93820783d02a30b859c60af6e4a8f29f5c4afbd90042"
+        "cid:sha256-a84c8ded91c633c8a3fd6a8ef8b6bd00cbf6496b973ee1c439cbdbe327f2c194",
+        "cid:sha256-8ea46ff1ed4251c9db4199075693e5bf7c42b625d139870f2cba850ea0d70975",
+        "cid:sha256-c9e4b3b4eadc4a51083775aa2feae69009e9cd717fe6d164e43fea6c630d5c32",
+        "cid:sha256-a9282c9bf0ec2c2710ed78d04887bacc086a09660a919894a3571601a7588798"
       ],
-      "artifact_count": 7
+      "artifact_count": 4
     },
     "decline": {
       "stated_reason_redacted": "",
       "reason_code": null,
-      "stopping_step": "step 7: could not advance",
+      "stopping_step": "step 4: could not advance",
       "policy_rules_fired": [
         "P-BUDGET-01"
       ]
-    }
+    },
+    "sandbox": false
   },
   {
     "result_id": "res_0007",
@@ -465,7 +468,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:37+00:00",
       "source_url_or_phone_route": "http://localhost:8801/alpha",
       "artifact_cids": [
         "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
@@ -483,7 +486,8 @@
         "P-HYPO-ATTEST-01",
         "P-HYPO-LICENCE-01"
       ]
-    }
+    },
+    "sandbox": true
   },
   {
     "result_id": "res_0008",
@@ -520,7 +524,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:41+00:00",
       "source_url_or_phone_route": "http://localhost:8801/bravo",
       "artifact_cids": [
         "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
@@ -533,7 +537,8 @@
       "reason_code": "RC_ACCESS_CONTROL",
       "stopping_step": "step 2: bot check",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": true
   },
   {
     "result_id": "res_0009",
@@ -570,7 +575,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:43+00:00",
       "source_url_or_phone_route": "http://localhost:8801/charlie",
       "artifact_cids": [
         "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
@@ -583,7 +588,8 @@
       "reason_code": "RC_HUMAN_REQUIRED",
       "stopping_step": "step 2: callback only",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": true
   },
   {
     "result_id": "res_0010",
@@ -620,7 +626,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:44+00:00",
       "source_url_or_phone_route": "http://localhost:8801/delta",
       "artifact_cids": [
         "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
@@ -632,7 +638,8 @@
       "reason_code": null,
       "stopping_step": "step 1: could not advance",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": true
   },
   {
     "result_id": "res_0011",
@@ -669,7 +676,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": null,
+      "timestamp": "2026-08-12T15:12:46+00:00",
       "source_url_or_phone_route": "http://localhost:8801/echo",
       "artifact_cids": [
         "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947"
@@ -681,6 +688,7 @@
       "reason_code": null,
       "stopping_step": "step 1: could not advance",
       "policy_rules_fired": []
-    }
+    },
+    "sandbox": true
   }
 ]

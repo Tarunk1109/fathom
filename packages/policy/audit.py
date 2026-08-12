@@ -28,10 +28,17 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse, urlunparse
+
+try:
+    import fcntl
+    _HAS_FLOCK = True
+except ImportError:  # Windows has no fcntl; single-process use still works correctly.
+    _HAS_FLOCK = False
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(_REPO_ROOT) not in sys.path:  # no packaging in this repo; imports are path-based
@@ -187,7 +194,19 @@ def verify_entries(entries: list[AuditEntry]) -> ChainVerification:
 
 
 class AuditLog:
-    """Append-only JSONL log. Existing entries are read but never rewritten."""
+    """Append-only JSONL log. Existing entries are read but never rewritten.
+
+    Safe for concurrent multi-process writers.
+
+    Found the hard way: two separate `run_route.py` invocations writing to the same default path
+    at nearly the same wall-clock moment both computed `index = len(self._entries)` from their own
+    in-memory snapshot, taken once at construction, and produced two entries claiming the same
+    index — a genuine chain break (`verify_chain()` caught it: "index is 118, expected 119"), not
+    tampering. `append()` now holds an OS file lock (`fcntl.flock`, exclusive, blocking) across the
+    entire read-current-state-then-write sequence, and re-reads the file fresh under that lock
+    rather than trusting a stale in-memory count — so a process that has been idle while another
+    process appended entries picks up the correct next index before computing its own.
+    """
 
     def __init__(self, path: Path | str | None = None) -> None:
         self.path = Path(path) if path is not None else DEFAULT_AUDIT_PATH
@@ -201,6 +220,25 @@ class AuditLog:
                 line = line.strip()
                 if line:
                     self._entries.append(AuditEntry.from_dict(json.loads(line)))
+
+    @contextmanager
+    def _locked(self):
+        """Exclusive OS-level lock scoped to this path, held across read+write.
+
+        Blocking, not try-and-fail: a concurrent writer waits its turn rather than racing. No-op
+        on platforms without fcntl (Windows) — single-process use is unaffected either way.
+        """
+        if not _HAS_FLOCK:
+            yield
+            return
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = self.path.with_suffix(self.path.suffix + ".lock")
+        with open(lock_path, "a+") as lock_handle:
+            fcntl.flock(lock_handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(lock_handle.fileno(), fcntl.LOCK_UN)
 
     @property
     def entries(self) -> list[AuditEntry]:
@@ -228,30 +266,38 @@ class AuditLog:
         explanation: str,
         timestamp: str | None = None,
     ) -> AuditEntry:
-        index = len(self._entries)
-        unsealed = AuditEntry(
-            index=index,
-            timestamp=timestamp or datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            session_id=session_id,
-            route_id=route_id,
-            profile_id=profile_id,
-            action_kind=action_kind,
-            target_safe=safe_target(target),
-            payload_fields=payload_field_names(payload),
-            payload_digest=payload_digest(payload),
-            rationale_redacted=redact_text(rationale, MAX_RATIONALE_CHARS),
-            verdict=verdict,
-            rule_id=rule_id,
-            explanation=explanation,
-            prev_hash=self.head_hash,
-            entry_hash="",
-        )
-        sealed = AuditEntry(**{**unsealed.hashable(),
-                               "payload_fields": unsealed.payload_fields,
-                               "entry_hash": unsealed.compute_hash()})
-        self._entries.append(sealed)
-        self._persist(sealed)
-        return sealed
+        with self._locked():
+            # Refresh from disk under the lock — another process may have appended since this
+            # object was constructed or last wrote. Trusting the in-memory count here is exactly
+            # the bug that produced the duplicate-index chain break.
+            if self.path.exists():
+                self._entries = []
+                self._load()
+
+            index = len(self._entries)
+            unsealed = AuditEntry(
+                index=index,
+                timestamp=timestamp or datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                session_id=session_id,
+                route_id=route_id,
+                profile_id=profile_id,
+                action_kind=action_kind,
+                target_safe=safe_target(target),
+                payload_fields=payload_field_names(payload),
+                payload_digest=payload_digest(payload),
+                rationale_redacted=redact_text(rationale, MAX_RATIONALE_CHARS),
+                verdict=verdict,
+                rule_id=rule_id,
+                explanation=explanation,
+                prev_hash=self.head_hash,
+                entry_hash="",
+            )
+            sealed = AuditEntry(**{**unsealed.hashable(),
+                                   "payload_fields": unsealed.payload_fields,
+                                   "entry_hash": unsealed.compute_hash()})
+            self._entries.append(sealed)
+            self._persist(sealed)
+            return sealed
 
     def _persist(self, entry: AuditEntry) -> None:
         self.path.parent.mkdir(parents=True, exist_ok=True)

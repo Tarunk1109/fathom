@@ -1,0 +1,219 @@
+Car
+Home
+Life
+Learn
+Car Insurance Quote
+
+Your postal code: [REDACTED:PC_FULL_POSTAL]
+
+Clear Form
+Vehicle
+Driver
+Discount
+Estimated 3 minutes to complete
+Vehicle 1
+Add a Vehicle
+Give us the scoop on your four-wheeled friend.
+Car Year
+Select Year
+2026
+2025
+2024
+2023
+2022
+2021
+2020
+2019
+2018
+2017
+2016
+2015
+2014
+2013
+2012
+2011
+2010
+2009
+2008
+2007
+2006
+2005
+2004
+2003
+2002
+2001 or older
+Car Manufacturer
+Select a Make
+CHEVROLET
+DODGE/RAM
+FORD
+HONDA
+HYUNDAI
+KIA
+MAZDA
+NISSAN
+TOYOTA
+VOLKSWAGEN
+ACURA
+ALFA ROMEO
+ASTON MARTIN
+AUDI
+BENTLEY
+BMW
+BUICK
+CADILLAC
+CHRYSLER
+FERRARI
+FIAT
+GENESIS
+GMC
+INFINITI
+JAGUAR
+JEEP
+KARMA
+LAMBORGHINI
+LAND ROVER
+LEXUS
+LINCOLN
+MASERATI
+MCLAREN
+MERCEDES-BENZ
+MINI
+MITSUBISHI
+PORSCHE
+ROLLS ROYCE
+SMART
+SUBARU
+TESLA
+VOLVO
+Was this car new or used when you bought it?
+New
+Used
+Is this car owned/financed or leased?
+Leased
+Owned
+When did you buy this car?
+Month
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+Year
+2026
+2025
+2024
+2023
+2022
+2021
+2020
+2019
+2018
+Does your car have winter tires?
+Yes
+No
+Where do you keep your car overnight?
+Select from the list
+Private Garage
+Private Driveway
+Underground Parking
+Parking Lot
+Carport
+Indoor Storage
+Street
+Other
+What do you mainly use your car for?
+Personal
+Business
+How far is your 1-way commute to work or school?
+Select
+1KM or Less
+2KM
+5KM
+7KM
+10KM
+15KM
+20KM
+30KM
+40KM
+50KM
+60KM
+70KM
+80KM
+90KM
+100KM
+150KM
+200KM
+How many total kilometers are driven each year?
+Select
+500KM
+1,000KM
+2,000KM
+3,000KM
+5,000KM
+8,000KM
+10,000KM
+15,000KM
+20,000KM
+30,000KM
+50,000KM
+60,000KM
+80,000KM
+100,000KM
+What is the ideal start date for your new insurance policy?
+Day
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+Month
+August
+September
+October
+November
+Year
+2026
+Accident Benefits
+Changes to Your Accident Benefits Selections (Effective July 1, 2026)
+
+As of July 1, 2026, significant changes have been made to the Accident Benefits coverage in Ontario. Many benefits that were previously included are now optional. Our standard quote automatically includes all optional accident benefits at their minimum coverage limits.
+
+Standard Mandatory Accident Benefits + Optional Enhancements
+
+Maximum coverage with flexibility to remove additional benefits.
+
+Selecting this option will open a window displaying all available optional Accident Benefits, which you may individually select based on your needs. Each selected benefit will be quoted at its minimum limit.
+
+›
+Do you want your insurance to have either comprehensive, collision coverage or both?
+Comprehensive Coverage
+Yes
+No
+Collision Coverage
+Yes
+No
+Add a Vehicle
+Next
+We compare rates from Canada's top providers, including:

@@ -19,7 +19,8 @@
       "fingerprint": {
         "underwriter_disclosed": "Sonnet Insurance Company"
       },
-      "automation_notes": "Journey order: Province -> Get started -> Vehicles -> Driver details -> Other drivers -> Assign drivers. Address-validation modal on the Vehicles step ('Heads up! ... mixed use residence', Cancel/Okay) \u2014 a naive executor hangs on it. Fraud-acknowledgement checkbox tied to address accuracy on the same step. Driver's licence number mandatory and case sensitive at Driver details -> Your Information."
+      "automation_notes": "Journey order: Province -> Get started -> Vehicles -> Driver details -> Other drivers -> Assign drivers. Address-validation modal on the Vehicles step ('Heads up! ... mixed use residence', Cancel/Okay) \u2014 a naive executor hangs on it. Fraud-acknowledgement checkbox tied to address accuracy on the same step. Driver's licence number mandatory and case sensitive at Driver details -> Your Information.",
+      "evidence_artifact": "cid:sha256-14216cc8eb1d6e18dc6d6d39a81444dee7a020384168899028216ad275fb72fd"
     },
     {
       "registry_id": "reg_0002",

@@ -66,6 +66,12 @@ class RegistryRecord:
     source_url: str = ""
     last_verified_at: str = ""
     evidence_artifact: str = ""
+
+    #: §8.3 field. The Rate Filing Radar (§10.5) that would populate this from the regulator's
+    #: published approved-change dataset was deferred (see docs/LIMITATIONS.md). Explicitly null
+    #: on every row rather than omitted, so the schema is complete and the gap is checkable.
+    rate_filing_delta: dict | None = None
+
     fingerprint: Fingerprint = field(default_factory=Fingerprint)
     signals_agreeing: int = 0
     dedup_hypothesis_with: str = ""
@@ -195,34 +201,90 @@ class MarketRegistry:
     # -- metrics ------------------------------------------------------------------------
 
     def metrics(self) -> dict:
-        """§11.9, with denominators visible. Unresolved stays in every denominator."""
+        """§11.9's five metrics, exactly as specified, with denominators visible.
+
+        Two granularities, by design — this mirrors the spec's own wording, not a simplification:
+
+        - **Market completion** and **comparable quote yield** are computed over *distinct rate
+          sources* ("verified applicable rate sources"), because that is literally what §11.9
+          names as their denominator. A rate source counts as "applicable" once at least one of
+          its member brands/entities has actually been attempted (excludes rate sources that are
+          purely `reconnaissance_pending` appendix rows nobody has touched yet). It counts as
+          meeting the numerator once at least one member achieved that outcome.
+        - **Evidence rate**, **duplicate suppression** and **freshness** are computed over
+          *records* (outcomes / brands / registry rows respectively), per §11.9's own wording for
+          each.
+
+        Unresolved stays in every denominator — it is never excluded or reclassified.
+        """
         market = [r for r in self.records.values() if not r.is_synthetic]
         total = len(market)
-        pending = [r for r in market if r.status == "reconnaissance_pending"]
-        applicable = [r for r in market if r.status != "reconnaissance_pending"]
+
+        # "Never attempted" is two things, not one string. `reconnaissance_pending` is FATHOM's
+        # own convention for a route it knows about but has not yet run. `requires_current_
+        # validation` marks an Appendix A discovery-seed row that loads with status="unresolved"
+        # by explicit operator instruction — its status field must read "unresolved" in every
+        # export, but it was never attempted either, and counting 45 of those as "applicable"
+        # would silently drag market completion, evidence rate and freshness down as if they
+        # were failed attempts rather than untouched appendix rows. Both are excluded from the
+        # "applicable" (attempted) set for METRICS purposes only; the exported status is untouched.
+        never_attempted = lambda r: r.status == "reconnaissance_pending" or r.requires_current_validation
+        pending = [r for r in market if never_attempted(r)]
+        applicable = [r for r in market if not never_attempted(r)]
         evidenced = [r for r in applicable if r.evidence_artifact and r.last_verified_at]
-        comparable = [r for r in applicable if r.status == "quoted_comparable"]
-        terminal = [r for r in applicable if r.status not in ("unresolved", "")]
-        groups = {r.distinct_rate_source_id for r in market if r.distinct_rate_source_id}
         merged = sum(1 for r in market if r.signals_agreeing >= 2)
+
+        # Rate-source-level denominator for market completion / comparable quote yield.
+        applicable_rate_sources = {r.distinct_rate_source_id for r in applicable
+                                   if r.distinct_rate_source_id}
+        by_rate_source: dict[str, list] = {}
+        for r in applicable:
+            by_rate_source.setdefault(r.distinct_rate_source_id, []).append(r)
+
+        rate_sources_with_evidenced_terminal = {
+            rs for rs, members in by_rate_source.items()
+            if any(m.status not in ("unresolved", "") and m.evidence_artifact and m.last_verified_at
+                  for m in members)
+        }
+        rate_sources_with_comparable = {
+            rs for rs, members in by_rate_source.items()
+            if any(m.status == "quoted_comparable" for m in members)
+        }
+
+        all_rate_sources = {r.distinct_rate_source_id for r in market if r.distinct_rate_source_id}
 
         def ratio(num: int, den: int) -> str:
             return f"{num}/{den}" + (f" ({num / den:.0%})" if den else " (n/a)")
 
         return {
-            "verified_applicable_rate_sources": len(groups),
+            "verified_applicable_rate_sources": len(applicable_rate_sources),
+            "distinct_rate_sources_total": len(all_rate_sources),
             "records_total": total,
             "records_attempted": len(applicable),
-            "records_reconnaissance_pending": len(pending),
-            "market_completion": ratio(len(terminal), len(applicable)),
-            "comparable_quote_yield": ratio(len(comparable), len(applicable)),
+            "records_never_attempted": len(pending),
+            "records_never_attempted_reconnaissance_pending": sum(
+                1 for r in pending if r.status == "reconnaissance_pending"),
+            "records_never_attempted_appendix_unvalidated": sum(
+                1 for r in pending if r.requires_current_validation),
+            "market_completion": ratio(len(rate_sources_with_evidenced_terminal),
+                                       len(applicable_rate_sources)),
+            "comparable_quote_yield": ratio(len(rate_sources_with_comparable),
+                                            len(applicable_rate_sources)),
             "evidence_rate": ratio(len(evidenced), len(applicable)),
             "duplicate_suppression": ratio(merged, total),
             "freshness": ratio(sum(1 for r in applicable if r.last_verified_at), len(applicable)),
             "synthetic_records_excluded": len(self.records) - len(market),
             "denominator_note": (
-                "reconnaissance_pending routes were never attempted and are reported separately "
-                "rather than counted as failures. Unresolved routes stay in every denominator."
+                "Market completion and comparable quote yield are computed over distinct rate "
+                "sources that have been attempted ('verified applicable rate sources'), per §11.9. "
+                "Evidence rate, duplicate suppression and freshness are computed over records. "
+                "Records never attempted — either FATHOM's own reconnaissance_pending routes, or "
+                "Appendix A discovery-seed rows carrying requires_current_validation=true (whose "
+                "exported status field reads 'unresolved' by explicit instruction, not because an "
+                "attempt was made) — are excluded from these denominators and reported separately, "
+                "rather than counted as failed attempts. A route FATHOM did attempt and could not "
+                "resolve keeps status 'unresolved' and stays in every denominator; that is a "
+                "different thing from a row nobody has touched yet."
             ),
         }
 
@@ -240,17 +302,30 @@ class MarketRegistry:
         path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
         return path
 
+    #: §8.3's full field set (this build's operative registry schema — see docs/DECISIONS.md
+    #: DL-16/DL-21 on why "Appendix B" from the hackathon brief could not be used verbatim: that
+    #: document was never present in this session). Every column present on every row; genuinely
+    #: unknown values are empty rather than omitted, so the schema's completeness is checkable.
+    CSV_COLUMNS = [
+        "registry_id", "legal_underwriter", "insurer_group", "brand_or_program",
+        "distribution_type", "product_scope", "distinct_rate_source_id", "signals_agreeing",
+        "dedup_hypothesis_with", "quote_url", "public_phone_route", "licensed_intermediary",
+        "requirements", "automation_notes", "status", "reason_code", "source_url",
+        "last_verified_at", "evidence_artifact", "rate_filing_delta",
+        "underwriter_disclosed", "quote_id_grammar", "form_set_hash", "premium_at_benchmark",
+        "regulatory_amalgamation", "appendix_group", "appendix_legal_name",
+        "requires_current_validation", "is_synthetic",
+    ]
+
     def export_csv(self, path: Path | str) -> Path:
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
-        columns = ["registry_id", "legal_underwriter", "insurer_group", "brand_or_program",
-                   "distribution_type", "product_scope", "distinct_rate_source_id",
-                   "signals_agreeing", "dedup_hypothesis_with", "status", "reason_code",
-                   "quote_url", "source_url", "last_verified_at", "evidence_artifact",
-                   "automation_notes"]
         with path.open("w", newline="", encoding="utf-8") as handle:
-            writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
+            writer = csv.DictWriter(handle, fieldnames=self.CSV_COLUMNS, extrasaction="ignore")
             writer.writeheader()
             for record in sorted(self.records.values(), key=lambda r: r.registry_id):
-                writer.writerow(record.to_dict())
+                row = record.to_dict()
+                row.update(row.pop("fingerprint"))  # flatten for CSV
+                row["requirements"] = ";".join(row.get("requirements") or [])
+                writer.writerow(row)
         return path

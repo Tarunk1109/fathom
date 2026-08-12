@@ -64,6 +64,11 @@ class NormalizedResult:
     evidence: dict
     decline: dict
 
+    #: True for results from the local synthetic sandbox (§11.5), never a real destination.
+    #: An explicit field, not a naming convention — finish.md §3.4 requires this to be checkable
+    #: without parsing route_id strings, so `sandbox: false` on a real result is itself a claim.
+    sandbox: bool = False
+
     def to_dict(self) -> dict:
         data = asdict(self)
         return data
@@ -120,7 +125,8 @@ def assess(status: str, variances: list[str], codes: list[str],
 
 
 def normalize(run, *, result_id: str, registry_id: str, rate_source_id: str,
-              channel: str = "web") -> NormalizedResult:
+              channel: str = "web", sandbox: bool = False,
+              timestamp: str = "") -> NormalizedResult:
     """Map an executor `RunResult` into the §8.4 schema."""
     variances, codes = ([], []) if run.premium is None else compare_to_benchmark(run.coverage)
 
@@ -158,11 +164,15 @@ def normalize(run, *, result_id: str, registry_id: str, rate_source_id: str,
         validity={"quote_reference_id": run.quote_reference,
                   "verification_may_change_premium": True},
         evidence={
-            "timestamp": None,
+            # Sourced from the actual evidence artifact's capture time, not a call-time
+            # timestamp — the number here should trace to real evidence, not to when this
+            # function happened to run (§15.1: every outcome needs a timestamp and evidence).
+            "timestamp": timestamp or None,
             "source_url_or_phone_route": run.entry_url,
             "artifact_cids": list(run.evidence_cids),
             "artifact_count": len(run.evidence_cids),
         },
+        sandbox=sandbox,
         decline={
             "stated_reason_redacted": run.stated_reason,
             "reason_code": run.reason_code,

@@ -205,15 +205,24 @@ as an assertion.
 
 ## Controls that failed open, and were caught
 
-Three worked examples of a control behaving wrongly under real conditions rather than under the
+Four worked examples of a control behaving wrongly under real conditions rather than under the
 scenario it was designed for. Each is a submission asset, not an embarrassment: it demonstrates the
-system was actually run against real content, not only unit-tested against invented fixtures.
+system was actually run against real content and real operational conditions, not only
+unit-tested against invented fixtures.
 
 | # | What failed open | How it was caught | Fix |
 | --- | --- | --- | --- |
 | 1 | The PII sweep's `allow-file` pragma was honoured anywhere in a file, so a test file that merely *discussed* the pragma in a string granted itself a file-wide allowance it never intended | `tests/test_profiles.py` acquired an unintended `STREET_ADDRESS` allowance from its own test body, caught by reading the sweep's own report output | `allow-file` is now honoured only in the first 20 lines of a file (its header). A test asserts this test file grants itself nothing |
 | 2 | `PHONE_NANP` and `PAYMENT_CARD` used digit-only lookaround boundaries, so a sha256 hex digest — which contains 10- and 16-digit runs flanked by hex letters — matched both rules | 19 false-positive findings on the first real policy audit log, before it could be committed | Boundaries changed from `(?<!\d)` to `(?<![A-Za-z0-9])` on both rules |
 | 3 | The price reader had no concept of whether a submission had occurred, and believed any dollar-shaped figure on any page | A live run against MyChoice.ca returned `$177.83` sourced from marketing copy, with zero fields filled — caught by inspecting the run before it was written to `out/results.json` | See "Worked example: the fabricated premium" above |
+| 4 | `AuditLog.append()` and `EvidenceStore.append()` computed the next entry's `index` from an in-memory count taken once at construction. Under concurrent multi-process writers — two background route runs launched close together — both processes read the same starting count and both appended an entry claiming the same index | `scripts/verify_chain.py` reported the chain broken: `index is 118, expected 119`. Direct inspection of the raw log confirmed two entries at position 119 with duplicate `index=118`, timestamped seconds apart from two different route runs — a genuine race, not tampering; every individual entry's hash was internally valid | Both classes now hold an exclusive OS file lock across the entire read-current-state-then-write sequence and re-read the file fresh under that lock. Verified against a real 6-process, 240-write concurrent stress test (`tests/test_audit_concurrency.py`). The corrupted historical log is archived, unmodified, at `out/audit/archive/`, with a full account — never distributed as a deliverable |
+
+**#4 is the most serious of the four**, because it is the one that could have shipped invisibly.
+A judge running `make verify` on the corrupted log would have seen `chain BROKEN` — the failure
+was loud, not silent — but it was found only because the final integrity pass actually ran the
+verifier against a log produced under this project's real, messy, concurrent development process,
+rather than against a clean single-process demo run. That is the same argument this whole table
+makes: test the thing that actually happened, not only the thing you expected to happen.
 
 ---
 
