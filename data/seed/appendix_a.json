@@ -444,13 +444,13 @@
       "brand_or_program": "Desjardins Insurance",
       "distribution_type": "agent",
       "product_scope": "standard_PPA",
-      "status": "reconnaissance_pending",
+      "status": "unresolved",
       "source_url": "https://www.desjardins.com/en/insurance/auto.html",
       "last_verified_at": "2026-08-12T00:00:00+00:00",
       "quote_url": "https://www.desjardins.com/en/insurance/auto.html",
+      "automation_notes": "D-URLS retry, 2026-08-12: https://www.desjardins.com/ca/personal/insurance/car/, 12 steps, 7 fields filled, did not reach a terminal state within the step budget. 12 evidence artifacts captured \u2014 the deepest real-route run in this build. | UNVERIFIED GUIDANCE from the Appendix A discovery seed (2026-08-06): Desjardins web/agent; The Personal affinity",
       "appendix_group": "Desjardins",
-      "appendix_legal_name": "Certas Home and Auto Insurance Company",
-      "automation_notes": "UNVERIFIED GUIDANCE from the Appendix A discovery seed (2026-08-06): Desjardins web/agent; The Personal affinity"
+      "appendix_legal_name": "Certas Home and Auto Insurance Company"
     },
     {
       "registry_id": "reg_0060",
@@ -574,16 +574,16 @@
       "brand_or_program": "belairdirect",
       "distribution_type": "direct",
       "product_scope": "standard_PPA",
-      "status": "reconnaissance_pending",
+      "status": "unresolved",
       "source_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
       "last_verified_at": "2026-08-12T00:00:00+00:00",
       "quote_url": "https://www.belairdirect.com/en/car-insurance/ontario.html",
       "fingerprint": {
         "underwriter_disclosed": "Belair Insurance Company Inc."
       },
+      "automation_notes": "D-URLS retry, 2026-08-12: https://www.belairdirect.com/en/car-insurance.html, 3 steps, 0 fields filled, stopped with no actionable control detected. The executor's link/button matching did not locate a quote-entry control on this page layout \u2014 a capability limitation of this build's ontology matching, not an observed market signal. 3 evidence artifacts captured. | UNVERIFIED GUIDANCE from the Appendix A discovery seed (2026-08-06): belairdirect direct; Intact and Jevco broker; validate legacy/affinity entities",
       "appendix_group": "Intact",
-      "appendix_legal_name": "Belair Insurance Company Inc.",
-      "automation_notes": "UNVERIFIED GUIDANCE from the Appendix A discovery seed (2026-08-06): belairdirect direct; Intact and Jevco broker; validate legacy/affinity entities"
+      "appendix_legal_name": "Belair Insurance Company Inc."
     },
     {
       "registry_id": "reg_222",
@@ -1044,10 +1044,11 @@
       "brand_or_program": "RBC Insurance",
       "distribution_type": "direct",
       "product_scope": "standard_PPA",
-      "status": "reconnaissance_pending",
+      "status": "unresolved",
       "source_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
       "last_verified_at": "2026-08-12T00:00:00+00:00",
-      "quote_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/"
+      "quote_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+      "automation_notes": "D-URLS retry, 2026-08-12: https://www.rbcinsurance.com/auto-insurance/, 1 step, a \"Privacy & Security\" modal was encountered and logged (not dismissed \u2014 no matching dismiss-text button found), then no actionable control detected. 1 evidence artifact captured."
     },
     {
       "registry_id": "reg_0005",

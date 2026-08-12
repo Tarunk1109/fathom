@@ -48,7 +48,7 @@ unhook:
 # --- Milestone 4+ ---------------------------------------------------------------------
 VENV ?= .venv/bin/python
 
-.PHONY: sandbox run approve ui
+.PHONY: sandbox run approve ui demo-fabrication
 sandbox:
 	@$(VENV) sandbox/server.py
 
@@ -60,3 +60,6 @@ approve:
 
 ui: run
 	@open ui/index.html 2>/dev/null || echo "open ui/index.html"
+
+demo-fabrication:
+	@$(VENV) scripts/demo_fabrication.py

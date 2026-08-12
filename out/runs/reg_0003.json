@@ -1,7 +1,7 @@
 {
   "route_id": "rt_reg_0003",
   "profile_id": "profile_hypo_clean",
-  "entry_url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+  "entry_url": "https://www.rbcinsurance.com/auto-insurance/",
   "status": "unresolved",
   "reason_code": null,
   "stopping_step": "step 1: no actionable control",
@@ -12,99 +12,26 @@
   "steps": [
     {
       "step": 1,
-      "url": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
-      "title": "Car Insurance Ontario \u2013 Free Online Auto Insurance Quote | RBC Insurance",
+      "url": "https://www.rbcinsurance.com/auto-insurance/",
+      "title": "RBC Insurance - The requested document could not be found on our website",
       "fields_seen": [],
       "fields_filled": [],
       "fields_denied": [],
       "hypotheses": []
     }
   ],
-  "modals": [],
+  "modals": [
+    {
+      "step": 1,
+      "url": "https://www.rbcinsurance.com/auto-insurance/",
+      "text": "Privacy & Security",
+      "dismissed": false,
+      "dismissed_via": ""
+    }
+  ],
   "evidence_cids": [
-    "cid:sha256-912eb25e80382c5f2b42b459608675a9de2e578ea67cac13f493278833e87a9c"
+    "cid:sha256-287a10c3a376e0026e5f22be571ca4b1da1406e4e27256843e8af335b15135f5"
   ],
-  "policy_denials": [
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ],
-    [
-      "P-BUDGET-01",
-      "Route 'rt_reg_0003' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-    ]
-  ],
+  "policy_denials": [],
   "pending_block": null
 }

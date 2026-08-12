@@ -1,0 +1,8 @@
+{
+  "source_url": "https://www.mychoice.ca/insurance/car/",
+  "cid": "cid:sha256-a84c8ded91c633c8a3fd6a8ef8b6bd00cbf6496b973ee1c439cbdbe327f2c194",
+  "captured_at": "2026-08-12T14:42:23+00:00",
+  "route_id": "rt_reg_0102",
+  "profile_id": "profile_hypo_clean",
+  "note": "Recaptured 2026-08-12 for the fabrication-incident demo. The literal byte-identical artifact from the original 2026-08-11 run that produced the $177.83 misread was not retained: the evidence chain was reset between runs during active development, before this incident was elevated to a permanent fixture. This capture reproduces the same live page and the same failure CLASS on the same real, unmodified MyChoice landing page: a recent-quotes marketing ticker showing decimal-formatted dollar figures ($223.50, $243.08, $490.75, $189.83) for OTHER, unrelated example applicants, displayed before any form field was ever filled. No number in this fixture was invented by FATHOM \u2014 every figure is MyChoice's own marketing copy, captured live."
+}

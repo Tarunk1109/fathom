@@ -104,31 +104,127 @@ are live but read session state a later milestone populates.
 ### Day 0 probe conduct
 
 The viability probe (§5) runs by hand, with the operator's own real information, and stops at the
-first wall on every route. No automation touched a real insurer. Per OQ-004, **no screenshots were
-taken**: the local vision redactor does not exist until Milestone 3, §2.1 makes an unredacted
-screenshot a hard failure, and verbatim redacted quotes satisfy the evidence requirement on their
-own.
+first wall on every route. No automation touched a real insurer during the probe. Per OQ-004, **no
+screenshots were taken**: the local vision redactor was never built (see below), §2.1 makes an
+unredacted screenshot a hard failure, and verbatim redacted quotes satisfy the evidence requirement
+on their own.
+
+### The vault, evidence chain and redactor (Milestone 3)
+
+- **Vault:** Fernet symmetric encryption, key held at `~/.fathom/vault.key` (0600), outside the
+  repository. `inject()` returns values wrapped in `FieldValue(value, source_profile_id)` — never a
+  raw string into a payload — so anything the vault supplies is provenanced and
+  `P-PROFILE-BLEED-01` can see it. `value_hashes()` exposes hashes only, so the profile registry can
+  detect an operator value pasted into a synthetic profile without ever handling the plaintext.
+- **Evidence chain:** sha256 content address of *redacted* bytes, prev-hash chained, append-only
+  JSONL — the same construction as the policy audit chain, for the same reason. `append()` runs the
+  redactor itself; there is no code path that stores a raw byte.
+- **Redactor:** regex only, reusing the PII sweep's rule set so detection and redaction cannot
+  drift apart (DL-04). **No vision model was built.** Screenshots are excluded from the submission
+  per OQ-004, so vision redaction has no consumer — a real scope decision, not an oversight, made
+  and logged as DL-04 in `docs/DECISIONS.md`.
+
+### Profile bleed — INC-001 and its rules (Milestone 3)
+
+On 2026-08-09, during a hand-driven hypothetical-profile pass, a real third-party address was
+entered mid-journey and an address-accuracy attestation checkbox was ticked. Nothing was submitted.
+Root cause: a hypothetical profile was populated with real-world data, and no gate covered the
+mixing because it happened outside the system entirely.
+
+Three rules close this, all live and tested:
+
+- **`P-PROFILE-BLEED-01`** — every submitted field carries a `source_profile_id`; a single action
+  must resolve to exactly one profile, or it is denied and both profiles are named in the denial.
+- **`P-HYPO-ATTEST-01`** — no accuracy, truthfulness or fraud-acknowledgement control may be
+  actioned under a hypothetical profile. Emits `manual_handoff`.
+- **`P-APPROVAL-01`** — no real-destination action proceeds on a route without a recorded operator
+  approval of that route's exact intended payload (`scripts/approve_payload.py`), bound to the
+  payload's content digest so a changed payload invalidates the approval. Default deny.
+
+Full record: `docs/OPEN_QUESTIONS.md`, incident INC-001.
+
+### The web executor and route budgets (Milestone 4)
+
+Every action the executor proposes — navigate, fill, click, submit — is submitted to
+`PolicyEngine.evaluate()` before Playwright touches the page. There is no direct browser call in
+`packages/executors/web/executor.py` that bypasses the gate. Modals are polled before every action
+and logged with their text (not caught as exceptions), and a per-route wall-clock deadline
+(`RouteBudget.deadline`, §9.4) stops a stalled real-page run rather than hanging indefinitely.
+
+---
+
+## Worked example: the fabricated premium
+
+**The most important entry in this document, because the failure actually happened.**
+
+On 2026-08-11, during a live run against MyChoice.ca (a comparison platform) under
+`profile_hypo_clean`, the price reader (`WebExecutor._read_price`) returned `$177.83` as a quoted
+premium. **Zero form fields had been submitted at that point.** The figure was scraped from
+marketing copy on the landing page — a "recent quotes" ticker showing example premiums for
+unrelated applicants — not a response to anything FATHOM had sent. It was one run away from being
+written into `out/results.json` and presented as a retrieved rate.
+
+**Why it was wrong.** The old reader had no concept of *whether a submission had occurred*. It
+searched the whole page's rendered text for anything shaped like `$X,XXX.XX` and believed the first
+match, whether that match sat inside an explicit price container or inside ad copy above a form the
+agent had not yet touched. A landing page advertising "rates from $94/month" and a comparison
+platform's own social-proof table of other people's example quotes are exactly the kind of content
+that shape-matches a real price and means nothing.
+
+**The three-part fix**, in `WebExecutor._read_price` and its call site in `_walk`:
+
+1. **Precondition: a price is only read if this run actually filled at least one field.**
+   `any(step.fields_filled for step in result.steps)` gates the call entirely — no field filled,
+   no price believed, regardless of what the page contains.
+2. **Prefer an explicit price container.** The reader looks for `.price`,
+   `[data-testid*=premium]`, `[class*=quote-price]` and similar selectors before ever falling back
+   to free page text.
+3. **Reject figures adjacent to advertising language.** Even in the free-text fallback, a match
+   next to phrases like "as low as", "starting at", "from $", "average", "save up to" is refused.
+
+**What this demonstrates.** A system that returns numbers is not the same as a system that returns
+evidence. A price with no submission behind it is not a quote, and the executor now knows that
+structurally — as a precondition checked in code before any figure is trusted — rather than by
+convention or by hoping the page never carries a number that looks like one. §6.1 states plainly
+that a single invented number ends the submission; this control exists because the failure actually
+occurred, not because it was anticipated in advance.
+
+**Reproduce it:**
+
+```
+make demo-fabrication
+```
+
+Runs the old (quarantined, never imported from the executor) and current readers side by side
+against a real, honestly captured artifact of the actual MyChoice landing page — see
+`out/fixtures/fabrication_demo/manifest.json` for exactly what was recaptured and why the
+byte-identical original artifact was not retained. `tests/test_price_reader.py` locks the fix down
+as an assertion.
+
+---
+
+## Controls that failed open, and were caught
+
+Three worked examples of a control behaving wrongly under real conditions rather than under the
+scenario it was designed for. Each is a submission asset, not an embarrassment: it demonstrates the
+system was actually run against real content, not only unit-tested against invented fixtures.
+
+| # | What failed open | How it was caught | Fix |
+| --- | --- | --- | --- |
+| 1 | The PII sweep's `allow-file` pragma was honoured anywhere in a file, so a test file that merely *discussed* the pragma in a string granted itself a file-wide allowance it never intended | `tests/test_profiles.py` acquired an unintended `STREET_ADDRESS` allowance from its own test body, caught by reading the sweep's own report output | `allow-file` is now honoured only in the first 20 lines of a file (its header). A test asserts this test file grants itself nothing |
+| 2 | `PHONE_NANP` and `PAYMENT_CARD` used digit-only lookaround boundaries, so a sha256 hex digest — which contains 10- and 16-digit runs flanked by hex letters — matched both rules | 19 false-positive findings on the first real policy audit log, before it could be committed | Boundaries changed from `(?<!\d)` to `(?<![A-Za-z0-9])` on both rules |
+| 3 | The price reader had no concept of whether a submission had occurred, and believed any dollar-shaped figure on any page | A live run against MyChoice.ca returned `$177.83` sourced from marketing copy, with zero fields filled — caught by inspecting the run before it was written to `out/results.json` | See "Worked example: the fabricated premium" above |
 
 ---
 
 ## Not yet enforced
 
-Everything else in §2.1 and §2.2 depends on the Policy Engine (Milestone 2) and the spine
-(Milestone 3). Until those exist, the honest statement is that **no automated action of any kind
-has been taken against any real destination.** The enforcement-status table in
-[`PRIME_DIRECTIVES.md`](PRIME_DIRECTIVES.md) tracks each mechanism as it lands.
+The parts of §2.1/§2.2 that depend on modules never built in this timeframe: the voice executor's
+consent state machine and disclosure prelude, the broker harvester's carrier-list and
+written-confirmation asks, and injection-resistant reading against untrusted page content beyond
+what the sandboxed `echo` site exercises informally. See `docs/LIMITATIONS.md` for the complete,
+itemized list of what was deferred and why.
 
----
-
-## Sections to write at their milestones
-
-| Section | Milestone |
-| --- | --- |
-| The Policy Engine: rules, decision record, audit chain, and a demonstrated denial | 2 |
-| Fact-lock and licence binding | 2–3 |
-| Sandbox-profile isolation: how a simulated profile is prevented from reaching a real destination | 3 |
-| The redaction pipeline: local text and vision, redact-before-write | 3 |
-| Bounded attempts: per-channel budgets and the no-retry-on-rejection rule | 4 |
-| Injection resistance: sandboxed reader, typed extraction, incident log | 7 |
-| Voice: disclosure prelude, consent state machine, recording gate, live escalation | 8 |
-| Final PII sweep across repo, `out/`, screenshots and the recorded walkthrough | 9 |
+The enforcement-status table in [`PRIME_DIRECTIVES.md`](PRIME_DIRECTIVES.md) tracks each rule's
+status as LIVE, PARTIAL or DOCUMENTED ONLY — never marked LIVE before the session state it reads is
+actually populated.

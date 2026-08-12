@@ -1,7 +1,7 @@
 {
   "route_id": "rt_reg_0004",
   "profile_id": "profile_hypo_clean",
-  "entry_url": "https://www.desjardins.com/en/insurance/auto.html",
+  "entry_url": "https://www.desjardins.com/ca/personal/insurance/car/",
   "status": "unresolved",
   "reason_code": null,
   "stopping_step": "exhausted 12 steps",
@@ -12,16 +12,14 @@
   "steps": [
     {
       "step": 1,
-      "url": "https://www.desjardins.com/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/ca/personal/insurance/car/index.jsp",
+      "title": "Page not found | Desjardins",
       "fields_seen": [
-        "lang_modal",
-        "lang_modal",
-        "province_modal",
-        "postalCode"
+        "mw_re",
+        "mw_mr",
+        "codePostal"
       ],
       "fields_filled": [
-        "province",
         "postal_code"
       ],
       "fields_denied": [],
@@ -29,117 +27,121 @@
     },
     {
       "step": 2,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
-      "fields_filled": [],
+      "url": "https://www.desjardins.com/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "lang_modal",
+        "lang_modal",
+        "province_modal",
+        "page-input-search"
+      ],
+      "fields_filled": [
+        "province"
+      ],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 3,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
       "fields_seen": [
-        "lang",
-        "lang",
-        "province"
+        "page-input-search"
       ],
-      "fields_filled": [
-        "province"
-      ],
+      "fields_filled": [],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 4,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
-      "fields_filled": [],
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province",
+        "page-input-search"
+      ],
+      "fields_filled": [
+        "province"
+      ],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 5,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
       "fields_seen": [
-        "lang",
-        "lang",
-        "province"
+        "page-input-search"
       ],
-      "fields_filled": [
-        "province"
-      ],
+      "fields_filled": [],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 6,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
-      "fields_filled": [],
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province",
+        "page-input-search"
+      ],
+      "fields_filled": [
+        "province"
+      ],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 7,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
       "fields_seen": [
-        "lang",
-        "lang",
-        "province"
+        "page-input-search"
       ],
-      "fields_filled": [
-        "province"
-      ],
+      "fields_filled": [],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 8,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
-      "fields_filled": [],
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province",
+        "page-input-search"
+      ],
+      "fields_filled": [
+        "province"
+      ],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 9,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
       "fields_seen": [
-        "lang",
-        "lang",
-        "province"
+        "page-input-search"
       ],
-      "fields_filled": [
-        "province"
-      ],
+      "fields_filled": [],
       "fields_denied": [],
       "hypotheses": []
     },
     {
       "step": 10,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
-      "fields_filled": [],
-      "fields_denied": [],
-      "hypotheses": []
-    },
-    {
-      "step": 11,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
       "fields_seen": [
         "lang",
         "lang",
-        "province"
+        "province",
+        "page-input-search"
       ],
       "fields_filled": [
         "province"
@@ -148,29 +150,47 @@
       "hypotheses": []
     },
     {
-      "step": 12,
-      "url": "https://www.desjardins.com/on/en/insurance/auto.html",
-      "title": "Car Insurance: Get an Auto Insurance Quote Online - Desjardins",
-      "fields_seen": [],
+      "step": 11,
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "page-input-search"
+      ],
       "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 12,
+      "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
+      "title": "Search Results - Desjardins",
+      "fields_seen": [
+        "lang",
+        "lang",
+        "province",
+        "page-input-search"
+      ],
+      "fields_filled": [
+        "province"
+      ],
       "fields_denied": [],
       "hypotheses": []
     }
   ],
   "modals": [],
   "evidence_cids": [
-    "cid:sha256-29ff596c6b6afea5e7f8efcf31f2637c88296adc3f992eaaeedeedff6ac784bc",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917",
-    "cid:sha256-fd9dcacdb66e90eb67a667589f968d1ecd6e765a262a5c183db7c43469f0476a",
-    "cid:sha256-70d848550abee14f24b471712e276d6b53e3305a0048d9e7c9caca407d6ae917"
+    "cid:sha256-b21c78bf2557c56405019587de2ecdea7d06898d8051128cf2b5432f3b3420b8",
+    "cid:sha256-dc9fbc87c3034068ef0997081bc19e3802c0d8920a4cc9cc6ddb4ba01f5898e0",
+    "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+    "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+    "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+    "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+    "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+    "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+    "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+    "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
+    "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
+    "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a"
   ],
   "policy_denials": [],
   "pending_block": null
