@@ -1,6 +1,6 @@
 # FATHOM run report
 
-Generated 2026-08-12T03:02:26+00:00.
+Generated 2026-08-12T03:11:30+00:00.
 
 All results below were retrieved under `profile_hypo_clean`, a **hypothetical** clean-record driver permitted by the organizer Q&A (AC-001). They are not quotes for the operator, and they are labelled as hypothetical everywhere they appear.
 
@@ -47,7 +47,7 @@ Policy rules fired: —
 Stated reason: The journey offers a callback instead of a price.
 
 **`rt_reg_9004`** — `unresolved` / `None`  
-Stopping step: step 1: no actionable control  
+Stopping step: step 1: could not advance  
 Policy rules fired: —  
 Stated reason: 
 
@@ -60,14 +60,14 @@ Stated reason:
 
 | Metric | Value |
 | --- | --- |
-| verified applicable rate sources | 7 |
-| records total | 7 |
+| verified applicable rate sources | 22 |
+| records total | 25 |
 | records attempted | 1 |
-| records reconnaissance pending | 6 |
+| records reconnaissance pending | 24 |
 | market completion | 1/1 (100%) |
 | comparable quote yield | 0/1 (0%) |
 | evidence rate | 0/1 (0%) |
-| duplicate suppression | 0/7 (0%) |
+| duplicate suppression | 4/25 (16%) |
 | freshness | 1/1 (100%) |
 | synthetic records excluded | 7 |
 
@@ -76,5 +76,5 @@ reconnaissance_pending routes were never attempted and are reported separately r
 ## Chain verification
 
 - Evidence chain: chain intact — 15 artifacts
-- Policy audit chain: chain intact — 50 entries verified
+- Policy audit chain: chain intact — 53 entries verified
 

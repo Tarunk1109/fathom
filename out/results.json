@@ -3,7 +3,7 @@
     "result_id": "res_0007",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9007",
-    "distinct_rate_source_id": "rs_0014",
+    "distinct_rate_source_id": "rs_0029",
     "route_id": "rt_reg_9007",
     "status": "quoted_comparable",
     "reason_code": null,
@@ -48,7 +48,7 @@
       "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
     },
     "validity": {
-      "quote_reference_id": "GLF-78756299",
+      "quote_reference_id": "GLF-96777323",
       "verification_may_change_premium": true
     },
     "evidence": {
@@ -56,7 +56,7 @@
       "source_url_or_phone_route": "http://localhost:8801/golf",
       "artifact_cids": [
         "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-        "cid:sha256-a3488a36e291bdb3efd3028fb60f2758c105472efd1eadcc90c4f9d9734ba7b5"
+        "cid:sha256-30cd62b02290f28e62f3099f486ec5adfb73314140537c1aab73faa15caaa9a7"
       ],
       "artifact_count": 2
     },
@@ -66,7 +66,7 @@
     "result_id": "res_0006",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9006",
-    "distinct_rate_source_id": "rs_0013",
+    "distinct_rate_source_id": "rs_0028",
     "route_id": "rt_reg_9006",
     "status": "quoted_comparable",
     "reason_code": null,
@@ -99,7 +99,7 @@
       "parity_note": "Coverage matches the benchmark, so the quoted price is the benchmark price."
     },
     "validity": {
-      "quote_reference_id": "FOX-15818258",
+      "quote_reference_id": "FOX-86130944",
       "verification_may_change_premium": true
     },
     "evidence": {
@@ -107,7 +107,7 @@
       "source_url_or_phone_route": "http://localhost:8801/foxtrot",
       "artifact_cids": [
         "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-        "cid:sha256-2c82d1bf99e694a012788b3ac82b90c921edd133f39cf65c054f9bcf2ed1c93f"
+        "cid:sha256-6f82596e210048a9fdb52c3d9ffc23441aaba7dc494edc0cf0e7a27fab9c24dc"
       ],
       "artifact_count": 2
     },
@@ -117,7 +117,7 @@
     "result_id": "res_0001",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9001",
-    "distinct_rate_source_id": "rs_0008",
+    "distinct_rate_source_id": "rs_0023",
     "route_id": "rt_reg_9001",
     "status": "blocked",
     "reason_code": "RC_HYPO_LICENCE_REQUIRED",
@@ -172,7 +172,7 @@
     "result_id": "res_0002",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9002",
-    "distinct_rate_source_id": "rs_0009",
+    "distinct_rate_source_id": "rs_0024",
     "route_id": "rt_reg_9002",
     "status": "blocked",
     "reason_code": "RC_ACCESS_CONTROL",
@@ -222,7 +222,7 @@
     "result_id": "res_0003",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9003",
-    "distinct_rate_source_id": "rs_0010",
+    "distinct_rate_source_id": "rs_0025",
     "route_id": "rt_reg_9003",
     "status": "callback_required",
     "reason_code": "RC_HUMAN_REQUIRED",
@@ -272,7 +272,7 @@
     "result_id": "res_0004",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9004",
-    "distinct_rate_source_id": "rs_0011",
+    "distinct_rate_source_id": "rs_0026",
     "route_id": "rt_reg_9004",
     "status": "unresolved",
     "reason_code": null,
@@ -306,14 +306,14 @@
       "timestamp": null,
       "source_url_or_phone_route": "http://localhost:8801/delta",
       "artifact_cids": [
-        "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+        "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
       ],
       "artifact_count": 1
     },
     "decline": {
       "stated_reason_redacted": "",
       "reason_code": null,
-      "stopping_step": "step 1: no actionable control",
+      "stopping_step": "step 1: could not advance",
       "policy_rules_fired": []
     }
   },
@@ -321,7 +321,7 @@
     "result_id": "res_0005",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9005",
-    "distinct_rate_source_id": "rs_0012",
+    "distinct_rate_source_id": "rs_0027",
     "route_id": "rt_reg_9005",
     "status": "unresolved",
     "reason_code": null,

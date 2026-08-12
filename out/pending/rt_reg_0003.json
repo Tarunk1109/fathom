@@ -1,0 +1,196 @@
+{
+  "_pii_sweep": "pii-sweep: allow-file STREET_ADDRESS,PC_FULL_POSTAL,DOB_LABELLED \u2014 every value in this payload comes from profile_hypo_clean, which is synthetic in every field.",
+  "route_id": "rt_reg_0003",
+  "target": "https://www.rbcinsurance.com/en-ca/auto-car-insurance/ontario-car-insurance/",
+  "profile_id": "profile_hypo_clean",
+  "brand": "RBC Insurance",
+  "legal_underwriter": "RBC Insurance Company of Canada",
+  "_withheld": {
+    "licence_number": "NEVER SUBMITTED \u2014 P-HYPO-LICENCE-01",
+    "licence_plate": "NEVER SUBMITTED \u2014 P-PLATE-01",
+    "contact_email": "not in profile; a callback-enrolment field is denied by P-HYPO-STEP-01",
+    "contact_phone": "not in profile; human contact is denied by P-HYPO-HUMAN-01"
+  },
+  "fields": {
+    "first_name": {
+      "value": "Avery",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "last_name": {
+      "value": "Sandbourne",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "date_of_birth": {
+      "value": "1988-04-12",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "gender": {
+      "value": "prefer_not_to_say",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "marital_status": {
+      "value": "single",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "address_line_1": {
+      "value": "480 Meridian Hollow Way",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "city": {
+      "value": "Toronto",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "province": {
+      "value": "ON",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "postal_code": {
+      "value": "M4W 3T9",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "residence_type": {
+      "value": "rented_apartment",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "years_at_address": {
+      "value": "4",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "licence_class": {
+      "value": "G",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "licence_province": {
+      "value": "ON",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "years_licensed_g": {
+      "value": "12",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "date_first_licensed": {
+      "value": "2011-06-01",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "driver_training": {
+      "value": "completed",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "prior_insurance": {
+      "value": "true",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "years_continuously_insured": {
+      "value": "10",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "at_fault_accidents_6y": {
+      "value": "0",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "not_at_fault_accidents_6y": {
+      "value": "0",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "convictions_3y": {
+      "value": "0",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "licence_suspensions_3y": {
+      "value": "0",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "claims_6y": {
+      "value": "0",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "lapse_in_coverage": {
+      "value": "none",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_year": {
+      "value": "2019",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_make": {
+      "value": "Honda",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_model": {
+      "value": "Civic",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_trim": {
+      "value": "LX",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_ownership": {
+      "value": "owned",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "vehicle_purchase_type": {
+      "value": "used",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "annual_km": {
+      "value": "12000",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "commute_one_way_km": {
+      "value": "9",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "primary_use": {
+      "value": "commute",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "parking_location": {
+      "value": "driveway",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "winter_tires": {
+      "value": "true",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "other_drivers": {
+      "value": "none",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "requested_effective_date": {
+      "value": "2026-09-01",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "third_party_liability_limit": {
+      "value": "2000000",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "collision_deductible": {
+      "value": "1000",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "comprehensive_deductible": {
+      "value": "1000",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "dcpd_included": {
+      "value": "true",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "opcf_49_elected": {
+      "value": "false",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "opcf_44r_requested": {
+      "value": "true",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "term_months": {
+      "value": "12",
+      "source_profile_id": "profile_hypo_clean"
+    },
+    "telematics": {
+      "value": "declined",
+      "source_profile_id": "profile_hypo_clean"
+    }
+  }
+}

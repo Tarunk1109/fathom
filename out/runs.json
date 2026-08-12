@@ -215,7 +215,7 @@
     "entry_url": "http://localhost:8801/delta",
     "status": "unresolved",
     "reason_code": null,
-    "stopping_step": "step 1: no actionable control",
+    "stopping_step": "step 1: could not advance",
     "stated_reason": "",
     "premium": null,
     "quote_reference": "",
@@ -225,15 +225,21 @@
         "step": 1,
         "url": "http://localhost:8801/delta",
         "title": "Sandbox Delta Insurance",
-        "fields_seen": [],
-        "fields_filled": [],
+        "fields_seen": [
+          "postal_code",
+          "annual_km"
+        ],
+        "fields_filled": [
+          "postal_code",
+          "annual_km"
+        ],
         "fields_denied": [],
         "hypotheses": []
       }
     ],
     "modals": [],
     "evidence_cids": [
-      "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+      "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -280,7 +286,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1712.0,
-    "quote_reference": "FOX-15818258",
+    "quote_reference": "FOX-86130944",
     "coverage": {
       "third_party_liability_limit": 2000000,
       "collision_deductible": 1000,
@@ -333,7 +339,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-      "cid:sha256-2c82d1bf99e694a012788b3ac82b90c921edd133f39cf65c054f9bcf2ed1c93f"
+      "cid:sha256-6f82596e210048a9fdb52c3d9ffc23441aaba7dc494edc0cf0e7a27fab9c24dc"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -347,7 +353,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1634.0,
-    "quote_reference": "GLF-78756299",
+    "quote_reference": "GLF-96777323",
     "coverage": {
       "third_party_liability_limit": 1000000,
       "collision_deductible": 500,
@@ -400,7 +406,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-      "cid:sha256-a3488a36e291bdb3efd3028fb60f2758c105472efd1eadcc90c4f9d9734ba7b5"
+      "cid:sha256-30cd62b02290f28e62f3099f486ec5adfb73314140537c1aab73faa15caaa9a7"
     ],
     "policy_denials": [],
     "pending_block": null

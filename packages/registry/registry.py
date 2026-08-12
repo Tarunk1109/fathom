@@ -37,6 +37,12 @@ class Fingerprint:
     form_set_hash: str = ""
     premium_at_benchmark: float | None = None
 
+    #: Documented extension to the four §9.3 signals (DL-15). A completed amalgamation filed with
+    #: the regulator is stronger evidence that two brands share filed rates than a form-set hash
+    #: is — the legal entity that files them has literally merged. Carries its source URL so the
+    #: assertion is checkable, and counts as one signal, never two.
+    regulatory_amalgamation: str = ""
+
     def signals(self) -> dict[str, object]:
         return {k: v for k, v in asdict(self).items() if v not in ("", None)}
 
@@ -144,6 +150,8 @@ class MarketRegistry:
         if (fa.premium_at_benchmark is not None
                 and fa.premium_at_benchmark == fb.premium_at_benchmark):
             agreeing.append("premium_at_benchmark")
+        if fa.regulatory_amalgamation and fa.regulatory_amalgamation == fb.regulatory_amalgamation:
+            agreeing.append("regulatory_amalgamation")
         return agreeing
 
     def resolve_rate_sources(self) -> dict[str, list[str]]:
