@@ -1,0 +1,408 @@
+[
+  {
+    "route_id": "rt_reg_9001",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/alpha",
+    "status": "blocked",
+    "reason_code": "RC_HYPO_LICENCE_REQUIRED",
+    "stopping_step": "step 4: Driver's licence number (mandatory \u2014 journey cannot advance)",
+    "stated_reason": "Field 'licence_number' submits a driver's licence number under hypothetical profile 'profile_hypo_clean'. Any value would be fabricated. \u00a72.1: never fabricate, borrow or alter a licence number \u2014 this holds regardless of profile.",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/alpha",
+        "title": "Sandbox Alpha Insurance",
+        "fields_seen": [
+          "province"
+        ],
+        "fields_filled": [
+          "province"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "http://localhost:8801/alpha",
+        "title": "Sandbox Alpha Insurance",
+        "fields_seen": [
+          "address_line_1",
+          "postal_code",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km",
+          "fraud_ack"
+        ],
+        "fields_filled": [
+          "address_line_1",
+          "postal_code",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km"
+        ],
+        "fields_denied": [
+          [
+            "I confirm the address information is acc",
+            "P-HYPO-ATTEST-01"
+          ]
+        ],
+        "hypotheses": []
+      },
+      {
+        "step": 3,
+        "url": "http://localhost:8801/alpha",
+        "title": "Sandbox Alpha Insurance",
+        "fields_seen": [
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class"
+        ],
+        "fields_filled": [
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 4,
+        "url": "http://localhost:8801/alpha",
+        "title": "Sandbox Alpha Insurance",
+        "fields_seen": [
+          "licence_number"
+        ],
+        "fields_filled": [],
+        "fields_denied": [
+          [
+            "licence_number",
+            "P-HYPO-LICENCE-01"
+          ]
+        ],
+        "hypotheses": []
+      }
+    ],
+    "modals": [
+      {
+        "step": 2,
+        "url": "http://localhost:8801/alpha",
+        "text": "Heads up!\n\nThe address you entered appears to be a mixed use residence. Please confirm it is correct.\n\nOkay",
+        "dismissed": true,
+        "dismissed_via": "okay"
+      }
+    ],
+    "evidence_cids": [
+      "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
+      "cid:sha256-938751b5802881c138692913d9be1a00ab2811443b08ec8f917e72caedc02804",
+      "cid:sha256-e2cf8952793c90f6f882355105dd677b925fc15f0a25fac2e05adf3736ebc15d",
+      "cid:sha256-723689d3a60db521784b6b5deaacf41935fe3bef79493daa4dc48175f74a5b0c"
+    ],
+    "policy_denials": [
+      [
+        "P-HYPO-ATTEST-01",
+        "'i confirm' asks the applicant to attest that information is accurate or truthful, and profile 'profile_hypo_clean' is hypothetical, so no such attestation can honestly be given. Record manual_handoff and stop. See INC-001."
+      ],
+      [
+        "P-HYPO-LICENCE-01",
+        "Field 'licence_number' submits a driver's licence number under hypothetical profile 'profile_hypo_clean'. Any value would be fabricated. \u00a72.1: never fabricate, borrow or alter a licence number \u2014 this holds regardless of profile."
+      ]
+    ],
+    "pending_block": [
+      "blocked",
+      "RC_HYPO_LICENCE_REQUIRED",
+      "step 4: Driver's licence number",
+      "Field 'licence_number' submits a driver's licence number under hypothetical profile 'profile_hypo_clean'. Any value would be fabricated. \u00a72.1: never fabricate, borrow or alter a licence number \u2014 this holds regardless of profile."
+    ]
+  },
+  {
+    "route_id": "rt_reg_9002",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/bravo",
+    "status": "blocked",
+    "reason_code": "RC_ACCESS_CONTROL",
+    "stopping_step": "step 2: bot check",
+    "stated_reason": "A CAPTCHA or bot control was presented.",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/bravo",
+        "title": "Sandbox Bravo Insurance",
+        "fields_seen": [
+          "postal_code"
+        ],
+        "fields_filled": [
+          "postal_code"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "http://localhost:8801/bravo",
+        "title": "Sandbox Bravo Insurance",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
+      "cid:sha256-a4bd4dfe30233f538ae9b4da41aaac6f5bda65e166be11e270fff0ada2b0437a"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_9003",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/charlie",
+    "status": "callback_required",
+    "reason_code": "RC_HUMAN_REQUIRED",
+    "stopping_step": "step 2: callback only",
+    "stated_reason": "The journey offers a callback instead of a price.",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/charlie",
+        "title": "Sandbox Charlie Insurance",
+        "fields_seen": [
+          "postal_code"
+        ],
+        "fields_filled": [
+          "postal_code"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "http://localhost:8801/charlie",
+        "title": "Sandbox Charlie Insurance",
+        "fields_seen": [
+          "contact_phone"
+        ],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
+      "cid:sha256-e2a70a2a136cb45df3b52a786a21b4b0112e08a6e6ecf0579b6bae9c23645008"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_9004",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/delta",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "step 1: no actionable control",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/delta",
+        "title": "Sandbox Delta Insurance",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_9005",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/echo",
+    "status": "unresolved",
+    "reason_code": null,
+    "stopping_step": "step 1: could not advance",
+    "stated_reason": "",
+    "premium": null,
+    "quote_reference": "",
+    "coverage": {},
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/echo",
+        "title": "Sandbox Echo Insurance",
+        "fields_seen": [
+          "postal_code"
+        ],
+        "fields_filled": [
+          "postal_code"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_9006",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/foxtrot",
+    "status": "quoted_comparable",
+    "reason_code": null,
+    "stopping_step": "step 2: priced",
+    "stated_reason": "",
+    "premium": 1712.0,
+    "quote_reference": "FOX-15818258",
+    "coverage": {
+      "third_party_liability_limit": 2000000,
+      "collision_deductible": 1000,
+      "comprehensive_deductible": 1000,
+      "dcpd": "included",
+      "income_replacement": "excluded",
+      "opcf_44r_family_protection": "included",
+      "term_months": 12
+    },
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/foxtrot",
+        "title": "Sandbox Foxtrot Insurance",
+        "fields_seen": [
+          "postal_code",
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km"
+        ],
+        "fields_filled": [
+          "postal_code",
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "http://localhost:8801/foxtrot",
+        "title": "Sandbox Foxtrot Insurance",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
+      "cid:sha256-2c82d1bf99e694a012788b3ac82b90c921edd133f39cf65c054f9bcf2ed1c93f"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  },
+  {
+    "route_id": "rt_reg_9007",
+    "profile_id": "profile_hypo_clean",
+    "entry_url": "http://localhost:8801/golf",
+    "status": "quoted_comparable",
+    "reason_code": null,
+    "stopping_step": "step 2: priced",
+    "stated_reason": "",
+    "premium": 1634.0,
+    "quote_reference": "GLF-78756299",
+    "coverage": {
+      "third_party_liability_limit": 1000000,
+      "collision_deductible": 500,
+      "comprehensive_deductible": 500,
+      "dcpd": "included",
+      "income_replacement": "included",
+      "opcf_44r_family_protection": "excluded",
+      "term_months": 12
+    },
+    "steps": [
+      {
+        "step": 1,
+        "url": "http://localhost:8801/golf",
+        "title": "Sandbox Golf Insurance",
+        "fields_seen": [
+          "postal_code",
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km"
+        ],
+        "fields_filled": [
+          "postal_code",
+          "first_name",
+          "last_name",
+          "date_of_birth",
+          "licence_class",
+          "vehicle_year",
+          "vehicle_make",
+          "vehicle_model",
+          "annual_km"
+        ],
+        "fields_denied": [],
+        "hypotheses": []
+      },
+      {
+        "step": 2,
+        "url": "http://localhost:8801/golf",
+        "title": "Sandbox Golf Insurance",
+        "fields_seen": [],
+        "fields_filled": [],
+        "fields_denied": [],
+        "hypotheses": []
+      }
+    ],
+    "modals": [],
+    "evidence_cids": [
+      "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
+      "cid:sha256-a3488a36e291bdb3efd3028fb60f2758c105472efd1eadcc90c4f9d9734ba7b5"
+    ],
+    "policy_denials": [],
+    "pending_block": null
+  }
+]

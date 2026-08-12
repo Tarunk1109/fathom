@@ -1,0 +1,196 @@
+<!doctype html><html><head><meta charset="utf-8">
+<title>FATHOM — Ontario auto market instrument</title>
+<style>
+ body{font-family:system-ui,-apple-system,sans-serif;margin:0;background:#f6f7f9;color:#111}
+ header{background:#0f172a;color:#fff;padding:22px 28px}
+ header h1{margin:0;font-size:20px;letter-spacing:.5px}
+ header p{margin:6px 0 0;color:#94a3b8;font-size:13px}
+ main{padding:24px 28px;max-width:1240px}
+ h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:#475569;
+     margin:34px 0 10px}
+ table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e2e8f0;
+        border-radius:6px;overflow:hidden;font-size:14px}
+ th{text-align:left;background:#f1f5f9;padding:9px 12px;font-size:12px;color:#475569;
+     text-transform:uppercase;letter-spacing:.05em}
+ td{padding:10px 12px;border-top:1px solid #eef2f7;vertical-align:top}
+ .num{text-align:right;font-variant-numeric:tabular-nums}
+ .sub{color:#64748b;font-size:12px}
+ .cov ul{margin:0;padding-left:16px} .cov li{margin:2px 0;color:#b45309}
+ .ok{color:#15803d}
+ .pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600;
+        background:#e2e8f0;color:#334155}
+ .pill.quoted_comparable{background:#dcfce7;color:#166534}
+ .pill.blocked{background:#fee2e2;color:#991b1b}
+ .pill.manual_handoff{background:#fef3c7;color:#92400e}
+ .pill.callback_required{background:#e0e7ff;color:#3730a3}
+ .pill.DENY{background:#fee2e2;color:#991b1b} .pill.ALLOW{background:#dcfce7;color:#166534}
+ .pill.ESCALATE{background:#fef3c7;color:#92400e}
+ .verdict{font-weight:700;font-size:12px}
+ .verdict.pass{color:#15803d} .verdict.caution{color:#b45309} .verdict.fail{color:#991b1b}
+ .note{background:#fff7ed;border:1px solid #fed7aa;color:#7c2d12;padding:12px 14px;
+        border-radius:6px;font-size:14px;margin:10px 0 0}
+ .banner{background:#fef3c7;border:1px solid #fcd34d;color:#78350f;padding:10px 14px;
+          border-radius:6px;font-size:13px;font-weight:600}
+ .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+ @media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style></head><body>
+<header>
+  <h1>FATHOM</h1>
+  <p>Ontario private-passenger auto market instrument · generated
+     2026-08-12T03:02:26+00:00</p>
+</header>
+<main>
+  <div class="banner">Results below were retrieved under <code>profile_hypo_clean</code>, a
+     <strong>hypothetical</strong> clean-record driver. They are not quotes for the operator.
+     Synthetic sandbox routes are excluded from all market metrics.</div>
+
+  <h2>Results</h2>
+  <p class="note">The lowest price (rt_reg_9007) does not match the benchmark package — it differs in 5 respect(s). It is a different product, not a cheaper one, and the difference has not been priced.</p>
+  <table>
+    <tr><th>Route</th><th>Status</th><th>Coverage vs benchmark</th><th>Annual</th>
+        <th>Assessment</th><th>Parity</th><th>Evidence</th></tr>
+    
+        <tr class="caution">
+          <td><strong>rt_reg_9007</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill quoted_comparable">quoted_comparable</span>
+              </td>
+          <td class="cov"><ul><li>third-party liability limit: 1,000,000 vs benchmark 2,000,000 (lower)</li><li>collision deductible: 500 vs benchmark 1,000 (lower)</li><li>comprehensive deductible: 500 vs benchmark 1,000 (lower)</li><li>OPCF 44R family protection: excluded vs benchmark included</li><li>income replacement benefit: included — an optional benefit since 1 July 2026, included here and not in the benchmark</li></ul></td>
+          <td class="num">$1,634.00</td>
+          <td><span class="verdict caution">CAUTION</span>
+              <div class="sub">conf medium ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">2 artifacts</td>
+        </tr>
+        <tr class="pass">
+          <td><strong>rt_reg_9006</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill quoted_comparable">quoted_comparable</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">$1,712.00</td>
+          <td><span class="verdict pass">PASS</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">measured</td>
+          <td class="sub">2 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_9001</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill blocked">blocked</span>
+              <div class="sub">RC_HYPO_LICENCE_REQUIRED</div></td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">4 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_9002</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill blocked">blocked</span>
+              <div class="sub">RC_ACCESS_CONTROL</div></td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">2 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_9003</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill callback_required">callback_required</span>
+              <div class="sub">RC_HUMAN_REQUIRED</div></td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">2 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_9004</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">1 artifacts</td>
+        </tr>
+        <tr class="fail">
+          <td><strong>rt_reg_9005</strong><div class="sub">profile_hypo_clean</div></td>
+          <td><span class="pill unresolved">unresolved</span>
+              </td>
+          <td class="cov"><span class="ok">matches benchmark</span></td>
+          <td class="num">—</td>
+          <td><span class="verdict fail">FAIL</span>
+              <div class="sub">conf high ·
+              evidence verified</div></td>
+          <td class="sub">not_possible</td>
+          <td class="sub">1 artifacts</td>
+        </tr>
+  </table>
+  <p class="sub">Sorted by price. Coverage differences render above price differences, and the
+     lowest number is never labelled best (§9.7).</p>
+
+  <div class="grid">
+    <div>
+      <h2>Market graph — brands to rate sources</h2>
+      <table>
+        <tr><th>Rate source</th><th>Brands</th><th>Legal underwriter</th><th>Signals</th>
+            <th>Dedup</th></tr>
+        
+        <tr><td><strong>rs_0001</strong></td><td>Sonnet</td>
+            <td class="sub">Sonnet Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0002</strong></td><td>belairdirect</td>
+            <td class="sub">Belair Insurance Company Inc.</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0003</strong></td><td>RBC Insurance</td>
+            <td class="sub">RBC Insurance Company of Canada</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0004</strong></td><td>Desjardins Insurance</td>
+            <td class="sub">Certas Home and Auto Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0005</strong></td><td>Onlia</td>
+            <td class="sub">unknown — requires regulator evidence</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0006</strong></td><td>TD Insurance</td>
+            <td class="sub">unknown — not yet verified</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+        <tr><td><strong>rs_0007</strong></td><td>CAA Insurance</td>
+            <td class="sub">CAA Insurance Company</td>
+            <td class="num">—</td>
+            <td class="sub">distinct</td></tr>
+      </table>
+      <p class="sub">§9.3: <code>same_rate_source_as</code> is asserted only at two or more
+         agreeing signals. A single-signal match is recorded as a hypothesis, never merged.</p>
+    </div>
+    <div>
+      <h2>Metrics</h2>
+      <table><tr><td>verified applicable rate sources</td><td class='num'>7</td></tr><tr><td>records total</td><td class='num'>7</td></tr><tr><td>records attempted</td><td class='num'>1</td></tr><tr><td>records reconnaissance pending</td><td class='num'>6</td></tr><tr><td>market completion</td><td class='num'>1/1 (100%)</td></tr><tr><td>comparable quote yield</td><td class='num'>0/1 (0%)</td></tr><tr><td>evidence rate</td><td class='num'>0/1 (0%)</td></tr><tr><td>duplicate suppression</td><td class='num'>0/7 (0%)</td></tr><tr><td>freshness</td><td class='num'>1/1 (100%)</td></tr><tr><td>synthetic records excluded</td><td class='num'>7</td></tr></table>
+      <p class="sub">reconnaissance_pending routes were never attempted and are reported separately rather than counted as failures. Unresolved routes stay in every denominator.</p>
+      <p class="sub">Evidence chain: chain intact — 15 artifacts<br>
+         Policy audit chain: chain intact — 50 entries verified</p>
+    </div>
+  </div>
+
+  <h2>Policy gate — last 60 decisions</h2>
+  <table>
+    <tr><th>#</th><th>Verdict</th><th>Rule</th><th>Action</th><th>Target</th></tr>
+    <tr><td class='num'>0</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>1</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>2</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>3</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>4</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>5</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>6</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>7</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>8</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>9</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-ATTEST-01</td><td class='sub'>click</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>10</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>11</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>12</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>13</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>14</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>15</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>16</td><td><span class='pill DENY'>DENY</span></td><td>P-HYPO-LICENCE-01</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>17</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/alpha</td></tr><tr><td class='num'>18</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>19</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>20</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/bravo</td></tr><tr><td class='num'>21</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>22</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>23</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/charlie</td></tr><tr><td class='num'>24</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/delta</td></tr><tr><td class='num'>25</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>26</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>27</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/echo</td></tr><tr><td class='num'>28</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>29</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>30</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>31</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>32</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>33</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>34</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>35</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>36</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>37</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>38</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/foxtrot</td></tr><tr><td class='num'>39</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>navigate</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>40</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>41</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>42</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>43</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>44</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>45</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>46</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>47</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>48</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>fill</td><td class='sub'>http://localhost:8801/golf</td></tr><tr><td class='num'>49</td><td><span class='pill ALLOW'>ALLOW</span></td><td>P-ALLOW-00</td><td class='sub'>submit</td><td class='sub'>http://localhost:8801/golf</td></tr>
+  </table>
+  <p class="sub">Every decision, allow or deny, is appended to a hash-chained log. Verify with
+     <code>make verify</code>.</p>
+</main></body></html>

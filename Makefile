@@ -44,3 +44,19 @@ hooks:
 unhook:
 	@git config --unset core.hooksPath || true
 	@echo "pre-commit hook removed."
+
+# --- Milestone 4+ ---------------------------------------------------------------------
+VENV ?= .venv/bin/python
+
+.PHONY: sandbox run approve ui
+sandbox:
+	@$(VENV) sandbox/server.py
+
+run:
+	@$(VENV) scripts/run_all.py
+
+approve:
+	@$(VENV) scripts/approve_payload.py --payload $(PAYLOAD)
+
+ui: run
+	@open ui/index.html 2>/dev/null || echo "open ui/index.html"

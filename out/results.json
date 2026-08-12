@@ -1,0 +1,369 @@
+[
+  {
+    "result_id": "res_0007",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9007",
+    "distinct_rate_source_id": "rs_0014",
+    "route_id": "rt_reg_9007",
+    "status": "quoted_comparable",
+    "reason_code": null,
+    "channel": "web",
+    "assessment": {
+      "verdict": "CAUTION",
+      "reason_codes": [
+        "coverage_variance_unpriced",
+        "coverage_variance_unpriced",
+        "coverage_variance_unpriced",
+        "coverage_variance_unpriced",
+        "optional_benefit_included_unpriced"
+      ],
+      "confidence_indicator": "medium",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": 1634.0,
+      "currency": "CAD",
+      "total_estimated_cost": 1634.0
+    },
+    "coverage": {
+      "third_party_liability_limit": 1000000,
+      "collision_deductible": 500,
+      "comprehensive_deductible": 500,
+      "dcpd": "included",
+      "income_replacement": "included",
+      "opcf_44r_family_protection": "excluded",
+      "term_months": 12
+    },
+    "variance_from_benchmark": [
+      "third-party liability limit: 1,000,000 vs benchmark 2,000,000 (lower)",
+      "collision deductible: 500 vs benchmark 1,000 (lower)",
+      "comprehensive deductible: 500 vs benchmark 1,000 (lower)",
+      "OPCF 44R family protection: excluded vs benchmark included",
+      "income replacement benefit: included \u2014 an optional benefit since 1 July 2026, included here and not in the benchmark"
+    ],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "GLF-78756299",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/golf",
+      "artifact_cids": [
+        "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
+        "cid:sha256-a3488a36e291bdb3efd3028fb60f2758c105472efd1eadcc90c4f9d9734ba7b5"
+      ],
+      "artifact_count": 2
+    },
+    "decline": {}
+  },
+  {
+    "result_id": "res_0006",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9006",
+    "distinct_rate_source_id": "rs_0013",
+    "route_id": "rt_reg_9006",
+    "status": "quoted_comparable",
+    "reason_code": null,
+    "channel": "web",
+    "assessment": {
+      "verdict": "PASS",
+      "reason_codes": [],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": 1712.0,
+      "currency": "CAD",
+      "total_estimated_cost": 1712.0
+    },
+    "coverage": {
+      "third_party_liability_limit": 2000000,
+      "collision_deductible": 1000,
+      "comprehensive_deductible": 1000,
+      "dcpd": "included",
+      "income_replacement": "excluded",
+      "opcf_44r_family_protection": "included",
+      "term_months": 12
+    },
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": 1712.0,
+      "adjustments_applied": [],
+      "parity_confidence": "measured",
+      "parity_note": "Coverage matches the benchmark, so the quoted price is the benchmark price."
+    },
+    "validity": {
+      "quote_reference_id": "FOX-15818258",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/foxtrot",
+      "artifact_cids": [
+        "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
+        "cid:sha256-2c82d1bf99e694a012788b3ac82b90c921edd133f39cf65c054f9bcf2ed1c93f"
+      ],
+      "artifact_count": 2
+    },
+    "decline": {}
+  },
+  {
+    "result_id": "res_0001",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9001",
+    "distinct_rate_source_id": "rs_0008",
+    "route_id": "rt_reg_9001",
+    "status": "blocked",
+    "reason_code": "RC_HYPO_LICENCE_REQUIRED",
+    "channel": "web",
+    "assessment": {
+      "verdict": "FAIL",
+      "reason_codes": [
+        "no_premium_returned"
+      ],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": null,
+      "currency": "CAD",
+      "total_estimated_cost": null
+    },
+    "coverage": {},
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/alpha",
+      "artifact_cids": [
+        "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
+        "cid:sha256-938751b5802881c138692913d9be1a00ab2811443b08ec8f917e72caedc02804",
+        "cid:sha256-e2cf8952793c90f6f882355105dd677b925fc15f0a25fac2e05adf3736ebc15d",
+        "cid:sha256-723689d3a60db521784b6b5deaacf41935fe3bef79493daa4dc48175f74a5b0c"
+      ],
+      "artifact_count": 4
+    },
+    "decline": {
+      "stated_reason_redacted": "Field 'licence_number' submits a driver's licence number under hypothetical profile 'profile_hypo_clean'. Any value would be fabricated. \u00a72.1: never fabricate, borrow or alter a licence number \u2014 this holds regardless of profile.",
+      "reason_code": "RC_HYPO_LICENCE_REQUIRED",
+      "stopping_step": "step 4: Driver's licence number (mandatory \u2014 journey cannot advance)",
+      "policy_rules_fired": [
+        "P-HYPO-ATTEST-01",
+        "P-HYPO-LICENCE-01"
+      ]
+    }
+  },
+  {
+    "result_id": "res_0002",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9002",
+    "distinct_rate_source_id": "rs_0009",
+    "route_id": "rt_reg_9002",
+    "status": "blocked",
+    "reason_code": "RC_ACCESS_CONTROL",
+    "channel": "web",
+    "assessment": {
+      "verdict": "FAIL",
+      "reason_codes": [
+        "no_premium_returned"
+      ],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": null,
+      "currency": "CAD",
+      "total_estimated_cost": null
+    },
+    "coverage": {},
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/bravo",
+      "artifact_cids": [
+        "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
+        "cid:sha256-a4bd4dfe30233f538ae9b4da41aaac6f5bda65e166be11e270fff0ada2b0437a"
+      ],
+      "artifact_count": 2
+    },
+    "decline": {
+      "stated_reason_redacted": "A CAPTCHA or bot control was presented.",
+      "reason_code": "RC_ACCESS_CONTROL",
+      "stopping_step": "step 2: bot check",
+      "policy_rules_fired": []
+    }
+  },
+  {
+    "result_id": "res_0003",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9003",
+    "distinct_rate_source_id": "rs_0010",
+    "route_id": "rt_reg_9003",
+    "status": "callback_required",
+    "reason_code": "RC_HUMAN_REQUIRED",
+    "channel": "web",
+    "assessment": {
+      "verdict": "FAIL",
+      "reason_codes": [
+        "no_premium_returned"
+      ],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": null,
+      "currency": "CAD",
+      "total_estimated_cost": null
+    },
+    "coverage": {},
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/charlie",
+      "artifact_cids": [
+        "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
+        "cid:sha256-e2a70a2a136cb45df3b52a786a21b4b0112e08a6e6ecf0579b6bae9c23645008"
+      ],
+      "artifact_count": 2
+    },
+    "decline": {
+      "stated_reason_redacted": "The journey offers a callback instead of a price.",
+      "reason_code": "RC_HUMAN_REQUIRED",
+      "stopping_step": "step 2: callback only",
+      "policy_rules_fired": []
+    }
+  },
+  {
+    "result_id": "res_0004",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9004",
+    "distinct_rate_source_id": "rs_0011",
+    "route_id": "rt_reg_9004",
+    "status": "unresolved",
+    "reason_code": null,
+    "channel": "web",
+    "assessment": {
+      "verdict": "FAIL",
+      "reason_codes": [
+        "no_premium_returned"
+      ],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": null,
+      "currency": "CAD",
+      "total_estimated_cost": null
+    },
+    "coverage": {},
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/delta",
+      "artifact_cids": [
+        "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+      ],
+      "artifact_count": 1
+    },
+    "decline": {
+      "stated_reason_redacted": "",
+      "reason_code": null,
+      "stopping_step": "step 1: no actionable control",
+      "policy_rules_fired": []
+    }
+  },
+  {
+    "result_id": "res_0005",
+    "profile_id": "profile_hypo_clean",
+    "registry_id": "reg_9005",
+    "distinct_rate_source_id": "rs_0012",
+    "route_id": "rt_reg_9005",
+    "status": "unresolved",
+    "reason_code": null,
+    "channel": "web",
+    "assessment": {
+      "verdict": "FAIL",
+      "reason_codes": [
+        "no_premium_returned"
+      ],
+      "confidence_indicator": "high",
+      "evidence_status": "verified"
+    },
+    "price": {
+      "annual_premium": null,
+      "currency": "CAD",
+      "total_estimated_cost": null
+    },
+    "coverage": {},
+    "variance_from_benchmark": [],
+    "parity": {
+      "price_at_benchmark": null,
+      "adjustments_applied": [],
+      "parity_confidence": "not_possible",
+      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
+    },
+    "validity": {
+      "quote_reference_id": "",
+      "verification_may_change_premium": true
+    },
+    "evidence": {
+      "timestamp": null,
+      "source_url_or_phone_route": "http://localhost:8801/echo",
+      "artifact_cids": [
+        "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947"
+      ],
+      "artifact_count": 1
+    },
+    "decline": {
+      "stated_reason_redacted": "",
+      "reason_code": null,
+      "stopping_step": "step 1: could not advance",
+      "policy_rules_fired": []
+    }
+  }
+]

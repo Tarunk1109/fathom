@@ -179,7 +179,9 @@ RULES: tuple[Rule, ...] = (
     Rule(
         rule_id="PAYMENT_CARD",
         description="Payment card number (Luhn-valid)",
-        pattern=re.compile(r"(?<!\d)(?:\d[ -]?){13,19}(?!\d)"),
+        # Non-alphanumeric boundaries, same reason as PHONE_NANP: a sha256 digest contains
+        # Luhn-valid 16-digit runs flanked by hex letters.
+        pattern=re.compile(r"(?<![A-Za-z0-9])(?:\d[ -]?){13,19}(?![A-Za-z0-9])"),
         directive="§2.1 no payment data; §9.1 P-PAY-01",
         validator=_luhn_ok,
     ),
