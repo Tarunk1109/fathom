@@ -1,0 +1,67 @@
+{
+  "route_id": "rt_sandbox_golf",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "http://localhost:8801/golf",
+  "status": "quoted_comparable",
+  "reason_code": null,
+  "stopping_step": "step 2: priced",
+  "stated_reason": "",
+  "premium": 1634.0,
+  "quote_reference": "GLF-55355599",
+  "coverage": {
+    "third_party_liability_limit": 1000000,
+    "collision_deductible": 500,
+    "comprehensive_deductible": 500,
+    "dcpd": "included",
+    "income_replacement": "included",
+    "opcf_44r_family_protection": "excluded",
+    "term_months": 12
+  },
+  "steps": [
+    {
+      "step": 1,
+      "url": "http://localhost:8801/golf",
+      "title": "Sandbox Golf Insurance",
+      "fields_seen": [
+        "postal_code",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "licence_class",
+        "vehicle_year",
+        "vehicle_make",
+        "vehicle_model",
+        "annual_km"
+      ],
+      "fields_filled": [
+        "postal_code",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "licence_class",
+        "vehicle_year",
+        "vehicle_make",
+        "vehicle_model",
+        "annual_km"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 2,
+      "url": "http://localhost:8801/golf",
+      "title": "Sandbox Golf Insurance",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
+    "cid:sha256-53e8745d9d4a3f173ba753f97a765c483a187ba44e0cb811978bcf26c25fca1d"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

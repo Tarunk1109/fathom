@@ -1,0 +1,67 @@
+{
+  "route_id": "rt_sandbox_foxtrot",
+  "profile_id": "profile_hypo_clean",
+  "entry_url": "http://localhost:8801/foxtrot",
+  "status": "quoted_comparable",
+  "reason_code": null,
+  "stopping_step": "step 2: priced",
+  "stated_reason": "",
+  "premium": 1712.0,
+  "quote_reference": "FOX-36328279",
+  "coverage": {
+    "third_party_liability_limit": 2000000,
+    "collision_deductible": 1000,
+    "comprehensive_deductible": 1000,
+    "dcpd": "included",
+    "income_replacement": "excluded",
+    "opcf_44r_family_protection": "included",
+    "term_months": 12
+  },
+  "steps": [
+    {
+      "step": 1,
+      "url": "http://localhost:8801/foxtrot",
+      "title": "Sandbox Foxtrot Insurance",
+      "fields_seen": [
+        "postal_code",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "licence_class",
+        "vehicle_year",
+        "vehicle_make",
+        "vehicle_model",
+        "annual_km"
+      ],
+      "fields_filled": [
+        "postal_code",
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "licence_class",
+        "vehicle_year",
+        "vehicle_make",
+        "vehicle_model",
+        "annual_km"
+      ],
+      "fields_denied": [],
+      "hypotheses": []
+    },
+    {
+      "step": 2,
+      "url": "http://localhost:8801/foxtrot",
+      "title": "Sandbox Foxtrot Insurance",
+      "fields_seen": [],
+      "fields_filled": [],
+      "fields_denied": [],
+      "hypotheses": []
+    }
+  ],
+  "modals": [],
+  "evidence_cids": [
+    "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
+    "cid:sha256-4f0d28bf02cc47f217fabb61163715d79ae651b9b91f444132ffb51bca8d1e91"
+  ],
+  "policy_denials": [],
+  "pending_block": null
+}

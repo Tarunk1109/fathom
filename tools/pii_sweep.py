@@ -160,8 +160,12 @@ RULES: tuple[Rule, ...] = (
     Rule(
         rule_id="PHONE_NANP",
         description="North American phone number",
+        # Boundaries are non-alphanumeric, not merely non-digit. A sha256 digest contains
+        # 10-digit runs flanked by hex letters, and the digit-only lookarounds matched them —
+        # 19 false positives on the first real audit log.
         pattern=re.compile(
-            r"(?<!\d)(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}(?!\d)"
+            r"(?<![A-Za-z0-9])(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}"
+            r"(?![A-Za-z0-9])"
         ),
         directive="§9.6 redactor category",
         validator=_phone_plausible,

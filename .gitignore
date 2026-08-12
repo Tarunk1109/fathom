@@ -69,3 +69,4 @@ Thumbs.db
 .vscode/
 
 # out/ is tracked on purpose — it holds the submission deliverables (15).
+.venv/

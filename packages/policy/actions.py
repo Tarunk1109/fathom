@@ -32,7 +32,13 @@ ActionKind = Literal[
 Verdict = Literal["ALLOW", "DENY", "ESCALATE"]
 
 #: Kinds that consume a route attempt against the §9.4 budget.
-ATTEMPT_CONSUMING_KINDS: frozenset[str] = frozenset({"navigate", "submit", "dial"})
+#:
+#: `submit` was here and was wrong (DL-13). §9.4's "1 attempt + 1 retry" budgets *attempts on a
+#: route* — opening the journey again, calling again. A multi-step quote form takes six submits to
+#: reach a price, and none of them is a retry. Counting them exhausted the budget mid-journey and
+#: reported P-BUDGET-01 for what was ordinary progress. Retrying a *rejection* is still prohibited,
+#: by P-STOP-01 and by the planner, not by the step counter.
+ATTEMPT_CONSUMING_KINDS: frozenset[str] = frozenset({"navigate", "dial"})
 
 #: Kinds that touch no destination — recording an outcome locally, or ending a call. These stay
 #: available after a stop request so a terminal status can still be written (§2.2).
