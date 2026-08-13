@@ -1,574 +1,5 @@
 [
   {
-    "route_id": "rt_reg_0002",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://www.belairdirect.com/en/car-insurance.html",
-    "status": "unresolved",
-    "reason_code": null,
-    "stopping_step": "step 3: no actionable control",
-    "stated_reason": "",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://www.belairdirect.com/en/car-insurance.html",
-        "title": "Human Verification",
-        "fields_seen": [
-          "?"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 2,
-        "url": "https://www.belairdirect.com/en/car-insurance.html",
-        "title": "Human Verification",
-        "fields_seen": [
-          "?"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 3,
-        "url": "https://www.belairdirect.com/en/car-insurance.html",
-        "title": "Human Verification",
-        "fields_seen": [
-          "?"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      }
-    ],
-    "modals": [],
-    "evidence_cids": [
-      "cid:sha256-77e059f8027d3bda2a297da89bbcdfbeaffb02ad312f40aa3fc902dce587c4cf",
-      "cid:sha256-bbd4115d1696e13ec2df9347ccdd33cf4576d22a5726f50dc17f32d16c30ee69",
-      "cid:sha256-abae0197adbf05f68a6de43ae1315541bff14bb263f7010d96b413660f792cc7"
-    ],
-    "policy_denials": [],
-    "pending_block": null
-  },
-  {
-    "route_id": "rt_reg_0003",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://www.rbcinsurance.com/auto-insurance/",
-    "status": "unresolved",
-    "reason_code": null,
-    "stopping_step": "step 1: no actionable control",
-    "stated_reason": "",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://www.rbcinsurance.com/auto-insurance/",
-        "title": "RBC Insurance - The requested document could not be found on our website",
-        "fields_seen": [],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      }
-    ],
-    "modals": [
-      {
-        "step": 1,
-        "url": "https://www.rbcinsurance.com/auto-insurance/",
-        "text": "Privacy & Security",
-        "dismissed": false,
-        "dismissed_via": ""
-      }
-    ],
-    "evidence_cids": [
-      "cid:sha256-287a10c3a376e0026e5f22be571ca4b1da1406e4e27256843e8af335b15135f5"
-    ],
-    "policy_denials": [],
-    "pending_block": null
-  },
-  {
-    "route_id": "rt_reg_0004",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://www.desjardins.com/ca/personal/insurance/car/",
-    "status": "unresolved",
-    "reason_code": null,
-    "stopping_step": "exhausted 12 steps",
-    "stated_reason": "",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://www.desjardins.com/ca/personal/insurance/car/index.jsp",
-        "title": "Page not found | Desjardins",
-        "fields_seen": [
-          "mw_re",
-          "mw_mr",
-          "codePostal"
-        ],
-        "fields_filled": [
-          "postal_code"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 2,
-        "url": "https://www.desjardins.com/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang_modal",
-          "lang_modal",
-          "province_modal",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 3,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "page-input-search"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 4,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang",
-          "lang",
-          "province",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 5,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "page-input-search"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 6,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang",
-          "lang",
-          "province",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 7,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "page-input-search"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 8,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang",
-          "lang",
-          "province",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 9,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "page-input-search"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 10,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang",
-          "lang",
-          "province",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 11,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "page-input-search"
-        ],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 12,
-        "url": "https://www.desjardins.com/on/en/results.html?mw_re=&mw_mr=desjardinscom_en_touslessites",
-        "title": "Search Results - Desjardins",
-        "fields_seen": [
-          "lang",
-          "lang",
-          "province",
-          "page-input-search"
-        ],
-        "fields_filled": [
-          "province"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      }
-    ],
-    "modals": [],
-    "evidence_cids": [
-      "cid:sha256-b21c78bf2557c56405019587de2ecdea7d06898d8051128cf2b5432f3b3420b8",
-      "cid:sha256-dc9fbc87c3034068ef0997081bc19e3802c0d8920a4cc9cc6ddb4ba01f5898e0",
-      "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-      "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-      "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-      "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-      "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-      "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-      "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-      "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-      "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-      "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a"
-    ],
-    "policy_denials": [],
-    "pending_block": null
-  },
-  {
-    "route_id": "rt_reg_0100",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://rates.ca/insurance-quotes/auto/ontario",
-    "status": "blocked",
-    "reason_code": "RC_ACCESS_CONTROL",
-    "stopping_step": "step 1: bot check",
-    "stated_reason": "A CAPTCHA or bot control was presented.",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://rates.ca/insurance-quotes/auto/ontario",
-        "title": "Attention Required! | Cloudflare",
-        "fields_seen": [],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      }
-    ],
-    "modals": [],
-    "evidence_cids": [
-      "cid:sha256-fc7b2bb923e2ed69189c21cb6a08048de61438788660c2561e904ed409ccb271"
-    ],
-    "policy_denials": [],
-    "pending_block": null
-  },
-  {
-    "route_id": "rt_reg_0101",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://www.lowestrates.ca/insurance/auto",
-    "status": "blocked",
-    "reason_code": "RC_ACCESS_CONTROL",
-    "stopping_step": "step 1: bot check",
-    "stated_reason": "A CAPTCHA or bot control was presented.",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://www.lowestrates.ca/insurance/auto",
-        "title": "Attention Required! | Cloudflare",
-        "fields_seen": [],
-        "fields_filled": [],
-        "fields_denied": [],
-        "hypotheses": []
-      }
-    ],
-    "modals": [],
-    "evidence_cids": [
-      "cid:sha256-deeea6dbfe9e8ee6a35df6b5e560780cf62f8e96906bd742440948ad0eacb4fc"
-    ],
-    "policy_denials": [],
-    "pending_block": null
-  },
-  {
-    "route_id": "rt_reg_0102",
-    "profile_id": "profile_hypo_clean",
-    "entry_url": "https://www.mychoice.ca/insurance/car/",
-    "status": "unresolved",
-    "reason_code": null,
-    "stopping_step": "step 4: could not advance",
-    "stated_reason": "",
-    "premium": null,
-    "quote_reference": "",
-    "coverage": {},
-    "steps": [
-      {
-        "step": 1,
-        "url": "https://www.mychoice.ca/insurance/car/",
-        "title": "Affordable Car Insurance in Canada from $94/month | MyChoice",
-        "fields_seen": [
-          "postal_code",
-          "postal_code"
-        ],
-        "fields_filled": [
-          "postal_code",
-          "postal_code"
-        ],
-        "fields_denied": [],
-        "hypotheses": []
-      },
-      {
-        "step": 2,
-        "url": "https://quote.mychoice.ca/insurance/car",
-        "title": "Get a Quote and Save Money | MyChoice",
-        "fields_seen": [
-          "carYear",
-          "purchaseMonth",
-          "purchaseYear",
-          "parkingLocation",
-          "distanceDaily",
-          "distanceYearly",
-          "policyStartDay",
-          "policyStartMonth",
-          "policyStartYear"
-        ],
-        "fields_filled": [
-          "vehicle_year",
-          "vehicle_year",
-          "parking_location"
-        ],
-        "fields_denied": [
-          [
-            "vehicle_year",
-            "FILL_FAILED"
-          ],
-          [
-            "vehicle_year",
-            "FILL_FAILED"
-          ]
-        ],
-        "hypotheses": [
-          [
-            "vehicle_year",
-            0.576
-          ]
-        ]
-      },
-      {
-        "step": 3,
-        "url": "https://quote.mychoice.ca/insurance/car",
-        "title": "Get a Quote and Save Money | MyChoice",
-        "fields_seen": [
-          "carYear",
-          "purchaseMonth",
-          "purchaseYear",
-          "parkingLocation",
-          "distanceDaily",
-          "distanceYearly",
-          "policyStartDay",
-          "policyStartMonth",
-          "policyStartYear"
-        ],
-        "fields_filled": [
-          "vehicle_year",
-          "vehicle_year",
-          "parking_location"
-        ],
-        "fields_denied": [
-          [
-            "vehicle_year",
-            "FILL_FAILED"
-          ],
-          [
-            "vehicle_year",
-            "FILL_FAILED"
-          ]
-        ],
-        "hypotheses": [
-          [
-            "vehicle_year",
-            0.576
-          ]
-        ]
-      },
-      {
-        "step": 4,
-        "url": "https://quote.mychoice.ca/insurance/car",
-        "title": "Get a Quote and Save Money | MyChoice",
-        "fields_seen": [
-          "carYear",
-          "purchaseMonth",
-          "purchaseYear",
-          "parkingLocation",
-          "distanceDaily",
-          "distanceYearly",
-          "policyStartDay",
-          "policyStartMonth",
-          "policyStartYear"
-        ],
-        "fields_filled": [
-          "vehicle_year",
-          "vehicle_year",
-          "parking_location"
-        ],
-        "fields_denied": [
-          [
-            "vehicle_year",
-            "FILL_FAILED"
-          ],
-          [
-            "vehicle_year",
-            "P-BUDGET-01"
-          ]
-        ],
-        "hypotheses": [
-          [
-            "vehicle_year",
-            0.576
-          ]
-        ]
-      }
-    ],
-    "modals": [],
-    "evidence_cids": [
-      "cid:sha256-a84c8ded91c633c8a3fd6a8ef8b6bd00cbf6496b973ee1c439cbdbe327f2c194",
-      "cid:sha256-8ea46ff1ed4251c9db4199075693e5bf7c42b625d139870f2cba850ea0d70975",
-      "cid:sha256-c9e4b3b4eadc4a51083775aa2feae69009e9cd717fe6d164e43fea6c630d5c32",
-      "cid:sha256-a9282c9bf0ec2c2710ed78d04887bacc086a09660a919894a3571601a7588798"
-    ],
-    "policy_denials": [
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ],
-      [
-        "P-BUDGET-01",
-        "Route 'rt_reg_0102' is past its time budget. \u00a79.4: bounded attempts are non-negotiable."
-      ]
-    ],
-    "pending_block": null
-  },
-  {
     "route_id": "rt_reg_9001",
     "profile_id": "profile_hypo_clean",
     "entry_url": "http://localhost:8801/alpha",
@@ -784,7 +215,7 @@
     "entry_url": "http://localhost:8801/delta",
     "status": "unresolved",
     "reason_code": null,
-    "stopping_step": "step 1: no actionable control",
+    "stopping_step": "step 1: could not advance",
     "stated_reason": "",
     "premium": null,
     "quote_reference": "",
@@ -794,15 +225,21 @@
         "step": 1,
         "url": "http://localhost:8801/delta",
         "title": "Sandbox Delta Insurance",
-        "fields_seen": [],
-        "fields_filled": [],
+        "fields_seen": [
+          "postal_code",
+          "annual_km"
+        ],
+        "fields_filled": [
+          "postal_code",
+          "annual_km"
+        ],
         "fields_denied": [],
         "hypotheses": []
       }
     ],
     "modals": [],
     "evidence_cids": [
-      "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+      "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -849,7 +286,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1712.0,
-    "quote_reference": "FOX-17937661",
+    "quote_reference": "FOX-78961851",
     "coverage": {
       "third_party_liability_limit": 2000000,
       "collision_deductible": 1000,
@@ -902,7 +339,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-      "cid:sha256-1ea2e5b79eee51ca97016e8ed4ae4ac9d42b7277c651470d5878f1afc923ec97"
+      "cid:sha256-cf62481d2f2589fbe35149fe770424ee1db214ecf4ec6e182eda26f5c5c0cdb8"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -916,7 +353,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1634.0,
-    "quote_reference": "GLF-48150160",
+    "quote_reference": "GLF-65268995",
     "coverage": {
       "third_party_liability_limit": 1000000,
       "collision_deductible": 500,
@@ -969,7 +406,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-      "cid:sha256-e9dd1361832f2e43a2c33d75164f38f96e33fee0272b0365e192854842173699"
+      "cid:sha256-9b0e77093dd7e7841c0d410bf2bf96920b04166a4e5b6a1b083e8f31c332bf6a"
     ],
     "policy_denials": [],
     "pending_block": null

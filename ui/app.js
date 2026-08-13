@@ -548,6 +548,47 @@
       g.addEventListener("click", () => matchingNode && showEdgeDetail(matchingNode, null));
       nodesGroup.appendChild(g);
     });
+
+    renderResidualManualPanel();
+  }
+
+  // final.md B2, revisited/scoped to extraction-only. Rows are parsed straight out of the real
+  // public Facility Association manual — never a quote, estimate, or premium. See
+  // docs/RESIDUAL_MARKET.md for what was extracted and what was deliberately left out.
+  function renderResidualManualPanel() {
+    const rm = DATA.residual_manual;
+    const panel = $("#residual-manual-panel");
+    if (!rm || !rm.available) { panel.hidden = true; return; }
+    panel.hidden = false;
+    $("#residual-manual-disclaimer").textContent = rm.disclaimer;
+
+    const body = $("#residual-manual-body");
+    body.innerHTML = "";
+    body.appendChild(el("p", { class: "mono" }, [
+      `${rm.table_name} — pages ${rm.page_range[0]}–${rm.page_range[1]} — ${rm.row_count} rows extracted — `,
+      el("a", { href: rm.source.url, target: "_blank", rel: "noopener" }, ["source PDF"]),
+      ` (retrieved ${rm.source.retrieved_at.slice(0, 10)}, sha256 ${rm.source.file_sha256.slice(0, 12)}…)`,
+    ]));
+
+    const table = el("table", { class: "residual-table" });
+    const thead = el("thead", {}, [el("tr", {}, [
+      el("th", {}, ["Location"]), el("th", {}, ["County / District / Municipality"]),
+      el("th", {}, ["Territory"]), el("th", {}, ["Stat code"]), el("th", {}, ["Source page"]),
+    ])]);
+    const tbody = el("tbody", {}, rm.sample_rows.map((r) => el("tr", {}, [
+      el("td", {}, [r.location]), el("td", {}, [r.county_district_municipality]),
+      el("td", {}, [r.territory]), el("td", {}, [r.stat_code]),
+      el("td", { class: "mono" }, [String(r.source_page)]),
+    ])));
+    table.appendChild(thead); table.appendChild(tbody);
+    body.appendChild(table);
+    body.appendChild(el("p", { class: "view-sub" }, [rm.sample_note]));
+
+    const notList = el("ul", { class: "not-extracted-list" }, rm.not_extracted.map((n) => el("li", {}, [
+      el("strong", {}, [n.category]), ` (${n.location_in_manual}) — not extracted: ${n.reason}`,
+    ])));
+    body.appendChild(el("p", {}, ["Deliberately not extracted:"]));
+    body.appendChild(notList);
   }
 
   function bezier(x1, y1, x2, y2) {

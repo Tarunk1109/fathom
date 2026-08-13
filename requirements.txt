@@ -1,3 +1,4 @@
 # FATHOM runtime dependencies. Added at the milestone that uses them (fathom.md §13).
 cryptography>=42      # Milestone 3 — vault encryption at rest (Fernet)
 playwright>=1.40      # Milestone 4 — web executor
+pdfplumber>=0.11      # final.md B2 (extraction-only) — one-time offline parse of the public FA manual

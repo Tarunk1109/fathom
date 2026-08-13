@@ -32,6 +32,7 @@ open ui/index.html  # or: python3 -m http.server 8802, then open localhost:8802/
 | 12 | Real-route outcomes: Cloudflare blocks detected not bypassed, licence walls, every one evidenced | `out/run_report.md` → **Named findings** and **Coverage ledger** | Four named findings up top (no real price, D-AGG, Aviva, fabrication); ledger table lists every attempted route with registry ID, legal underwriter, status, reason, timestamp, evidence CID |
 | 13 | Metrics with denominators, unresolved kept in the denominator; enforcement status honestly split | `ui/index.html` → **Sounding** (metric row) and **Gate** (enforcement table) | `market_completion 3/7 (43%)`, `evidence_rate 7/7 (100%)`, unresolved count rendered in `--unknown`, never grey. Enforcement table: 19 LIVE, 3 PARTIAL, 1 NOT-BUILT — partials not hidden |
 | 14 | Limitations, stated plainly | `docs/LIMITATIONS.md` | Per-route reason no real insurer priced the hypothetical profile; aggregators, licence walls, D-OPER, Appendix A validation status, the fabrication and concurrency incidents, and the full deferred-module list including B2/B6 |
+| 15 | Residual-market rating data, extracted from the real public FA manual, never computed | `ui/index.html` → **Market** (bottom panel) | `UNVERIFIED EXTRACTION` badge; 6,440 territory-definition rows, each with its source page; a link to the source PDF and its retrieval hash; the explicit "deliberately not extracted" list (rate-group tables, premium tables, driver class rules) with reasons — see `docs/RESIDUAL_MARKET.md` |
 
 ---
 

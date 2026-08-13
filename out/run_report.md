@@ -1,6 +1,6 @@
 # FATHOM run report
 
-Generated 2026-08-13T02:31:14+00:00.
+Generated 2026-08-13T03:00:14+00:00.
 
 ## Run parameters
 
@@ -21,6 +21,8 @@ All results below were retrieved under `profile_hypo_clean`, a **hypothetical** 
 
 **A fabricated premium was caught before it reached this report.** A live run against MyChoice.ca returned `$177.83` from landing-page marketing copy with zero fields filled. Fixed and locked down as a regression test. Full account in `docs/SAFETY.md` § "Worked example: the fabricated premium"; reproduce with `make demo-fabrication`.
 
+**Residual-market rating data, extracted and never computed.** `out/residual_manual_extract.json` parses the real, public Facility Association Ontario Manual of Rules and Rates (effective 2025-11-01) into 6,440 provenanced territory-definition rows (pages 1398-1605 and two earlier per-section repeats), each carrying its source page and table name. No premium or estimate was computed from it — every figure not cleanly parseable (e.g. rate-group tables whose cells stack multiple values with no unambiguous mapping) was left out rather than guessed. Labelled `UNVERIFIED EXTRACTION` everywhere it appears; see `docs/RESIDUAL_MARKET.md`.
+
 ## Coverage ledger
 
 Every route ever attempted, hand-probed or automated. `unresolved` stays `unresolved` — never silently reclassified. Rows never attempted (reconnaissance-pending routes and unvalidated Appendix A rows) are not listed here — see § Metrics for their counts.
@@ -28,19 +30,16 @@ Every route ever attempted, hand-probed or automated. `unresolved` stays `unreso
 | Registry ID | Brand | Legal underwriter | Rate source | Channel | Status | Reason | Timestamp | Evidence CID |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `reg_0001` | Sonnet | Sonnet Insurance Company | `rs_0001` | web_manual_probe | `blocked` | licence_number_required_hypothetical_profile | 2026-08-09T00:00:00+00:00 | `cid:sha256-14216cc8eb1d6e18d…` |
-| `reg_0002` | belairdirect | Belair Insurance Company Inc. | `rs_0002` | web | `unresolved` | — | 2026-08-13T02:31:00+00:00 | `cid:sha256-77e059f8027d3bda2…` |
-| `reg_0003` | RBC Insurance | RBC Insurance Company of Canada | `rs_0003` | web | `unresolved` | — | 2026-08-13T02:31:00+00:00 | `cid:sha256-287a10c3a376e0026…` |
-| `reg_0004` | Desjardins Insurance | Certas Home and Auto Insurance Company | `rs_0004` | web | `unresolved` | — | 2026-08-13T02:31:00+00:00 | `cid:sha256-b21c78bf2557c5640…` |
-| `reg_0100` | Rates.ca | n/a — comparison platform | `rs_0020` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:31:00+00:00 | `cid:sha256-fc7b2bb923e2ed691…` |
-| `reg_0101` | LowestRates.ca | n/a — comparison platform | `rs_0021` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:31:00+00:00 | `cid:sha256-deeea6dbfe9e8ee6a…` |
-| `reg_0102` | MyChoice | n/a — comparison platform | `rs_0022` | web | `unresolved` | — | 2026-08-13T02:31:00+00:00 | `cid:sha256-a84c8ded91c633c8a…` |
-| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-13T02:31:04+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
-| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:31:06+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
-| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-13T02:31:08+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
-| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-13T02:31:09+00:00 | `cid:sha256-abfafb1889b780774…` |
-| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-13T02:31:10+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
-| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-13T02:31:12+00:00 | `cid:sha256-07279c0c1f0cae656…` |
-| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-13T02:31:14+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
+| `reg_0002` | belairdirect | Belair Insurance Company Inc. | `rs_0002` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
+| `reg_0003` | RBC Insurance | RBC Insurance Company of Canada | `rs_0003` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
+| `reg_0004` | Desjardins Insurance | Certas Home and Auto Insurance Company | `rs_0004` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
+| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-13T03:00:05+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
+| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T03:00:07+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
+| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-13T03:00:08+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
+| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-13T03:00:10+00:00 | `cid:sha256-8a9a8549a747a778e…` |
+| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-13T03:00:11+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
+| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-13T03:00:13+00:00 | `cid:sha256-07279c0c1f0cae656…` |
+| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-13T03:00:14+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
 
 ## Outcomes
 
@@ -48,12 +47,6 @@ Every route ever attempted, hand-probed or automated. `unresolved` stays `unreso
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `rt_reg_9007` `[SANDBOX]` | `profile_hypo_clean` | `quoted_comparable` | — | $1,634.00 | CAUTION | not_possible | 2 artifacts |
 | `rt_reg_9006` `[SANDBOX]` | `profile_hypo_clean` | `quoted_comparable` | — | $1,712.00 | PASS | measured | 2 artifacts |
-| `rt_reg_0002` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 3 artifacts |
-| `rt_reg_0003` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 1 artifacts |
-| `rt_reg_0004` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 12 artifacts |
-| `rt_reg_0100` | `profile_hypo_clean` | `blocked` | RC_ACCESS_CONTROL | — | FAIL | not_possible | 1 artifacts |
-| `rt_reg_0101` | `profile_hypo_clean` | `blocked` | RC_ACCESS_CONTROL | — | FAIL | not_possible | 1 artifacts |
-| `rt_reg_0102` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 4 artifacts |
 | `rt_reg_9001` `[SANDBOX]` | `profile_hypo_clean` | `blocked` | RC_HYPO_LICENCE_REQUIRED | — | FAIL | not_possible | 4 artifacts |
 | `rt_reg_9002` `[SANDBOX]` | `profile_hypo_clean` | `blocked` | RC_ACCESS_CONTROL | — | FAIL | not_possible | 2 artifacts |
 | `rt_reg_9003` `[SANDBOX]` | `profile_hypo_clean` | `callback_required` | RC_HUMAN_REQUIRED | — | FAIL | not_possible | 2 artifacts |
@@ -75,36 +68,6 @@ The lowest price (rt_reg_9007) does not match the benchmark package — it diffe
 
 ## Terminal blockers
 
-**`rt_reg_0002`** — `unresolved` / `None`  
-Stopping step: step 3: no actionable control  
-Policy rules fired: —  
-Stated reason: 
-
-**`rt_reg_0003`** — `unresolved` / `None`  
-Stopping step: step 1: no actionable control  
-Policy rules fired: —  
-Stated reason: 
-
-**`rt_reg_0004`** — `unresolved` / `None`  
-Stopping step: exhausted 12 steps  
-Policy rules fired: —  
-Stated reason: 
-
-**`rt_reg_0100`** — `blocked` / `RC_ACCESS_CONTROL`  
-Stopping step: step 1: bot check  
-Policy rules fired: —  
-Stated reason: A CAPTCHA or bot control was presented.
-
-**`rt_reg_0101`** — `blocked` / `RC_ACCESS_CONTROL`  
-Stopping step: step 1: bot check  
-Policy rules fired: —  
-Stated reason: A CAPTCHA or bot control was presented.
-
-**`rt_reg_0102`** — `unresolved` / `None`  
-Stopping step: step 4: could not advance  
-Policy rules fired: P-BUDGET-01  
-Stated reason: 
-
 **`rt_reg_9001` `[SANDBOX]`** — `blocked` / `RC_HYPO_LICENCE_REQUIRED`  
 Stopping step: step 4: Driver's licence number (mandatory — journey cannot advance)  
 Policy rules fired: P-HYPO-ATTEST-01, P-HYPO-LICENCE-01  
@@ -121,7 +84,7 @@ Policy rules fired: —
 Stated reason: The journey offers a callback instead of a price.
 
 **`rt_reg_9004` `[SANDBOX]`** — `unresolved` / `None`  
-Stopping step: step 1: no actionable control  
+Stopping step: step 1: could not advance  
 Policy rules fired: —  
 Stated reason: 
 
@@ -155,24 +118,24 @@ The true number of distinct rate sources is very likely lower than 67 — severa
 
 | Metric | Value |
 | --- | --- |
-| verified applicable rate sources | 7 |
+| verified applicable rate sources | 4 |
 | distinct rate sources total | 67 |
 | records total | 70 |
-| records attempted | 7 |
-| records never attempted | 63 |
-| records never attempted reconnaissance pending | 18 |
+| records attempted | 4 |
+| records never attempted | 66 |
+| records never attempted reconnaissance pending | 21 |
 | records never attempted appendix unvalidated | 45 |
-| market completion | 3/7 (43%) |
-| comparable quote yield | 0/7 (0%) |
-| evidence rate | 7/7 (100%) |
+| market completion | 1/4 (25%) |
+| comparable quote yield | 0/4 (0%) |
+| evidence rate | 1/4 (25%) |
 | duplicate suppression | 4/70 (6%) |
-| freshness | 7/7 (100%) |
+| freshness | 4/4 (100%) |
 | synthetic records excluded | 7 |
 
 Market completion and comparable quote yield are computed over distinct rate sources that have been attempted ('verified applicable rate sources'), per §11.9. Evidence rate, duplicate suppression and freshness are computed over records. Records never attempted — either FATHOM's own reconnaissance_pending routes, or Appendix A discovery-seed rows carrying requires_current_validation=true (whose exported status field reads 'unresolved' by explicit instruction, not because an attempt was made) — are excluded from these denominators and reported separately, rather than counted as failed attempts. A route FATHOM did attempt and could not resolve keeps status 'unresolved' and stays in every denominator; that is a different thing from a row nobody has touched yet.
 
 ## Chain verification
 
-- Evidence chain: chain intact — 133 artifacts
-- Policy audit chain: chain intact — 438 entries verified
+- Evidence chain: chain intact — 148 artifacts
+- Policy audit chain: chain intact — 492 entries verified
 

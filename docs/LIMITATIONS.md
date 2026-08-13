@@ -171,13 +171,17 @@ Four of six Part B items shipped, in priority order, on top of the UI overhaul (
 
 ## 11. Deferred entirely — Part B items not attempted
 
-- **B2, Rulebook Compiler and the `COMPUTED` residual-market premium** — §3 lists this as one of
-  four headline outputs and it remains **the single most significant absence in this build.**
-  Deliberately not attempted: it requires sourcing a real public rate manual, extracting real
-  rating tables reliably, having an LLM write a deterministic rater, and self-verifying against the
-  manual's own worked examples — a multi-hour undertaking with a hard honesty bar (a wrong computed
-  price is fatal; a missing one is fine). final.md itself sanctions stopping cleanly rather than
-  approximating, which is what this is.
+- **B2, Rulebook Compiler and the `COMPUTED` residual-market premium — the compute half remains
+  not attempted, revisited and scoped down to extraction-only in a later pass.** The original B2
+  (an LLM-written deterministic rater, self-verified against the manual's own worked examples) is
+  still not built, for the same reason as before: a wrong computed price is fatal and a missing one
+  is fine, and building a trustworthy rater is a multi-hour undertaking on its own. What was added
+  instead, under a hard 60-minute timebox: `scripts/extract_residual_manual.py` parses the real
+  public Facility Association Ontario manual and extracts exactly one clean, unambiguous table (the
+  territory-definitions lookup, pp. 1398-1605) into `out/residual_manual_extract.json`, with every
+  row carrying its source page and table name. No premium, estimate, or computed figure appears
+  anywhere in that output — see `docs/RESIDUAL_MARKET.md` for what was extracted, what was tried
+  and rejected as too ambiguous to extract without guessing, and why.
 - **B6, Live Narration Mode** — explicitly gated by final.md on "only if everything above is done."
   B2 is not done, so this was never in scope for this pass.
 

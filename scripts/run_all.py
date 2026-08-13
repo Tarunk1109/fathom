@@ -139,6 +139,14 @@ def write_run_report(results, registry, note, evidence, engine, groups=None, pro
         "MyChoice.ca returned `$177.83` from landing-page marketing copy with zero fields filled. "
         "Fixed and locked down as a regression test. Full account in `docs/SAFETY.md` § "
         '"Worked example: the fabricated premium"; reproduce with `make demo-fabrication`.', "",
+        "**Residual-market rating data, extracted and never computed.** "
+        "`out/residual_manual_extract.json` parses the real, public Facility Association Ontario "
+        "Manual of Rules and Rates (effective 2025-11-01) into 6,440 provenanced territory-"
+        "definition rows (pages 1398-1605 and two earlier per-section repeats), each carrying its "
+        "source page and table name. No premium or estimate was computed from it — every figure "
+        "not cleanly parseable (e.g. rate-group tables whose cells stack multiple values with no "
+        "unambiguous mapping) was left out rather than guessed. Labelled `UNVERIFIED EXTRACTION` "
+        "everywhere it appears; see `docs/RESIDUAL_MARKET.md`.", "",
     ]
 
     # --- Coverage ledger: every route ever attempted, registry-level ------------------------

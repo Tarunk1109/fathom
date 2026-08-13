@@ -1,6 +1,6 @@
 [
   {
-    "result_id": "res_0013",
+    "result_id": "res_0007",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9007",
     "distinct_rate_source_id": "rs_0074",
@@ -48,15 +48,15 @@
       "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
     },
     "validity": {
-      "quote_reference_id": "GLF-48150160",
+      "quote_reference_id": "GLF-65268995",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:38+00:00",
+      "timestamp": "2026-08-13T02:31:13+00:00",
       "source_url_or_phone_route": "http://localhost:8801/golf",
       "artifact_cids": [
         "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-        "cid:sha256-e9dd1361832f2e43a2c33d75164f38f96e33fee0272b0365e192854842173699"
+        "cid:sha256-9b0e77093dd7e7841c0d410bf2bf96920b04166a4e5b6a1b083e8f31c332bf6a"
       ],
       "artifact_count": 2
     },
@@ -64,7 +64,7 @@
     "sandbox": true
   },
   {
-    "result_id": "res_0012",
+    "result_id": "res_0006",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9006",
     "distinct_rate_source_id": "rs_0073",
@@ -100,15 +100,15 @@
       "parity_note": "Coverage matches the benchmark, so the quoted price is the benchmark price."
     },
     "validity": {
-      "quote_reference_id": "FOX-17937661",
+      "quote_reference_id": "FOX-78961851",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:36+00:00",
+      "timestamp": "2026-08-13T02:31:11+00:00",
       "source_url_or_phone_route": "http://localhost:8801/foxtrot",
       "artifact_cids": [
         "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-        "cid:sha256-1ea2e5b79eee51ca97016e8ed4ae4ac9d42b7277c651470d5878f1afc923ec97"
+        "cid:sha256-cf62481d2f2589fbe35149fe770424ee1db214ecf4ec6e182eda26f5c5c0cdb8"
       ],
       "artifact_count": 2
     },
@@ -117,324 +117,6 @@
   },
   {
     "result_id": "res_0001",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0002",
-    "distinct_rate_source_id": "rs_0002",
-    "route_id": "rt_reg_0002",
-    "status": "unresolved",
-    "reason_code": null,
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:04:40+00:00",
-      "source_url_or_phone_route": "https://www.belairdirect.com/en/car-insurance.html",
-      "artifact_cids": [
-        "cid:sha256-77e059f8027d3bda2a297da89bbcdfbeaffb02ad312f40aa3fc902dce587c4cf",
-        "cid:sha256-bbd4115d1696e13ec2df9347ccdd33cf4576d22a5726f50dc17f32d16c30ee69",
-        "cid:sha256-abae0197adbf05f68a6de43ae1315541bff14bb263f7010d96b413660f792cc7"
-      ],
-      "artifact_count": 3
-    },
-    "decline": {
-      "stated_reason_redacted": "",
-      "reason_code": null,
-      "stopping_step": "step 3: no actionable control",
-      "policy_rules_fired": []
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0002",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0003",
-    "distinct_rate_source_id": "rs_0003",
-    "route_id": "rt_reg_0003",
-    "status": "unresolved",
-    "reason_code": null,
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:04:45+00:00",
-      "source_url_or_phone_route": "https://www.rbcinsurance.com/auto-insurance/",
-      "artifact_cids": [
-        "cid:sha256-287a10c3a376e0026e5f22be571ca4b1da1406e4e27256843e8af335b15135f5"
-      ],
-      "artifact_count": 1
-    },
-    "decline": {
-      "stated_reason_redacted": "",
-      "reason_code": null,
-      "stopping_step": "step 1: no actionable control",
-      "policy_rules_fired": []
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0003",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0004",
-    "distinct_rate_source_id": "rs_0004",
-    "route_id": "rt_reg_0004",
-    "status": "unresolved",
-    "reason_code": null,
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:05:48+00:00",
-      "source_url_or_phone_route": "https://www.desjardins.com/ca/personal/insurance/car/",
-      "artifact_cids": [
-        "cid:sha256-b21c78bf2557c56405019587de2ecdea7d06898d8051128cf2b5432f3b3420b8",
-        "cid:sha256-dc9fbc87c3034068ef0997081bc19e3802c0d8920a4cc9cc6ddb4ba01f5898e0",
-        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a",
-        "cid:sha256-43755e1da20b2b5278f243f2f4a8b91f3c2e8cc6721ac9b56dfe1fdb9414d885",
-        "cid:sha256-9f4100a802d2b94e71021a5b4659cdede57f457761d6822e3130a842f0a9503a"
-      ],
-      "artifact_count": 12
-    },
-    "decline": {
-      "stated_reason_redacted": "",
-      "reason_code": null,
-      "stopping_step": "exhausted 12 steps",
-      "policy_rules_fired": []
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0004",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0100",
-    "distinct_rate_source_id": "rs_0020",
-    "route_id": "rt_reg_0100",
-    "status": "blocked",
-    "reason_code": "RC_ACCESS_CONTROL",
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:07:34+00:00",
-      "source_url_or_phone_route": "https://rates.ca/insurance-quotes/auto/ontario",
-      "artifact_cids": [
-        "cid:sha256-fc7b2bb923e2ed69189c21cb6a08048de61438788660c2561e904ed409ccb271"
-      ],
-      "artifact_count": 1
-    },
-    "decline": {
-      "stated_reason_redacted": "A CAPTCHA or bot control was presented.",
-      "reason_code": "RC_ACCESS_CONTROL",
-      "stopping_step": "step 1: bot check",
-      "policy_rules_fired": []
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0005",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0101",
-    "distinct_rate_source_id": "rs_0021",
-    "route_id": "rt_reg_0101",
-    "status": "blocked",
-    "reason_code": "RC_ACCESS_CONTROL",
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:07:35+00:00",
-      "source_url_or_phone_route": "https://www.lowestrates.ca/insurance/auto",
-      "artifact_cids": [
-        "cid:sha256-deeea6dbfe9e8ee6a35df6b5e560780cf62f8e96906bd742440948ad0eacb4fc"
-      ],
-      "artifact_count": 1
-    },
-    "decline": {
-      "stated_reason_redacted": "A CAPTCHA or bot control was presented.",
-      "reason_code": "RC_ACCESS_CONTROL",
-      "stopping_step": "step 1: bot check",
-      "policy_rules_fired": []
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0006",
-    "profile_id": "profile_hypo_clean",
-    "registry_id": "reg_0102",
-    "distinct_rate_source_id": "rs_0022",
-    "route_id": "rt_reg_0102",
-    "status": "unresolved",
-    "reason_code": null,
-    "channel": "web",
-    "assessment": {
-      "verdict": "FAIL",
-      "reason_codes": [
-        "no_premium_returned"
-      ],
-      "confidence_indicator": "high",
-      "evidence_status": "verified"
-    },
-    "price": {
-      "annual_premium": null,
-      "currency": "CAD",
-      "total_estimated_cost": null
-    },
-    "coverage": {},
-    "variance_from_benchmark": [],
-    "parity": {
-      "price_at_benchmark": null,
-      "adjustments_applied": [],
-      "parity_confidence": "not_possible",
-      "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
-    },
-    "validity": {
-      "quote_reference_id": "",
-      "verification_may_change_premium": true
-    },
-    "evidence": {
-      "timestamp": "2026-08-12T15:07:38+00:00",
-      "source_url_or_phone_route": "https://www.mychoice.ca/insurance/car/",
-      "artifact_cids": [
-        "cid:sha256-a84c8ded91c633c8a3fd6a8ef8b6bd00cbf6496b973ee1c439cbdbe327f2c194",
-        "cid:sha256-8ea46ff1ed4251c9db4199075693e5bf7c42b625d139870f2cba850ea0d70975",
-        "cid:sha256-c9e4b3b4eadc4a51083775aa2feae69009e9cd717fe6d164e43fea6c630d5c32",
-        "cid:sha256-a9282c9bf0ec2c2710ed78d04887bacc086a09660a919894a3571601a7588798"
-      ],
-      "artifact_count": 4
-    },
-    "decline": {
-      "stated_reason_redacted": "",
-      "reason_code": null,
-      "stopping_step": "step 4: could not advance",
-      "policy_rules_fired": [
-        "P-BUDGET-01"
-      ]
-    },
-    "sandbox": false
-  },
-  {
-    "result_id": "res_0007",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9001",
     "distinct_rate_source_id": "rs_0068",
@@ -468,7 +150,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:25+00:00",
+      "timestamp": "2026-08-13T02:31:01+00:00",
       "source_url_or_phone_route": "http://localhost:8801/alpha",
       "artifact_cids": [
         "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
@@ -490,7 +172,7 @@
     "sandbox": true
   },
   {
-    "result_id": "res_0008",
+    "result_id": "res_0002",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9002",
     "distinct_rate_source_id": "rs_0069",
@@ -524,7 +206,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:29+00:00",
+      "timestamp": "2026-08-13T02:31:05+00:00",
       "source_url_or_phone_route": "http://localhost:8801/bravo",
       "artifact_cids": [
         "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
@@ -541,7 +223,7 @@
     "sandbox": true
   },
   {
-    "result_id": "res_0009",
+    "result_id": "res_0003",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9003",
     "distinct_rate_source_id": "rs_0070",
@@ -575,7 +257,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:31+00:00",
+      "timestamp": "2026-08-13T02:31:07+00:00",
       "source_url_or_phone_route": "http://localhost:8801/charlie",
       "artifact_cids": [
         "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
@@ -592,7 +274,7 @@
     "sandbox": true
   },
   {
-    "result_id": "res_0010",
+    "result_id": "res_0004",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9004",
     "distinct_rate_source_id": "rs_0071",
@@ -626,23 +308,23 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:20:31+00:00",
+      "timestamp": "2026-08-13T02:28:32+00:00",
       "source_url_or_phone_route": "http://localhost:8801/delta",
       "artifact_cids": [
-        "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
+        "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
       ],
       "artifact_count": 1
     },
     "decline": {
       "stated_reason_redacted": "",
       "reason_code": null,
-      "stopping_step": "step 1: no actionable control",
+      "stopping_step": "step 1: could not advance",
       "policy_rules_fired": []
     },
     "sandbox": true
   },
   {
-    "result_id": "res_0011",
+    "result_id": "res_0005",
     "profile_id": "profile_hypo_clean",
     "registry_id": "reg_9005",
     "distinct_rate_source_id": "rs_0072",
@@ -676,7 +358,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:30:55+00:00",
+      "timestamp": "2026-08-13T02:31:09+00:00",
       "source_url_or_phone_route": "http://localhost:8801/echo",
       "artifact_cids": [
         "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947"

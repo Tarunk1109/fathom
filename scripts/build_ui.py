@@ -229,6 +229,31 @@ def load_json(path: Path, default):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else default
 
 
+def build_residual_manual_panel() -> dict:
+    """final.md B2, revisited/scoped to extraction-only. Never a premium, never a quote --
+    see docs/RESIDUAL_MARKET.md. Embeds a bounded sample of rows (the full 6,000+-row table
+    lives in out/residual_manual_extract.json) so the UI stays fast to load."""
+    path = OUT / "residual_manual_extract.json"
+    data = load_json(path, None)
+    if data is None:
+        return {"available": False}
+    rows = data["extracted"]["rows"]
+    sample = rows[::max(1, len(rows) // 200)][:200]
+    return {
+        "available": True,
+        "label": data["label"],
+        "disclaimer": data["disclaimer"],
+        "source": data["source"],
+        "table_name": data["extracted"]["table_name"],
+        "page_range": data["extracted"]["page_range"],
+        "row_count": data["extracted"]["row_count"],
+        "sample_rows": sample,
+        "sample_note": f"showing {len(sample)} of {data['extracted']['row_count']} rows "
+                        f"(full table in out/residual_manual_extract.json)",
+        "not_extracted": data["not_extracted"],
+    }
+
+
 def main() -> int:
     registry_export = load_json(OUT / "registry.json", {"records": [], "metrics": {}})
     results = load_json(OUT / "results.json", [])
@@ -352,6 +377,7 @@ def main() -> int:
         "frontier": frontier,
         "scorecard": scorecard,
         "enforcement": ENFORCEMENT_TABLE,
+        "residual_manual": build_residual_manual_panel(),
     }
 
     try:
