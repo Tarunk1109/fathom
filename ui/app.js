@@ -293,6 +293,8 @@
       ["Policy rules PARTIAL", s.policy_rules_partial, false],
       ["Concurrency bug found + fixed", s.concurrency_bug_found_and_fixed ? "yes" : "no", true],
       ["Sandbox routes run", s.sandbox_routes_run, false],
+      ["Sandbox routes reaching a price", s.sandbox_routes_priced, false],
+      ["Extraction accuracy, verified sample", s.extraction_accuracy_verified_sample, false],
     ];
     ITEMS.forEach(([label, value, flag]) => {
       grid.appendChild(el("div", { class: "scorecard-item" + (flag ? " flag" : "") }, [

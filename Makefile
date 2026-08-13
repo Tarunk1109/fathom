@@ -68,3 +68,9 @@ build-ui:
 
 demo-fabrication:
 	@$(VENV) scripts/demo_fabrication.py
+
+demo-injection:
+	@$(VENV) scripts/demo_injection.py
+
+ask:
+	@$(VENV) scripts/ask_findings.py "$(Q)"

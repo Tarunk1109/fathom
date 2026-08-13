@@ -4,7 +4,8 @@ Deliverable per FATHOM §15. §15.2 says to write these honestly, and §18 lists
 walkthrough with what could not be done" as an anti-goal — so this document is thorough and the
 walkthrough is not.
 
-Last updated 2026-08-12, final pass per `finish.md`.
+Last updated 2026-08-13, final pass per `final.md` (Part A UI overhaul + Part B features, on top
+of the earlier `finish.md` pass).
 
 ---
 
@@ -140,33 +141,88 @@ against real captured content (`make demo-fabrication`). Full account: `docs/SAF
   §8.3 registry schema was used as the operative field set instead — every field present on every
   row, `null` or empty where genuinely unknown. See `docs/DECISIONS.md` DL-21.
 
-## 10. Deferred entirely
+## 10. Built in the `final.md` pass — Part B
 
-Present in `fathom.md`, not built, and not claimed:
+Four of six Part B items shipped, in priority order, on top of the UI overhaul (Part A):
+
+- **B1, Eligibility Frontier** — a full sixth view (`ui/index.html` → **Frontier**), pure inversion
+  of reason codes already collected. Honestly thin under this build's actual data: one unlockable
+  rung (`run_under_operator_profile`, opening 1 distinct rate source — Sonnet's licence wall), and
+  a "closed regardless" list of six routes whose `unresolved`/`RC_ACCESS_CONTROL` outcomes have no
+  operator-side unlock. Most attempted routes stopped at this build's own capability limit rather
+  than a market-eligibility refusal, so there is little for the ladder to invert yet — stated
+  explicitly in the view itself, not left implicit.
+- **B3, Injection defense demo** (`make demo-injection`) — runs the real executor against the
+  sandbox `echo` site's hidden payload, captures it verbatim in a real evidence artifact, and
+  confirms zero bind/payment-shaped actions were proposed in response. See `docs/DECISIONS.md`
+  DL-24 for the honest architecture note: this codebase has no module literally named "Reader" or
+  "Planner" as §11.3 describes — the defense demonstrated is that the field-filler's behaviour is
+  determined by page structure matched against a fixed ontology, never by page content, so the
+  payload was never in a position to be read as a command.
+- **B4, Ask Your Findings** (`make ask Q="..."`) — a CLI, not a live browser text box. Retrieval
+  runs first over `ui/data.json`; the model is only ever called with the retrieved rows, and never
+  called at all if nothing retrieves — a structural enforcement of "never answer from general
+  knowledge," not a prompt-only promise. See §12 below for why this is a CLI.
+- **B5, Honest Scorecard** — rendered on the Sounding view: fabrications caught/shipped, policy
+  rules LIVE/PARTIAL, the concurrency bug found-and-fixed flag, sandbox routes run and priced.
+  **One figure is deliberately reported as unmeasured rather than invented:** extraction accuracy
+  against a manually verified sample. No such sample was built this session; the scorecard says
+  "not measured this session" instead of a number, per the same discipline as everything else here.
+
+## 11. Deferred entirely — Part B items not attempted
+
+- **B2, Rulebook Compiler and the `COMPUTED` residual-market premium** — §3 lists this as one of
+  four headline outputs and it remains **the single most significant absence in this build.**
+  Deliberately not attempted: it requires sourcing a real public rate manual, extracting real
+  rating tables reliably, having an LLM write a deterministic rater, and self-verifying against the
+  manual's own worked examples — a multi-hour undertaking with a hard honesty bar (a wrong computed
+  price is fatal; a missing one is fine). final.md itself sanctions stopping cleanly rather than
+  approximating, which is what this is.
+- **B6, Live Narration Mode** — explicitly gated by final.md on "only if everything above is done."
+  B2 is not done, so this was never in scope for this pass.
+
+Also still not built, from `fathom.md` directly, deferred under the same priority reasoning as the
+`finish.md` pass (a working executor and an honest UI beat every one of these):
 
 - Voice executor (disclosure prelude, consent state machine, live escalation)
 - Inbound callback catcher
-- Rulebook Compiler and the `COMPUTED` residual-market premium — §3 lists this as one of four
-  headline outputs and it is the most significant absence in this build
 - Benefit Price Probe and measured parity
 - Vehicle Inversion Engine
 - Channel Arbitrage Detector
 - Dark Pattern Detector
-- Eligibility Frontier solver
 - Twin Readers (dual extraction with agreement checking)
 - Self-healing route recipes
-- The injection-resistance demo
-- Ask-Your-Own-Findings
+- Rate Filing Radar
+- Broker Disclosure Harvester
 
-These were deferred deliberately under the operator's priority order: a working executor beats
-every one of them, and the organizers stated that automation is the ask, not a bonus.
+## 12. Ask Your Findings is a CLI, not a live UI text box
 
-## 11. Cross-channel handoff
+The Evidence view's "Ask your findings" panel explains this in place, but the reasoning belongs
+here too: embedding a live Anthropic API key in `ui/index.html`'s JavaScript would put that key in
+the page source of every copy of the file — a static HTML page has no server side to hide it behind.
+That is exactly the class of leak this project's own PII/secret discipline exists to prevent (the
+operator supplied a real API key mid-session; it was stored in a local, gitignored `.env`, never
+committed, never printed after receipt, never embedded in any UI code — see `docs/DECISIONS.md`
+DL-26). `make ask Q="..."` runs the same retrieval-and-answer logic server-side instead.
+
+## 13. Cross-channel handoff
 
 **Not built.** The brief's minimum acceptance list includes a cross-channel handoff where the
 journey requires it (e.g., web route escalating to a voice or broker channel with context
 preserved). No voice or broker executor exists in this build, so no handoff was possible to
 demonstrate. Marked FAIL in the acceptance checklist rather than claimed.
+
+## 14. UI-specific limitations
+
+- **Responsive behaviour below ~860px width was written but not visually confirmed.** The browser
+  automation tool used to test this UI resized the OS window but the captured screenshot did not
+  reflect the narrower viewport, so the `@media (max-width: 860px)` rail-collapse rule in
+  `ui/styles.css` is implemented per final.md §A3 but not screenshot-verified at that width.
+- **The market graph's layout is a hand-rolled two-column node-link diagram, not a force-directed
+  or otherwise auto-laid-out graph.** It is legible and correctly wired (verified live, including
+  fixing a real row-collapse bug — see `docs/DECISIONS.md` DL-28), but it does not reflow to avoid
+  edge crossings at arbitrary data sizes the way a proper graph layout algorithm would.
+- **Extraction accuracy has no verified-sample figure** — see §10 above.
 
 ---
 

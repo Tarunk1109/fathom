@@ -319,6 +319,8 @@ def main() -> int:
     frontier = build_frontier(registry_export["records"])
 
     # Fabrication incident + scorecard figures (final.md B5).
+    sandbox_results = [r for r in results if r.get("sandbox")]
+    sandbox_priced = sum(1 for r in sandbox_results if r.get("price", {}).get("annual_premium") is not None)
     scorecard = {
         "fabrications_caught_pre_report": 1,
         "fabrications_shipped": 0,
@@ -327,7 +329,12 @@ def main() -> int:
                                  {"P-REAL-FACT-01", "P-LICENCE-01", "P-THIRDPARTY-01"}),
         "policy_rules_partial": 3,
         "concurrency_bug_found_and_fixed": True,
-        "sandbox_routes_run": sum(1 for r in registry_export["records"] if r.get("is_synthetic")),
+        "sandbox_routes_run": len(sandbox_results),
+        "sandbox_routes_priced": f"{sandbox_priced}/{len(sandbox_results)}" if sandbox_results else "0/0",
+        # Not computed: extraction accuracy against a manually verified sample. No such sample
+        # was built this session. Omitted rather than estimated -- see LIMITATIONS.md. A metric
+        # with no real number behind it is worse than an honestly absent one.
+        "extraction_accuracy_verified_sample": "not measured this session",
     }
 
     payload = {

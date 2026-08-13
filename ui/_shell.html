@@ -156,15 +156,15 @@
       </div>
       <div id="ask-panel" class="panel">
         <h2 class="panel-title">Ask your findings</h2>
-        <p class="panel-sub" id="ask-unavailable">Answers only from retrieved evidence artifacts
-          below — never from general knowledge. Requires an API key; see
-          docs/DECISIONS.md.</p>
-        <div id="ask-ui" hidden>
-          <div class="ask-row">
-            <input type="text" id="ask-input" placeholder="Which rate sources stopped at a licence requirement?">
-            <button id="ask-btn">Ask</button>
-          </div>
-          <div id="ask-answer"></div>
+        <p class="panel-sub">Answers only from the evidence rows below — never from general
+          knowledge. Retrieval runs first; if nothing matches, the model is never called, so
+          there is no path to a guessed answer.</p>
+        <p class="panel-sub" style="color:var(--sounding)">
+          Run from a terminal, not this page — an API key embedded in a static HTML file would be
+          readable in the page source of every copy of it. This is a deliberate scope decision,
+          not a missing feature; see docs/DECISIONS.md.</p>
+        <div class="mono" style="background:var(--shelf);padding:10px 12px;border-radius:var(--radius);font-size:12px">
+          make ask Q="Which rate sources stopped at a licence requirement?"
         </div>
       </div>
       <div id="evidence-list"></div>
