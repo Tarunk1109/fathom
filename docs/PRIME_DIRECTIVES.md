@@ -82,52 +82,58 @@ blurred, in the UI or in the submission.
 
 ## Enforcement status
 
-**A living artifact. Updated at every milestone. Never mark a directive enforced before the gate
-exists.**
+**A living artifact. Updated at every milestone, including this final pass per `finish.md`. Never
+mark a directive enforced before the gate exists.**
 
 The directives are enforced in code, not by convention. This table tracks which enforcement
 mechanism actually exists, so the safety claim stays demonstrable rather than aspirational (§7.1).
 The honest split between *enforced* and *documented only* is a submission asset: it is the
 difference between a system that has been built and one that has been described.
 
-**Status values.** `LIVE` — the gate exists, is wired in, and has tests proving both that it denies
-what it must and that it does not over-block. `PARTIAL` — the gate exists but something it depends
-on does not. `DOCUMENTED ONLY` — written down, nothing enforces it yet.
+**Status values.** `LIVE` — the gate exists, is wired in, is tested, and is exercised by this
+build's actual operation (`scripts/run_all.py`), not only by a unit test's constructed state.
+`PARTIAL` — the gate exists and is tested, but something it depends on is never populated in this
+build's actual operation. `DOCUMENTED ONLY` — written down, nothing enforces it yet.
 
-| Directive area | Enforcement mechanism | Milestone | Status |
-| --- | --- | --- | --- |
-| No PII in the repo, logs or submission | `tools/pii_sweep.py`, in CI and pre-commit | 1 | **LIVE** |
-| No PII in the policy audit log | `packages/policy/audit.py` — field names + digest only, targets stripped, rationale scrubbed | 2 | **LIVE** |
-| Personal use only | `LICENSE`, `README.md` | 1 | **LIVE** |
-| Never bind, purchase, renew, cancel or modify | `P-BIND-01` | 2 | **LIVE** |
-| Never submit a signature or application declaration | `P-SIGN-01` | 2 | **LIVE** |
-| Never submit payment information | `P-PAY-01` | 2 | **LIVE** |
-| Never bypass a CAPTCHA or bot control | `P-CAPTCHA-01` | 2 | **LIVE** |
-| Never enter credentials to an unregistered service | `P-AUTH-01` | 2 | **LIVE** |
-| Never continue after a stop request | `P-STOP-01` | 2 | **LIVE** |
-| Attempt and time budgets | `P-BUDGET-01` — drawn down by the gate, not the caller | 2 | **LIVE** |
-| Never record without affirmative consent | `P-RECORD-01` | 2 | **LIVE** |
-| Disclose automation at the start of every call | `P-DISCLOSE-01` | 2 | **LIVE** |
-| Never submit a licence number under a hypothetical profile | `P-HYPO-LICENCE-01` | 2 | **LIVE** |
-| No human contact under a hypothetical profile | `P-HYPO-HUMAN-01` | 2 | **LIVE** |
-| No identity/consent/declaration/callback/purchase step under a hypothetical profile | `P-HYPO-STEP-01` → `manual_handoff` | 2 | **LIVE** |
-| Skip optional plate fields; record `blocked` if mandatory | `P-PLATE-01` → `blocked` | 2 | **LIVE** |
-| Escalate identity lookup, consent attestation, coverage advice | `P-HUMAN-01` → `ESCALATE` + checkpoint queue | 2 | **LIVE** |
-| Every decision recorded in a verifiable chain | `AuditLog.verify_chain()`, `scripts/verify_chain.py` | 2 | **LIVE** |
-| Never change material facts across insurers | `P-FACT-01` | 2 | **PARTIAL** — rule live and tested; the session fact-lock it reads is populated by intake at Milestone 3 |
-| Use the operator's own real information | `P-REAL-FACT-01` | 2 | **PARTIAL** — rule live and tested; `registered_facts` is populated by the vault at Milestone 3 |
-| Never fabricate, borrow or alter a licence number | `P-LICENCE-01` | 2 | **PARTIAL** — rule live and tested; `registered_licence_hash` comes from the vault at Milestone 3 |
-| Never enter another person's data without consent | `P-THIRDPARTY-01` | 2 | **PARTIAL** — explicit third-party fields denied now; identity comparison needs the vault at Milestone 3 |
-| Sandbox-only profiles never reach a real destination | `P-SANDBOX-01` | 2 | **PARTIAL** — rule live and tested; the profile registry that sets the flag arrives at Milestone 3 |
-| Redaction before every write | `packages/redactor/` (local text + vision) | 3 | DOCUMENTED ONLY |
-| Voice disclosure prelude checksummed, consent state machine | `packages/executors/voice/` | 8 | DOCUMENTED ONLY — `P-DISCLOSE-01` and `P-RECORD-01` gate the actions; the state machine driving them is Milestone 8 |
-| No legal characterization | Friction Ledger write path + review | 6 | DOCUMENTED ONLY |
-| Every hypothetical result visibly labelled | UI + normalizer | 4–9 | DOCUMENTED ONLY |
+| Directive area | Enforcement mechanism | Status |
+| --- | --- | --- |
+| No PII in the repo, logs or submission | `tools/pii_sweep.py`, in CI and pre-commit | **LIVE** |
+| No PII in the policy audit or evidence chain | Field names + digest only, targets stripped, rationale/content redacted before write | **LIVE** |
+| Personal use only | `LICENSE`, `README.md` | **LIVE** |
+| Never bind, purchase, renew, cancel or modify | `P-BIND-01` | **LIVE** (rule tested; never naturally triggered in a real run — the executor never attempts a purchase action by design, see `make demo`) |
+| Never submit a signature or application declaration | `P-SIGN-01` | **LIVE** |
+| Never submit payment information | `P-PAY-01` | **LIVE** |
+| Never bypass a CAPTCHA or bot control | `P-CAPTCHA-01` | **LIVE** — fired for real against sandbox `bravo`; the Rates.ca/LowestRates.ca Cloudflare blocks were detected by the executor's own bot-check heuristic, not this rule (no interaction was ever attempted for the rule to fire on) |
+| Never enter credentials to an unregistered service | `P-AUTH-01` | **LIVE** |
+| Never continue after a stop request | `P-STOP-01` | **LIVE** |
+| Attempt and time budgets | `P-BUDGET-01`, drawn down by the gate itself | **LIVE** — fired for real (18 times against MyChoice's time budget in the final rebuild) |
+| Never record without affirmative consent | `P-RECORD-01` | **DOCUMENTED ONLY in operation** — rule live and tested against a constructed `CallState`; no voice executor exists to drive a real call through it |
+| Disclose automation at the start of every call | `P-DISCLOSE-01` | **DOCUMENTED ONLY in operation** — same reason |
+| Never submit a licence number under a hypothetical profile | `P-HYPO-LICENCE-01` | **LIVE** — fired for real (Sonnet reconnaissance, and sandbox `alpha`'s automated reproduction) |
+| No human contact under a hypothetical profile | `P-HYPO-HUMAN-01` | **LIVE**, tested; never naturally triggered — no route in this build reaches a voice/callback action |
+| No identity/consent/declaration/callback/purchase step under a hypothetical profile | `P-HYPO-STEP-01` → `manual_handoff` | **LIVE**, tested; not naturally triggered this run (routes stopped earlier, at the licence wall or a capability limit) |
+| No accuracy/fraud-acknowledgement attestation under a hypothetical profile | `P-HYPO-ATTEST-01` → `manual_handoff` | **LIVE** — fired for real against sandbox `alpha`, reproducing the exact control INC-001 identified |
+| One submission, one profile | `P-PROFILE-BLEED-01` | **LIVE** — every payload the executor builds carries `FieldValue` provenance; the rule reads it on every fill |
+| No real destination without a recorded, digest-bound payload approval | `P-APPROVAL-01` | **LIVE** — default deny; genuinely gated all six real routes attempted this build |
+| Skip optional plate fields; record `blocked` if mandatory | `P-PLATE-01` → `blocked` | **LIVE**, tested; not naturally triggered — no attempted route reached a plate field |
+| Escalate identity lookup, consent attestation, coverage advice | `P-HUMAN-01` → `ESCALATE` + checkpoint queue | **LIVE**, tested; not naturally triggered in this build's own routes |
+| Every decision recorded in a verifiable chain | `AuditLog.verify_chain()`, `scripts/verify_chain.py` | **LIVE** — and concurrency-safe as of this pass; a real chain-break from concurrent writers was found and fixed, see `docs/SAFETY.md` |
+| Never change material facts across insurers | `P-FACT-01` | **LIVE** — `SessionContext.fact_lock` is populated from `Profile.fact_lock()` on every real invocation of `scripts/run_all.py`, including for the hypothetical profile |
+| Use the operator's own real information | `P-REAL-FACT-01` | **PARTIAL** — rule live and tested; `registered_facts` comes from the vault, and the one profile that would populate it (`profile_operator`) is never run against any destination, real or sandbox, per D-OPER |
+| Never fabricate, borrow or alter a licence number | `P-LICENCE-01` | **PARTIAL** — same reason: `registered_licence_hash` requires a `profile_operator` run that D-OPER explicitly rules out |
+| Never enter another person's data without consent | `P-THIRDPARTY-01` | **PARTIAL** — explicit third-party field-name denial is live and tested; identity-hash comparison needs vault-populated `operator_identity`, same D-OPER gap |
+| Sandbox-only profiles never reach a real destination | `P-SANDBOX-01` | **LIVE** — `sandbox_only` is populated from the profile registry on every invocation; `profile_sim_g2` loads and validates, though no route in this build was run explicitly *as* that profile |
+| Redaction before every write | `packages/redactor/` (regex; no vision component, `DL-04`) | **LIVE**, scoped — `EvidenceStore.append()` runs it structurally; regex is a floor, not a ceiling (see `docs/LIMITATIONS.md`) |
+| Voice disclosure prelude checksummed, consent state machine | `packages/executors/voice/` | **NOT BUILT** — no voice executor exists in this repository |
+| No legal characterization | Manual review discipline (no code check) | **DOCUMENTED ONLY** — every `automation_notes` field in this build was written to avoid it, but nothing programmatically enforces it |
+| Every hypothetical/sandbox result visibly labelled | `results.json`'s explicit `sandbox: bool` field, UI badges/banner | **LIVE** — verified rendering live in Chrome during this pass |
 
-**The `PARTIAL` rows are the honest ones.** Each of those rules is written, registered and tested,
-and each reads session state that a later milestone populates. A rule reading an empty fact-lock
-denies nothing — so the rule is live, and the directive is not fully enforced until Milestone 3
-fills it. Saying "LIVE" there would be the exact overclaim this table exists to prevent.
+**The `PARTIAL` rows are now down to exactly three, and all three share one cause:**
+`profile_operator` — the only profile whose vault-backed data would populate
+`registered_licence_hash`, `registered_facts` and `operator_identity` — was deliberately never run
+against any destination, per the operator's final D-OPER decision. The rules are complete, tested,
+and would fire correctly the moment that profile runs; they have simply never been exercised by
+this build's own operation, by design.
 
 Verify the current state yourself: `make rules` lists every registered rule, `make demo` shows one
-being enforced, and `make verify` checks the audit chain.
+being enforced live, and `make verify` checks the audit chain.

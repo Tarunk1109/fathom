@@ -2,9 +2,11 @@
 
 **An evidence-grade instrument for the Ontario private-passenger auto insurance market.**
 
-> Sound the market. Prove the bottom.
-
-One intake. Every reachable Ontario rate source. Proof for every result, including every refusal.
+FATHOM runs an agentic web executor against Ontario auto insurers under a hypothetical clean-record
+driver profile, gates every action through a deterministic policy engine before it touches a real
+page, and turns every outcome — a price or a refusal — into evidenced, comparable, common-schema
+records. It measures the market rather than shopping it: a refusal with its exact reason is as
+valuable an output as a price.
 
 Built for the Ontario All-Quote Agent Challenge, August 2026.
 Operator: Tarun Karnati, Toronto, Ontario.
@@ -18,79 +20,39 @@ for anyone but the operator. See [`LICENSE`](LICENSE) — it is not an open sour
 no right of use to anyone else. Judges and challenge organisers have read access for evaluation
 only.
 
-**What it does.** It measures the Ontario private-passenger auto market from the position of a
-single real applicant: a G1 licence holder who owns no vehicle and has no Canadian driving history.
-Every rate source attempted ends in an evidenced terminal status. Refusals are first-class results,
-not errors.
-
 **What it does not do.** It does not bind, purchase, renew, cancel or modify a policy. It does not
 submit payment information, an e-signature, or an application declaration. It does not bypass a
-CAPTCHA, bot control, authentication or rate limit. It does not act for anyone but the operator, and
-it does not use anyone else's data. These are enforced in code by the Policy Engine, not by
-convention — see [`docs/PRIME_DIRECTIVES.md`](docs/PRIME_DIRECTIVES.md).
+CAPTCHA, bot control, authentication or rate limit — when the executor met one (Rates.ca,
+LowestRates.ca), it recorded the block and stopped. These are enforced in code by the Policy
+Engine on every proposed action, not by convention. See
+[`docs/PRIME_DIRECTIVES.md`](docs/PRIME_DIRECTIVES.md) for the full rule list and which parts are
+genuinely exercised by this build versus merely tested.
 
-**What its outputs are.** Records of observations with timestamps and redacted evidence. Not
-insurance advice, not offers, not quotes. A premium labelled `computed` is a calculation from a
-publicly published rate manual — it is not a quote from an insurer, and real placement requires a
-licensed intermediary. Friction is recorded as observation only; FATHOM alleges no breach of any
-law, regulation or rule by any party.
-
----
-
-## Status
-
-Built in the order given in `fathom.md` §14. The spine before the signature features.
-
-| Milestone | Scope | Status |
-| --- | --- | --- |
-| 0 | Day 0 reconnaissance probe → maps the four routes (Plan A applies) | **in progress** — probe running by hand, see [`docs/DAY0_PROBE.md`](docs/DAY0_PROBE.md) |
-| 1 | The contract: scaffold, licence, directives, PII-sweep CI | **done** |
-| 2 | The gate: Policy Engine + hash-chained audit log | **done** — `make demo`, `make verify` |
-| 3 | The spine: profiles, vault, fact-lock, intake, evidence, redactor, registry | blocked on Milestone 0 |
-| 4 | First blood: web executor, first real terminal status, normalizer | blocked |
-| 5 | The signature: Rulebook Compiler, Benefit Price Probe, Parity Solver | blocked |
-| 6 | The market: fingerprinting, Rate Filing Radar, Broker Harvester, Frontier | blocked |
-| 7 | The engineering: recipes, twin readers, sandbox, injection defence | blocked |
-| 8 | The voice: disclosure, consent state machine, escalation, callbacks | blocked |
-| 9 | The submission: vehicle inversion, arbitrage, scorecard, narration | blocked |
-
-Milestones 1 and 2 are plan-independent, so they ran in parallel with the probe (amendment D-001).
-Nothing past Milestone 2 begins until the probe is recorded.
-
-The specification was amended on 2026-08-09 following an organizer Q&A: a hypothetical clean-record
-driver profile is permitted and automation is required. See `docs/OPEN_QUESTIONS.md` — AC-001 and
-amendments D-002 through D-007.
+**What its outputs are.** Records of observations with timestamps and content-addressed, redacted
+evidence. Not insurance advice, not offers, not quotes. Results retrieved under the hypothetical
+profile are not quotes for the operator and are labelled as hypothetical everywhere they appear.
+Friction is recorded as observation only; FATHOM alleges no breach of any law or rule by any party.
 
 ---
 
-## The gate
+## The honest summary
 
-```bash
-make demo      # a bind attempt denied, with rule ID and audit chain index, then chain verification
-make verify    # verify the audit chain — judge-facing, no code reading required
-make rules     # list every registered rule and what it denies
-```
+No real insurer priced the hypothetical profile in this build. Sonnet, reconnoitred by hand on Day
+0, walled at a mandatory driver's licence number field — a hypothetical profile cannot supply one,
+by design (`P-HYPO-LICENCE-01`). Rates.ca and LowestRates.ca sit behind a Cloudflare managed
+challenge, detected and respected, never bypassed. belairdirect, RBC and Desjardins were retried at
+their actual quote-entry URLs and each returned `unresolved` — a real capability limit in this
+build's page-reading heuristics, not a market signal, stated as such. The two normalized outcomes
+that show visible coverage differences at a common price point are both from the local synthetic
+sandbox, clearly labelled `SANDBOX` everywhere they appear.
 
-Everything routes through the Policy Engine (§7.1). No executor calls a browser, phone or API
-directly. 18 deny rules plus one escalate rule, deterministic, no LLM in the decision path, every
-decision appended to a hash-chained log.
-
-Three verdicts with different downstream behaviour: `ALLOW` proceeds, `DENY` refuses and the route
-ends, `ESCALATE` sends the request to the operator and leaves the route open.
-
----
-
-## Requirements
-
-Python 3.12+. Nothing else, yet.
-
-Dependencies are added at the milestone that uses them, not up front — the stack in `fathom.md` §13
-is a set of decisions to be made on arrival, not a manifest to install now. The PII sweep and its
-tests are stdlib-only by design, so the safety check runs before any dependency exists.
-
-```
-python3 --version    # 3.12 or newer
-```
+What did ship: a policy gate that every proposed action passes through and that genuinely denied
+real things during real runs (a licence-number field, an accuracy-attestation checkbox, a time
+budget); an executor that fills real multi-step insurer forms, handles a real mid-journey modal, and
+recaptures evidence live; a 70-brand registry collapsing to 67 distinct rate sources with one
+evidenced merger (the Aviva amalgamation); and a fabricated-premium bug that was caught, fixed, and
+turned into a demonstrable regression test rather than quietly patched away. `docs/LIMITATIONS.md`
+states all of this in full, itemized detail — this paragraph is the summary, not the substitute.
 
 ---
 
@@ -98,17 +60,83 @@ python3 --version    # 3.12 or newer
 
 ```bash
 git clone <repo> fathom && cd fathom
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/python -m playwright install chromium
 make hooks     # optional: run the PII sweep automatically before every commit
-make check     # sweep + tests
 ```
+
+Requires Python 3.12+. Two dependencies, each added at the milestone that introduced it
+(`cryptography` for the vault, `playwright` for the web executor) — see `requirements.txt` and
+`docs/DECISIONS.md`. Everything before the executor (the policy gate, the PII sweep) is stdlib
+only, so the safety check runs before any dependency exists.
+
+`make` targets below assume the venv is active, or call `.venv/bin/python` directly as shown.
+
+---
+
+## Judge-facing commands
+
+```bash
+make check              # tests + PII sweep — sweep + test  →  152+ tests, zero PII findings
+make sandbox             # start the 7 synthetic insurer sites on :8801 (needed by `make run`)
+make run                 # the full pipeline: execute → normalize → dedup → export → build UI
+make demo                # the gate: a bind attempt denied, rule ID + chain index, then chain
+                          #   verification, then a deliberate tamper to show the check can fail
+make demo-fabrication    # the fabricated-$177.83-premium incident, reproduced against real
+                          #   captured content, old buggy reader vs. the fix, side by side
+make verify              # judge-facing chain verification, no code reading required
+make rules                # list every registered policy rule and what it denies
+```
+
+Run `make sandbox` in one terminal, then `make run` in another to regenerate every deliverable
+from a live pipeline run. `make demo` and `make demo-fabrication` need nothing else running.
+
+---
+
+## Where to find each deliverable
+
+| Deliverable | Path |
+| --- | --- |
+| Machine-readable market registry | `out/registry.json`, `out/registry.csv` |
+| Normalized outcomes, common schema | `out/results.json` |
+| Redacted run report (metrics, findings, coverage ledger) | `out/run_report.md` |
+| Three-view UI (results / market graph / policy gate) | `ui/index.html` |
+| Architecture and safety note | `docs/ARCHITECTURE.md`, `docs/SAFETY.md` |
+| Known limitations | `docs/LIMITATIONS.md` |
+| Day 0 probe record | `docs/DAY0_PROBE.md` |
+| Demo walkthrough script | `docs/DEMO_SCRIPT.md` |
+| Build-time decisions log | `docs/DECISIONS.md` |
+| Open questions, incidents, spec amendments | `docs/OPEN_QUESTIONS.md` |
+
+---
+
+## The gate
+
+Everything routes through the Policy Engine (§7.1 of `fathom.md`). No executor calls a browser,
+phone or API directly — every proposed action is a structured object submitted to
+`PolicyEngine.evaluate()`, which returns `ALLOW`, `DENY` or `ESCALATE` plus the rule that fired, and
+appends the decision to a hash-chained, concurrency-safe audit log.
+
+19 deny rules, 1 escalate rule. Deterministic — no LLM in the decision path. Full list and current
+enforcement status (which rules are exercised by this build's real operation, not only unit-tested)
+in [`docs/PRIME_DIRECTIVES.md`](docs/PRIME_DIRECTIVES.md).
+
+Three verdicts, different downstream behaviour: `ALLOW` proceeds. `DENY` refuses and the route
+ends. `ESCALATE` sends the request to a checkpoint queue and **leaves the route open** — a
+representative requiring identity verification or coverage advice is not the same as a rejection.
+
+**No real destination is touched without a recorded, digest-bound payload approval**
+(`P-APPROVAL-01`, default deny — see `scripts/approve_payload.py`). Six real routes were approved
+this way: belairdirect, RBC Insurance, Desjardins, Rates.ca, LowestRates.ca, MyChoice.
 
 ---
 
 ## The PII sweep
 
-The hard constraint in §2.1 — no real licence number, full address, payment data or raw call audio
-anywhere in the repo, logs, prompts, traces, screenshots or the submission — is enforced by a check
-that runs identically in CI and locally.
+The hard constraint — no real licence number, full address, payment data or raw call audio
+anywhere in the repo, logs, prompts, traces, screenshots or exports — is enforced by a check that
+runs identically in CI and locally.
 
 ```bash
 make sweep                       # scan the whole repo, including out/ and docs/
@@ -117,38 +145,25 @@ python3 tools/pii_sweep.py --list-rules
 python3 tools/pii_sweep.py --json
 ```
 
-Exit code 0 clean, 1 on findings. CI fails the build on a hit.
-
-Two properties are deliberate:
-
-- **The sweep never prints what it found.** Findings are reported as file, line, rule and a masked
-  excerpt. Printing the match would put PII into CI logs — the exact failure the sweep prevents.
-- **Binary files are listed for manual review, not silently skipped.** A screenshot cannot be
-  grepped. §15.1 requires the final sweep to cover screenshots and recordings too, and the tool must
-  not imply coverage it does not have.
-
-False positives are handled with an inline pragma, never by weakening a rule:
-
-```python
-value = "K1A 0B1"   # pii-sweep: allow PC_FULL_POSTAL  synthetic fixture
-value = "..."       # pii-sweep: allow PC_FULL_POSTAL,EMAIL  two rules on one line
-value = "..."       # pii-sweep: allow  everything on this line
-```
-
-Rules: `DL_ONTARIO`, `PC_FULL_POSTAL` (FSA-only such as `M5V` is permitted), `VIN`, `PHONE_NANP`,
-`EMAIL`, `PAYMENT_CARD` (Luhn-checked), `STREET_ADDRESS`, `DOB_LABELLED` (birth year alone is
-permitted).
+Exit code 0 clean, 1 on findings. Eight rule classes (`DL_ONTARIO`, `PC_FULL_POSTAL`, `VIN`,
+`PHONE_NANP`, `EMAIL`, `PAYMENT_CARD`, `STREET_ADDRESS`, `DOB_LABELLED`), each permitting the
+specific redacted forms this project actually records (an FSA like `M5V`, a bare birth year, a
+licence class like `G1`). Findings are reported as file/line/rule and a masked excerpt, never the
+matched value. Three real false-positive classes were found and fixed against real content during
+this build (a header-scoped pragma leak, and two hex-digest collisions) — see `docs/SAFETY.md`.
 
 ---
 
 ## Tests
 
 ```bash
-make test                                  # python3 -m unittest discover -s tests
+make test          # python3 -m unittest discover -s tests
 ```
 
-Stdlib `unittest` for now; pytest arrives with Milestone 2 per §13. The suite includes a test that
-sweeps the live repository, so a leak fails the tests as well as CI.
+Stdlib `unittest`, no test framework dependency. 150+ cases, including a real 6-process concurrency
+stress test for the audit and evidence chains (`tests/test_audit_concurrency.py`), a regression
+test for the fabricated-premium fix (`tests/test_price_reader.py`), and a test that sweeps the live
+repository for PII on every run.
 
 ---
 
@@ -156,26 +171,46 @@ sweeps the live repository, so a leak fails the tests as well as CI.
 
 ```
 fathom/
-├── docs/            PRIME_DIRECTIVES, DAY0_PROBE, ARCHITECTURE, SAFETY, LIMITATIONS, OPEN_QUESTIONS
-├── packages/        policy, profiles, vault, intake, registry, planner, executors,
-│                    rater, evidence, redactor, normalizer, analysis, mcp
-├── sandbox/         five synthetic insurer sites (Milestone 7)
-├── ui/              seven views (Milestone 9)
-├── tools/           pii_sweep.py
+├── fathom.md          the specification — governs
+├── finish.md           the final-completion instruction this pass executed
+├── docs/               PRIME_DIRECTIVES, ARCHITECTURE, SAFETY, LIMITATIONS, DAY0_PROBE,
+│                        DEMO_SCRIPT, DECISIONS, OPEN_QUESTIONS
+├── packages/
+│   ├── policy/          the gate — actions, rules, audit chain, engine
+│   ├── profiles/        profile registry — records, not code paths
+│   ├── vault/            encrypted operator store (Fernet)
+│   ├── evidence/         content-addressed, hash-chained evidence chain
+│   ├── redactor/          regex redaction, shares rules with the PII sweep
+│   ├── registry/          market registry, §9.3 fingerprinting/dedup
+│   ├── executors/web/     the web executor — every action gate-mediated
+│   └── normalizer/        common schema, PASS/CAUTION/FAIL, parity
+├── sandbox/              7 synthetic insurer sites
+├── scripts/              run_all, demo_gate, demo_fabrication, verify_chain,
+│                          approve_payload, prepare_payload, build_seed
+├── ui/                   the three-view static UI
+├── tools/pii_sweep.py
 ├── tests/
-├── out/             registry.json/csv, run_report.md, benefit_price_curves.json
-└── data/            profiles, regulatory seed, public rate/vehicle data
+├── out/                  every deliverable this pipeline produces
+└── data/                 profiles, registry seed (Appendix A + evidenced rows)
 ```
 
-`fathom.md` is the specification and governs. `docs/PRIME_DIRECTIVES.md` is a verbatim copy of §2
-carried in-repo; if the two diverge, §2 governs.
+`fathom.md` is the specification and governs. `finish.md` is the completion instruction this final
+pass executed top to bottom. `docs/PRIME_DIRECTIVES.md` is a verbatim copy of `fathom.md` §2 carried
+in-repo; if the two diverge, `fathom.md` §2 governs.
 
 ---
 
 ## Reading order
 
-1. [`docs/PRIME_DIRECTIVES.md`](docs/PRIME_DIRECTIVES.md) — the hard constraints, and which are
-   enforced in code today
-2. [`docs/DAY0_PROBE.md`](docs/DAY0_PROBE.md) — the probe that selects the build plan
-3. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — one entry per module
-4. [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md) — deferred decisions, with what blocks them
+1. [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) — the fastest way to see everything that matters
+2. [`docs/PRIME_DIRECTIVES.md`](docs/PRIME_DIRECTIVES.md) — the hard constraints and what actually
+   enforces them today
+3. [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — the pipeline as it actually runs, one section
+   per module, and an explicit "not built" list
+4. [`docs/SAFETY.md`](docs/SAFETY.md) — including the fabricated-premium incident and every other
+   control that failed open and was caught
+5. [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) — written honestly, itemized, no hedging
+6. [`docs/DAY0_PROBE.md`](docs/DAY0_PROBE.md) — the hand-run reconnaissance that mapped Sonnet's
+   licence wall before any executor existed
+7. [`docs/DECISIONS.md`](docs/DECISIONS.md) and [`docs/OPEN_QUESTIONS.md`](docs/OPEN_QUESTIONS.md)
+   — every build-time judgment call, amendment and incident, with rationale
