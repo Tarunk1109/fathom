@@ -1,6 +1,6 @@
 # FATHOM run report
 
-Generated 2026-08-13T03:00:14+00:00.
+Generated 2026-08-13T03:41:36+00:00.
 
 ## Run parameters
 
@@ -33,13 +33,13 @@ Every route ever attempted, hand-probed or automated. `unresolved` stays `unreso
 | `reg_0002` | belairdirect | Belair Insurance Company Inc. | `rs_0002` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
 | `reg_0003` | RBC Insurance | RBC Insurance Company of Canada | `rs_0003` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
 | `reg_0004` | Desjardins Insurance | Certas Home and Auto Insurance Company | `rs_0004` | web | `unresolved` | — | 2026-08-12T00:00:00+00:00 | `—` |
-| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-13T03:00:05+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
-| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T03:00:07+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
-| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-13T03:00:08+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
-| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-13T03:00:10+00:00 | `cid:sha256-8a9a8549a747a778e…` |
-| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-13T03:00:11+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
-| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-13T03:00:13+00:00 | `cid:sha256-07279c0c1f0cae656…` |
-| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-13T03:00:14+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
+| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-13T03:41:27+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
+| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T03:41:28+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
+| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-13T03:41:30+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
+| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-13T03:41:31+00:00 | `cid:sha256-8a9a8549a747a778e…` |
+| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-13T03:41:33+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
+| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-13T03:41:34+00:00 | `cid:sha256-07279c0c1f0cae656…` |
+| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-13T03:41:36+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
 
 ## Outcomes
 
@@ -50,7 +50,7 @@ Every route ever attempted, hand-probed or automated. `unresolved` stays `unreso
 | `rt_reg_9001` `[SANDBOX]` | `profile_hypo_clean` | `blocked` | RC_HYPO_LICENCE_REQUIRED | — | FAIL | not_possible | 4 artifacts |
 | `rt_reg_9002` `[SANDBOX]` | `profile_hypo_clean` | `blocked` | RC_ACCESS_CONTROL | — | FAIL | not_possible | 2 artifacts |
 | `rt_reg_9003` `[SANDBOX]` | `profile_hypo_clean` | `callback_required` | RC_HUMAN_REQUIRED | — | FAIL | not_possible | 2 artifacts |
-| `rt_reg_9004` `[SANDBOX]` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 1 artifacts |
+| `rt_reg_9004` `[SANDBOX]` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 2 artifacts |
 | `rt_reg_9005` `[SANDBOX]` | `profile_hypo_clean` | `unresolved` | — | — | FAIL | not_possible | 1 artifacts |
 
 ## Comparability
@@ -84,7 +84,7 @@ Policy rules fired: —
 Stated reason: The journey offers a callback instead of a price.
 
 **`rt_reg_9004` `[SANDBOX]`** — `unresolved` / `None`  
-Stopping step: step 1: could not advance  
+Stopping step: step 2: no actionable control  
 Policy rules fired: —  
 Stated reason: 
 
@@ -136,6 +136,6 @@ Market completion and comparable quote yield are computed over distinct rate sou
 
 ## Chain verification
 
-- Evidence chain: chain intact — 148 artifacts
-- Policy audit chain: chain intact — 492 entries verified
+- Evidence chain: chain intact — 164 artifacts
+- Policy audit chain: chain intact — 545 entries verified
 

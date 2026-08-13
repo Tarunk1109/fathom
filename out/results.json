@@ -48,15 +48,15 @@
       "parity_note": "This route's coverage differs from the benchmark and the per-item deltas have not been measured, so no benchmark-equivalent price is stated."
     },
     "validity": {
-      "quote_reference_id": "GLF-65268995",
+      "quote_reference_id": "GLF-52791760",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:13+00:00",
+      "timestamp": "2026-08-13T03:00:14+00:00",
       "source_url_or_phone_route": "http://localhost:8801/golf",
       "artifact_cids": [
         "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-        "cid:sha256-9b0e77093dd7e7841c0d410bf2bf96920b04166a4e5b6a1b083e8f31c332bf6a"
+        "cid:sha256-0c9138f1294faebe4617257800153600991cdafdeb6178f0cdf54e34035b4863"
       ],
       "artifact_count": 2
     },
@@ -100,15 +100,15 @@
       "parity_note": "Coverage matches the benchmark, so the quoted price is the benchmark price."
     },
     "validity": {
-      "quote_reference_id": "FOX-78961851",
+      "quote_reference_id": "FOX-90973542",
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:11+00:00",
+      "timestamp": "2026-08-13T03:00:12+00:00",
       "source_url_or_phone_route": "http://localhost:8801/foxtrot",
       "artifact_cids": [
         "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-        "cid:sha256-cf62481d2f2589fbe35149fe770424ee1db214ecf4ec6e182eda26f5c5c0cdb8"
+        "cid:sha256-8bc798d62d4930f3bd22120a2e5762c575288c74cfa77cf22a746586c4ecc2aa"
       ],
       "artifact_count": 2
     },
@@ -150,7 +150,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:01+00:00",
+      "timestamp": "2026-08-13T03:00:02+00:00",
       "source_url_or_phone_route": "http://localhost:8801/alpha",
       "artifact_cids": [
         "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
@@ -206,7 +206,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:05+00:00",
+      "timestamp": "2026-08-13T03:00:06+00:00",
       "source_url_or_phone_route": "http://localhost:8801/bravo",
       "artifact_cids": [
         "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
@@ -257,7 +257,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:07+00:00",
+      "timestamp": "2026-08-13T03:00:08+00:00",
       "source_url_or_phone_route": "http://localhost:8801/charlie",
       "artifact_cids": [
         "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
@@ -308,17 +308,18 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:28:32+00:00",
+      "timestamp": "2026-08-13T03:00:09+00:00",
       "source_url_or_phone_route": "http://localhost:8801/delta",
       "artifact_cids": [
-        "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0"
+        "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0",
+        "cid:sha256-abfafb1889b780774471ebcd75cbcc7b51c9846ecd7f75061f6fbfb398211cf0"
       ],
-      "artifact_count": 1
+      "artifact_count": 2
     },
     "decline": {
       "stated_reason_redacted": "",
       "reason_code": null,
-      "stopping_step": "step 1: could not advance",
+      "stopping_step": "step 2: no actionable control",
       "policy_rules_fired": []
     },
     "sandbox": true
@@ -358,7 +359,7 @@
       "verification_may_change_premium": true
     },
     "evidence": {
-      "timestamp": "2026-08-13T02:31:09+00:00",
+      "timestamp": "2026-08-13T03:00:11+00:00",
       "source_url_or_phone_route": "http://localhost:8801/echo",
       "artifact_cids": [
         "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947"

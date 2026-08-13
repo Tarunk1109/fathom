@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-13T03:00:14+00:00",
+  "generated_at": "2026-08-13T03:41:36+00:00",
   "metrics": {
     "verified_applicable_rate_sources": 4,
     "distinct_rate_sources_total": 67,
@@ -2349,7 +2349,7 @@
       "status": "blocked",
       "reason_code": "RC_HYPO_LICENCE_REQUIRED",
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:05+00:00",
+      "last_verified_at": "2026-08-13T03:41:27+00:00",
       "evidence_artifact": "cid:sha256-a7a0bcfbdd712ecb1a05b0a368531491ab5a704a3b6de1a94b8a89df1243b585",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2382,7 +2382,7 @@
       "status": "blocked",
       "reason_code": "RC_ACCESS_CONTROL",
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:07+00:00",
+      "last_verified_at": "2026-08-13T03:41:28+00:00",
       "evidence_artifact": "cid:sha256-c17e5c48427cbc52db01ff9fa157721ba03803ff8387f45e828cdc84086c828f",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2415,7 +2415,7 @@
       "status": "callback_required",
       "reason_code": "RC_HUMAN_REQUIRED",
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:08+00:00",
+      "last_verified_at": "2026-08-13T03:41:30+00:00",
       "evidence_artifact": "cid:sha256-0c449d4e3ea0dd442db5c80418d219b9e9bf4f75666645ffce00bb253e0482bd",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2448,7 +2448,7 @@
       "status": "unresolved",
       "reason_code": null,
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:10+00:00",
+      "last_verified_at": "2026-08-13T03:41:31+00:00",
       "evidence_artifact": "cid:sha256-8a9a8549a747a778e97e6506890fdd5d18b7c728873ee80259e6e69a96d0d1c0",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2481,7 +2481,7 @@
       "status": "unresolved",
       "reason_code": null,
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:11+00:00",
+      "last_verified_at": "2026-08-13T03:41:33+00:00",
       "evidence_artifact": "cid:sha256-b8de02fe43b1ef003924111b1453150831df92db3048253be9317cde9f5b4947",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2514,7 +2514,7 @@
       "status": "quoted_comparable",
       "reason_code": null,
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:13+00:00",
+      "last_verified_at": "2026-08-13T03:41:34+00:00",
       "evidence_artifact": "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
       "rate_filing_delta": null,
       "fingerprint": {
@@ -2547,7 +2547,7 @@
       "status": "quoted_comparable",
       "reason_code": null,
       "source_url": "sandbox/server.py",
-      "last_verified_at": "2026-08-13T03:00:14+00:00",
+      "last_verified_at": "2026-08-13T03:41:36+00:00",
       "evidence_artifact": "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
       "rate_filing_delta": null,
       "fingerprint": {
