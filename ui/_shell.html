@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-view="sounding">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FATHOM — sounding the Ontario auto market</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" aria-label="Views">
+    <div class="rail-mark">
+      <span class="rail-mark-glyph">≈</span>
+      <span class="rail-mark-word">FATHOM</span>
+    </div>
+    <button class="rail-item" data-goto="sounding" aria-current="page">
+      <span class="rail-item-label">Sounding</span>
+    </button>
+    <button class="rail-item" data-goto="outcomes">
+      <span class="rail-item-label">Outcomes</span>
+    </button>
+    <button class="rail-item" data-goto="market">
+      <span class="rail-item-label">Market</span>
+    </button>
+    <button class="rail-item" data-goto="frontier">
+      <span class="rail-item-label">Frontier</span>
+    </button>
+    <button class="rail-item" data-goto="gate">
+      <span class="rail-item-label">Gate</span>
+    </button>
+    <button class="rail-item" data-goto="evidence">
+      <span class="rail-item-label">Evidence</span>
+    </button>
+    <div class="rail-foot">
+      <span class="rail-foot-line" id="rail-generated"></span>
+      <span class="rail-foot-line">profile_hypo_clean</span>
+    </div>
+  </nav>
+
+  <main class="stage">
+
+    <section class="view" id="view-sounding" data-view="sounding">
+      <header class="view-head">
+        <h1 class="view-title">Sounding</h1>
+        <p class="view-sub">Every rate source, dropped into the market. Depth is where each one
+          actually stopped.</p>
+      </header>
+
+      <div class="sounding-chart-wrap">
+        <svg id="sounding-chart" class="sounding-chart" role="img" aria-label="Sounding chart"></svg>
+      </div>
+
+      <p class="sounding-prose" id="sounding-prose"></p>
+
+      <div class="metric-row" id="metric-row"></div>
+
+      <div class="panel" id="scorecard-panel">
+        <h2 class="panel-title">Honest scorecard</h2>
+        <div class="scorecard-grid" id="scorecard-grid"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-outcomes" data-view="outcomes" hidden>
+      <header class="view-head">
+        <h1 class="view-title">Outcomes</h1>
+        <p class="view-sub">Coverage differences render above price differences. The lowest
+          number is never labelled best.</p>
+      </header>
+      <div class="outcomes-controls">
+        <label class="control">
+          <span>Sort</span>
+          <select id="outcomes-sort">
+            <option value="depth">By depth reached</option>
+            <option value="price">By annual cost</option>
+            <option value="status">By status</option>
+          </select>
+        </label>
+        <span class="price-sort-note" id="price-sort-note" hidden>Sorted by price — coverage
+          differs across these rows. A lower price is not a better result.</span>
+      </div>
+      <div id="outcomes-computed"></div>
+      <div id="outcomes-estimated"></div>
+    </section>
+
+    <section class="view" id="view-market" data-view="market" hidden>
+      <header class="view-head">
+        <h1 class="view-title">Market</h1>
+        <p class="view-sub">Brands collapsing into distinct rate sources. Solid edges are
+          evidenced; dashed edges are single-signal hypotheses.</p>
+      </header>
+      <div class="market-controls">
+        <span>Lens</span>
+        <div class="layer-toggle" id="layer-toggle" role="radiogroup" aria-label="Market lens">
+          <button data-layer="brand" aria-pressed="true">Brand</button>
+          <button data-layer="distributor" aria-pressed="false">Distributor</button>
+          <button data-layer="underwriter" aria-pressed="false">Legal underwriter</button>
+          <button data-layer="group" aria-pressed="false">Insurer group</button>
+        </div>
+      </div>
+      <div class="market-graph-wrap">
+        <svg id="market-graph" class="market-graph" role="img" aria-label="Market graph"></svg>
+      </div>
+      <div class="panel" id="market-edge-detail" hidden>
+        <h2 class="panel-title" id="market-edge-title"></h2>
+        <div id="market-edge-body"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-frontier" data-view="frontier" hidden>
+      <header class="view-head">
+        <h1 class="view-title">Frontier</h1>
+        <p class="view-sub">Every refusal, inverted into a forward path. Pure inversion of
+          evidence already held — no new data.</p>
+      </header>
+      <div id="frontier-ladder"></div>
+      <div class="panel" id="frontier-closed-panel">
+        <h2 class="panel-title">Closed regardless</h2>
+        <p class="panel-sub">No change the operator can make opens these.</p>
+        <div id="frontier-closed"></div>
+      </div>
+    </section>
+
+    <section class="view" id="view-gate" data-view="gate" hidden>
+      <header class="view-head">
+        <h1 class="view-title">Gate</h1>
+        <p class="view-sub">Every decision the policy engine has made, in sequence.</p>
+      </header>
+      <div class="gate-controls">
+        <button class="verify-btn" id="verify-chain-btn">Verify chain</button>
+        <span id="verify-chain-result" class="verify-result"></span>
+        <label class="control">
+          <span>Filter rule</span>
+          <select id="gate-rule-filter"><option value="">All rules</option></select>
+        </label>
+      </div>
+      <div class="gate-log-wrap">
+        <table class="gate-log" id="gate-log"></table>
+      </div>
+      <div class="panel">
+        <h2 class="panel-title">Enforcement status</h2>
+        <table class="enforcement-table" id="enforcement-table"></table>
+      </div>
+    </section>
+
+    <section class="view" id="view-evidence" data-view="evidence" hidden>
+      <header class="view-head">
+        <h1 class="view-title">Evidence</h1>
+        <p class="view-sub">Every artifact, content-addressed. Search by CID to verify any
+          specific claim.</p>
+      </header>
+      <div class="evidence-controls">
+        <input type="search" id="evidence-search" placeholder="Search CID, route, or source…"
+               aria-label="Search evidence">
+        <span id="evidence-chain-status" class="verify-result"></span>
+      </div>
+      <div id="ask-panel" class="panel">
+        <h2 class="panel-title">Ask your findings</h2>
+        <p class="panel-sub" id="ask-unavailable">Answers only from retrieved evidence artifacts
+          below — never from general knowledge. Requires an API key; see
+          docs/DECISIONS.md.</p>
+        <div id="ask-ui" hidden>
+          <div class="ask-row">
+            <input type="text" id="ask-input" placeholder="Which rate sources stopped at a licence requirement?">
+            <button id="ask-btn">Ask</button>
+          </div>
+          <div id="ask-answer"></div>
+        </div>
+      </div>
+      <div id="evidence-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="artifact-modal" id="artifact-modal" hidden>
+  <div class="artifact-modal-box" role="dialog" aria-modal="true" aria-label="Evidence artifact">
+    <button class="artifact-modal-close" id="artifact-modal-close" aria-label="Close">✕</button>
+    <div id="artifact-modal-body"></div>
+  </div>
+</div>
+
+<script id="fathom-data" type="application/json">/*__FATHOM_DATA__*/</script>
+<script src="app.js"></script>
+</body>
+</html>

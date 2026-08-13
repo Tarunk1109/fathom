@@ -865,7 +865,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1712.0,
-    "quote_reference": "FOX-27325175",
+    "quote_reference": "FOX-41695079",
     "coverage": {
       "third_party_liability_limit": 2000000,
       "collision_deductible": 1000,
@@ -918,7 +918,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-07279c0c1f0cae656f34d63880c372ddf8df0a5bd7ab89109b747fffe612dfc2",
-      "cid:sha256-ed8c32101651ad258cbf4db041cc5d9c69bff07fb0cb21c0d9b9c2293bb6901c"
+      "cid:sha256-b0560d63d8d9443209086aeca1ce70313563e5b3e4704e8851b350750326e34c"
     ],
     "policy_denials": [],
     "pending_block": null
@@ -932,7 +932,7 @@
     "stopping_step": "step 2: priced",
     "stated_reason": "",
     "premium": 1634.0,
-    "quote_reference": "GLF-79906349",
+    "quote_reference": "GLF-17361839",
     "coverage": {
       "third_party_liability_limit": 1000000,
       "collision_deductible": 500,
@@ -985,7 +985,7 @@
     "modals": [],
     "evidence_cids": [
       "cid:sha256-6024bbf0a44906b6b9c6205768384293eb8b00660edaa60824e693025843e00c",
-      "cid:sha256-5cc8c14ccfb404dcdb769922ffa5e37d83cc7609f5b9827586368304cf3b6400"
+      "cid:sha256-eb89bdda3136b50808385aec064a334eff0fb2811474cde44a3ec31d8d7033a9"
     ],
     "policy_denials": [],
     "pending_block": null

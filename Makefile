@@ -48,7 +48,7 @@ unhook:
 # --- Milestone 4+ ---------------------------------------------------------------------
 VENV ?= .venv/bin/python
 
-.PHONY: sandbox run approve ui demo-fabrication
+.PHONY: sandbox run approve ui build-ui demo-fabrication
 sandbox:
 	@$(VENV) sandbox/server.py
 
@@ -60,6 +60,11 @@ approve:
 
 ui: run
 	@open ui/index.html 2>/dev/null || echo "open ui/index.html"
+
+# Rebuild only the UI from whatever is already in out/ — for iterating on ui/app.js or
+# ui/styles.css without re-running every route. `make run` calls this automatically.
+build-ui:
+	@$(VENV) scripts/build_ui.py
 
 demo-fabrication:
 	@$(VENV) scripts/demo_fabrication.py

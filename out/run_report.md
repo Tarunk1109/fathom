@@ -1,6 +1,6 @@
 # FATHOM run report
 
-Generated 2026-08-12T15:20:24+00:00.
+Generated 2026-08-13T02:20:37+00:00.
 
 ## Run parameters
 
@@ -28,19 +28,19 @@ Every route ever attempted, hand-probed or automated. `unresolved` stays `unreso
 | Registry ID | Brand | Legal underwriter | Rate source | Channel | Status | Reason | Timestamp | Evidence CID |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `reg_0001` | Sonnet | Sonnet Insurance Company | `rs_0001` | web_manual_probe | `blocked` | licence_number_required_hypothetical_profile | 2026-08-09T00:00:00+00:00 | `cid:sha256-14216cc8eb1d6e18d…` |
-| `reg_0002` | belairdirect | Belair Insurance Company Inc. | `rs_0002` | web | `unresolved` | — | 2026-08-12T15:20:09+00:00 | `cid:sha256-77e059f8027d3bda2…` |
-| `reg_0003` | RBC Insurance | RBC Insurance Company of Canada | `rs_0003` | web | `unresolved` | — | 2026-08-12T15:20:09+00:00 | `cid:sha256-287a10c3a376e0026…` |
-| `reg_0004` | Desjardins Insurance | Certas Home and Auto Insurance Company | `rs_0004` | web | `unresolved` | — | 2026-08-12T15:20:09+00:00 | `cid:sha256-b21c78bf2557c5640…` |
-| `reg_0100` | Rates.ca | n/a — comparison platform | `rs_0020` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-12T15:20:09+00:00 | `cid:sha256-fc7b2bb923e2ed691…` |
-| `reg_0101` | LowestRates.ca | n/a — comparison platform | `rs_0021` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-12T15:20:09+00:00 | `cid:sha256-deeea6dbfe9e8ee6a…` |
-| `reg_0102` | MyChoice | n/a — comparison platform | `rs_0022` | web | `unresolved` | — | 2026-08-12T15:20:09+00:00 | `cid:sha256-a84c8ded91c633c8a…` |
-| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-12T15:20:13+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
-| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-12T15:20:15+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
-| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-12T15:20:16+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
-| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-12T15:20:18+00:00 | `cid:sha256-8a9a8549a747a778e…` |
-| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-12T15:20:20+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
-| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-12T15:20:22+00:00 | `cid:sha256-07279c0c1f0cae656…` |
-| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-12T15:20:24+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
+| `reg_0002` | belairdirect | Belair Insurance Company Inc. | `rs_0002` | web | `unresolved` | — | 2026-08-13T02:20:22+00:00 | `cid:sha256-77e059f8027d3bda2…` |
+| `reg_0003` | RBC Insurance | RBC Insurance Company of Canada | `rs_0003` | web | `unresolved` | — | 2026-08-13T02:20:22+00:00 | `cid:sha256-287a10c3a376e0026…` |
+| `reg_0004` | Desjardins Insurance | Certas Home and Auto Insurance Company | `rs_0004` | web | `unresolved` | — | 2026-08-13T02:20:22+00:00 | `cid:sha256-b21c78bf2557c5640…` |
+| `reg_0100` | Rates.ca | n/a — comparison platform | `rs_0020` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:20:22+00:00 | `cid:sha256-fc7b2bb923e2ed691…` |
+| `reg_0101` | LowestRates.ca | n/a — comparison platform | `rs_0021` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:20:22+00:00 | `cid:sha256-deeea6dbfe9e8ee6a…` |
+| `reg_0102` | MyChoice | n/a — comparison platform | `rs_0022` | web | `unresolved` | — | 2026-08-13T02:20:22+00:00 | `cid:sha256-a84c8ded91c633c8a…` |
+| `reg_9001` **[SANDBOX]** | Sandbox Alpha | Sandbox Alpha Insurance Company | `rs_0068` | web | `blocked` | RC_HYPO_LICENCE_REQUIRED | 2026-08-13T02:20:26+00:00 | `cid:sha256-a7a0bcfbdd712ecb1…` |
+| `reg_9002` **[SANDBOX]** | Sandbox Bravo | Sandbox Bravo Insurance Company | `rs_0069` | web | `blocked` | RC_ACCESS_CONTROL | 2026-08-13T02:20:28+00:00 | `cid:sha256-c17e5c48427cbc52d…` |
+| `reg_9003` **[SANDBOX]** | Sandbox Charlie | Sandbox Charlie Insurance Company | `rs_0070` | web | `callback_required` | RC_HUMAN_REQUIRED | 2026-08-13T02:20:30+00:00 | `cid:sha256-0c449d4e3ea0dd442…` |
+| `reg_9004` **[SANDBOX]** | Sandbox Delta | Sandbox Delta Insurance Company | `rs_0071` | web | `unresolved` | — | 2026-08-13T02:20:31+00:00 | `cid:sha256-8a9a8549a747a778e…` |
+| `reg_9005` **[SANDBOX]** | Sandbox Echo | Sandbox Echo Insurance Company | `rs_0072` | web | `unresolved` | — | 2026-08-13T02:20:33+00:00 | `cid:sha256-b8de02fe43b1ef003…` |
+| `reg_9006` **[SANDBOX]** | Sandbox Foxtrot | Sandbox Foxtrot Insurance Company | `rs_0073` | web | `quoted_comparable` | — | 2026-08-13T02:20:35+00:00 | `cid:sha256-07279c0c1f0cae656…` |
+| `reg_9007` **[SANDBOX]** | Sandbox Golf | Sandbox Golf Insurance Company | `rs_0074` | web | `quoted_comparable` | — | 2026-08-13T02:20:37+00:00 | `cid:sha256-6024bbf0a44906b6b…` |
 
 ## Outcomes
 
@@ -173,6 +173,6 @@ Market completion and comparable quote yield are computed over distinct rate sou
 
 ## Chain verification
 
-- Evidence chain: chain intact — 85 artifacts
-- Policy audit chain: chain intact — 282 entries verified
+- Evidence chain: chain intact — 101 artifacts
+- Policy audit chain: chain intact — 335 entries verified
 
